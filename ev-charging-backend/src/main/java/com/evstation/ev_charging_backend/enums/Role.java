@@ -1,6 +1,6 @@
 package com.evstation.ev_charging_backend.enums;
 
-public enum RoleType {
+public enum Role {
 
     USER,
     HOST,

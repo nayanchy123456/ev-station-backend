@@ -1,28 +1,23 @@
 package com.evstation.ev_charging_backend.entity;
 
-import com.evstation.ev_charging_backend.enums.RoleType;
+import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import com.evstation.ev_charging_backend.enums.Role;
+import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+@Entity
+@Table(name = "users")
 @Getter
 @Setter
 @NoArgsConstructor
-@Entity
-@Table(name = "users")
+@AllArgsConstructor
+@Builder
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long userId;
 
     private String firstName;
     private String lastName;
@@ -30,11 +25,14 @@ public class User {
     @Column(unique = true, nullable = false)
     private String email;
 
+    @Column(unique = true, nullable = false)
+    private String phone;
+
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private RoleType role;
+    private Role role;
 
-    // getters and setters
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 }
-
