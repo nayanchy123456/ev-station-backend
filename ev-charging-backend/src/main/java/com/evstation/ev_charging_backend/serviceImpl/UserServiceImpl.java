@@ -4,6 +4,7 @@ import com.evstation.ev_charging_backend.dto.AuthResponse;
 import com.evstation.ev_charging_backend.dto.LoginRequest;
 import com.evstation.ev_charging_backend.dto.RegisterRequest;
 import com.evstation.ev_charging_backend.entity.User;
+import com.evstation.ev_charging_backend.enums.Role;
 import com.evstation.ev_charging_backend.exception.InvalidCredentialsException;
 import com.evstation.ev_charging_backend.exception.UserAlreadyExistsException;
 import com.evstation.ev_charging_backend.repository.UserRepository;
@@ -17,8 +18,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -28,73 +27,87 @@ public class UserServiceImpl implements UserService {
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
 
- @Override
-public AuthResponse register(RegisterRequest request) {
-    boolean emailExists = userRepository.existsByEmail(request.getEmail());
-    boolean phoneExists = userRepository.existsByPhone(request.getPhone());
+    @Override
+    public AuthResponse register(RegisterRequest request) {
+        // Check if email or phone already exists
+        if (userRepository.existsByEmail(request.getEmail())) {
+            throw new UserAlreadyExistsException("Email is already registered!");
+        }
+        if (userRepository.existsByPhone(request.getPhone())) {
+            throw new UserAlreadyExistsException("Phone number is already registered!");
+        }
 
-    if (emailExists && phoneExists) {
-        throw new UserAlreadyExistsException("Email and Phone are already registered!");
-    } else if (emailExists) {
-        throw new UserAlreadyExistsException("Email is already registered!");
-    } else if (phoneExists) {
-        throw new UserAlreadyExistsException("Phone number is already registered!");
+        // Prevent admin registration
+        if (request.getRole() == Role.ADMIN) {
+            throw new RuntimeException("Cannot register as admin");
+        }
+
+        // Assign role: HOST → PENDING_HOST, others → USER
+        Role assignedRole = (request.getRole() == Role.HOST) ? Role.PENDING_HOST : Role.USER;
+
+        // Build user entity
+        User user = User.builder()
+                .firstName(request.getFirstName())
+                .lastName(request.getLastName())
+                .email(request.getEmail())
+                .phone(request.getPhone())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .role(assignedRole)
+                .build();
+
+        // Save user
+        userRepository.save(user);
+
+        // Generate token only for USERS
+        String token = null;
+        if (assignedRole != Role.PENDING_HOST) {
+            token = jwtUtil.generateToken(user.getEmail(), assignedRole.name());
+        }
+
+        // Build response
+        return AuthResponse.builder()
+                .message(assignedRole == Role.PENDING_HOST ?
+                        "Host registration pending approval by admin" :
+                        "User registered successfully!")
+                .token(token)
+                .email(user.getEmail())
+                .role(assignedRole.name())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .phone(user.getPhone())
+                .createdAt(user.getCreatedAt())
+                .build();
     }
 
-    User user = User.builder()
-            .firstName(request.getFirstName())
-            .lastName(request.getLastName())
-            .email(request.getEmail())
-            .phone(request.getPhone())
-            .password(passwordEncoder.encode(request.getPassword()))
-            .role(request.getRole())
-            .build();
+    @Override
+    public AuthResponse login(LoginRequest request) {
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+        } catch (Exception e) {
+            throw new InvalidCredentialsException("Invalid email or password!");
+        }
 
-    userRepository.save(user);
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new InvalidCredentialsException("Invalid email or password!"));
 
-     return AuthResponse.builder()
-        .message("User registered successfully!")
-        .email(user.getEmail())
-        .role(user.getRole().name())
-        .firstName(user.getFirstName())
-        .lastName(user.getLastName())
-        .phone(user.getPhone())
-        .createdAt(user.getCreatedAt()) // Keep it as LocalDateTime
-        .build();
+        String token = null;
+        if (user.getRole() != Role.PENDING_HOST) {
+            token = jwtUtil.generateToken(user.getEmail(), user.getRole().name());
+        }
 
-}
-
-
-   @Override
-public AuthResponse login(LoginRequest request) {
-    // Authenticate credentials
-    try {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
-        );
-    } catch (Exception e) {
-        throw new InvalidCredentialsException("Invalid email or password!");
+        return AuthResponse.builder()
+                .message(user.getRole() == Role.PENDING_HOST ?
+                        "Host registration pending approval" : "Login successful!")
+                .token(token)
+                .email(user.getEmail())
+                .role(user.getRole().name())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .phone(user.getPhone())
+                .createdAt(user.getCreatedAt())
+                .build();
     }
-
-    // Load user
-    User user = userRepository.findByEmail(request.getEmail())
-            .orElseThrow(() -> new InvalidCredentialsException("Invalid email or password!"));
-
-    // Generate JWT token
-    String token = jwtUtil.generateToken(user.getEmail(), user.getRole().name());
-
-    return AuthResponse.builder()
-            .message("Login successful!")
-            .token(token)
-            .email(user.getEmail())
-            .role(user.getRole().name())
-            .firstName(user.getFirstName())
-            .lastName(user.getLastName())
-            .phone(user.getPhone())
-            .createdAt(user.getCreatedAt())
-            .build();
-}
-
 
     @Override
     public AuthResponse getCurrentUserProfile() {

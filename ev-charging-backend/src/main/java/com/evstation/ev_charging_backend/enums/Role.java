@@ -4,5 +4,10 @@ public enum Role {
 
     USER,
     HOST,
-    ADMIN
+    ADMIN,
+    PENDING_HOST;
+
+    Role valueOf(Role role) {
+        throw new UnsupportedOperationException("Unimplemented method 'valueOf'");
+    }
 }
