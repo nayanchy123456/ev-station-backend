@@ -3,16 +3,20 @@ package com.evstation.ev_charging_backend.controller;
 import com.evstation.ev_charging_backend.dto.ChargerRequestDto;
 import com.evstation.ev_charging_backend.dto.ChargerResponseDto;
 import com.evstation.ev_charging_backend.entity.User;
+import com.evstation.ev_charging_backend.exception.ResourceNotFoundException;
 import com.evstation.ev_charging_backend.repository.UserRepository;
 import com.evstation.ev_charging_backend.security.JwtUtil;
 import com.evstation.ev_charging_backend.service.ChargerService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -104,4 +108,73 @@ public class ChargerController {
 
         return ResponseEntity.ok(chargers);
     }
+
+@GetMapping("/search")
+public ResponseEntity<?> searchChargers(
+        @RequestParam(required = false) String brand,
+        @RequestParam(required = false) String location,
+        @RequestParam(required = false) Double minPrice,
+        @RequestParam(required = false) Double maxPrice) {
+
+    try {
+        List<ChargerResponseDto> results = chargerService.searchChargers(brand, location, minPrice, maxPrice);
+        return ResponseEntity.ok(results);
+    } catch (ResourceNotFoundException ex) {
+        // Return 404 with a message
+        Map<String, Object> response = Map.of(
+                "timestamp", Instant.now(),
+                "status", 404,
+                "error", "Not Found",
+                "message", ex.getMessage()
+        );
+        return ResponseEntity.status(404).body(response);
+    } catch (Exception ex) {
+        // Fallback for any other errors
+        Map<String, Object> response = Map.of(
+                "timestamp", Instant.now(),
+                "status", 500,
+                "error", "Internal Server Error",
+                "message", ex.getMessage()
+        );
+        return ResponseEntity.status(500).body(response);
+    }
+}
+
+
+
+
+@GetMapping("/nearby")
+public ResponseEntity<?> getNearbyChargers(
+        @RequestParam Double userLat,
+        @RequestParam Double userLng,
+        @RequestParam Double radiusKm) {
+    try {
+        List<ChargerResponseDto> chargers = chargerService.findNearbyChargers(userLat, userLng, radiusKm);
+
+        if (chargers.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                    Map.of(
+                            "timestamp", Instant.now(),
+                            "status", HttpStatus.NOT_FOUND.value(),
+                            "error", "Not Found",
+                            "message", "No chargers found within " + radiusKm + " km radius"
+                    )
+            );
+        }
+
+        return ResponseEntity.ok(chargers);
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                Map.of(
+                        "timestamp", Instant.now(),
+                        "status", HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                        "error", "Internal Server Error",
+                        "message", e.getMessage()
+                )
+        );
+    }
+}
+
+
+
 }
