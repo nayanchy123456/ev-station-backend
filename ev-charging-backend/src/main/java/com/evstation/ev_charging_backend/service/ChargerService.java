@@ -11,4 +11,20 @@ public interface ChargerService {
     void deleteCharger(Long id, Long userId, String role);
     List<ChargerResponseDto> getAllChargers();
     List<ChargerResponseDto> getChargersByHost(Long hostId);
+    List<ChargerResponseDto> searchChargers(String brand, String location, Double minPrice, Double maxPrice);
+   List<ChargerResponseDto> findNearbyChargers(double latitude, double longitude, double radiusKm);
+
+List<ChargerResponseDto> searchChargersNearby(
+        String brand,
+        String location,
+        Double minPrice,
+        Double maxPrice,
+        Double userLat,
+        Double userLng,
+        Double radiusKm
+);
+
+
+
+
 }

@@ -12,6 +12,7 @@ import com.evstation.ev_charging_backend.util.GeoCodingUtil;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -124,5 +125,126 @@ public class ChargerServiceImpl implements ChargerService {
             .rating(charger.getRating())
             .build();
 }
+
+@Override
+public List<ChargerResponseDto> searchChargersNearby(
+        String brand,
+        String location,
+        Double minPrice,
+        Double maxPrice,
+        Double userLat,
+        Double userLng,
+        Double radiusKm
+) {
+    try {
+        List<Charger> chargers = chargerRepository.findAll();
+
+        List<ChargerResponseDto> filtered = chargers.stream()
+                // Filter by brand
+                .filter(c -> brand == null || c.getBrand().toLowerCase().contains(brand.toLowerCase()))
+                // Filter by location string
+                .filter(c -> location == null || c.getLocation().toLowerCase().contains(location.toLowerCase()))
+                // Filter by minPrice
+                .filter(c -> minPrice == null || c.getPricePerKwh().doubleValue() >= minPrice)
+                // Filter by maxPrice
+                .filter(c -> maxPrice == null || c.getPricePerKwh().doubleValue() <= maxPrice)
+                // Filter by distance if coordinates provided
+                .filter(c -> {
+                    if (userLat == null || userLng == null || radiusKm == null) return true;
+                    if (c.getLatitude() == null || c.getLongitude() == null) return false;
+                    double distance = distanceInKm(userLat, userLng, c.getLatitude(), c.getLongitude());
+                    return distance <= radiusKm;
+                })
+                // Sort by nearest if coordinates provided
+                .sorted((c1, c2) -> {
+                    if (userLat == null || userLng == null) return 0;
+                    double d1 = distanceInKm(userLat, userLng, c1.getLatitude(), c1.getLongitude());
+                    double d2 = distanceInKm(userLat, userLng, c2.getLatitude(), c2.getLongitude());
+                    return Double.compare(d1, d2);
+                })
+                .map(this::mapToResponse)
+                .toList();
+
+        if (filtered.isEmpty()) {
+            throw new ResourceNotFoundException("No chargers found matching the given criteria");
+        }
+
+        return filtered;
+
+    } catch (ResourceNotFoundException e) {
+        throw e; // Let GlobalExceptionHandler handle it
+    } catch (Exception e) {
+        throw new RuntimeException("Error while searching chargers: " + e.getMessage());
+    }
+}
+
+@Override
+public List<ChargerResponseDto> findNearbyChargers(double latitude, double longitude, double radiusKm) {
+    try {
+        if (latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) {
+            throw new IllegalArgumentException("Invalid latitude or longitude values");
+        }
+
+        List<Charger> chargers = chargerRepository.findAll();
+
+        List<ChargerResponseDto> nearby = chargers.stream()
+                .filter(c -> c.getLatitude() != null && c.getLongitude() != null)
+                .filter(c -> distanceInKm(latitude, longitude, c.getLatitude(), c.getLongitude()) <= radiusKm)
+                .map(this::mapToResponse)
+                .toList();
+
+        if (nearby.isEmpty()) {
+            throw new ResourceNotFoundException("No chargers found within the given radius");
+        }
+
+        return nearby;
+
+    } catch (ResourceNotFoundException | IllegalArgumentException e) {
+        throw e; // Let GlobalExceptionHandler handle it
+    } catch (Exception e) {
+        throw new RuntimeException("Error while finding nearby chargers: " + e.getMessage());
+    }
+}
+
+private double distanceInKm(double lat1, double lon1, double lat2, double lon2) {
+    final int EARTH_RADIUS_KM = 6371;
+    double latDistance = Math.toRadians(lat2 - lat1);
+    double lonDistance = Math.toRadians(lon2 - lon1);
+    double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+            + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
+            * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+    double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return EARTH_RADIUS_KM * c;
+}
+
+
+@Override
+public List<ChargerResponseDto> searchChargers(String brand, String location, Double minPrice, Double maxPrice) {
+    try {
+        List<Charger> chargers = chargerRepository.findAll();
+
+        List<ChargerResponseDto> filtered = chargers.stream()
+                .filter(c -> brand == null || c.getBrand().toLowerCase().contains(brand.toLowerCase()))
+                .filter(c -> location == null || c.getLocation().toLowerCase().contains(location.toLowerCase()))
+                .filter(c -> minPrice == null || c.getPricePerKwh().doubleValue() >= minPrice)
+                .filter(c -> maxPrice == null || c.getPricePerKwh().doubleValue() <= maxPrice)
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
+
+        if (filtered.isEmpty()) {
+            throw new ResourceNotFoundException("No chargers found for the given search criteria");
+        }
+
+        return filtered;
+    } catch (Exception e) {
+        throw new RuntimeException("Error while filtering chargers: " + e.getMessage());
+    }
+}
+
+
+
+
+
+
 
 }
