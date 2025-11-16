@@ -1,5 +1,6 @@
 package com.evstation.ev_charging_backend.dto;
 
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
@@ -19,10 +20,11 @@ public class ChargerRequestDto {
     private String brand;
 
     @NotBlank(message = "Location is required")
-    private String location; // user enters location string
+    private String location;
 
     @NotNull(message = "Price per kWh is required")
+    @DecimalMin(value = "0.01", message = "Price per kWh must be greater than 0")
     private BigDecimal pricePerKwh;
 
-    private List<String> images;
+    private List<String> images; // optional
 }
