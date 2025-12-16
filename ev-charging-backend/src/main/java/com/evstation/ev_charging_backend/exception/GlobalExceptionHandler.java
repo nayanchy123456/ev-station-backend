@@ -28,6 +28,12 @@ public class GlobalExceptionHandler {
                 .body(AuthResponse.builder().message(ex.getMessage()).build());
     }
 
+    @ExceptionHandler(InvalidPhoneNumberException.class)
+    public ResponseEntity<AuthResponse> handleInvalidPhoneNumber(InvalidPhoneNumberException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(AuthResponse.builder().message(ex.getMessage()).build());
+    }
+
     // --- Access denied for HOST ownership check ---
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<Map<String, Object>> handleAccessDenied(AccessDeniedException ex) {

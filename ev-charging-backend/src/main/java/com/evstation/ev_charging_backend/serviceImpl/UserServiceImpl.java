@@ -6,11 +6,13 @@ import com.evstation.ev_charging_backend.dto.RegisterRequest;
 import com.evstation.ev_charging_backend.entity.User;
 import com.evstation.ev_charging_backend.enums.Role;
 import com.evstation.ev_charging_backend.exception.InvalidCredentialsException;
+import com.evstation.ev_charging_backend.exception.InvalidPhoneNumberException;
 import com.evstation.ev_charging_backend.exception.UserAlreadyExistsException;
 import com.evstation.ev_charging_backend.repository.UserRepository;
 import com.evstation.ev_charging_backend.security.CustomUserDetails;
 import com.evstation.ev_charging_backend.security.JwtUtil;
 import com.evstation.ev_charging_backend.service.UserService;
+import com.evstation.ev_charging_backend.util.PhoneValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -29,6 +31,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public AuthResponse register(RegisterRequest request) {
+        // Validate phone number for Nepal format
+        if (!PhoneValidator.isValidNepalPhone(request.getPhone())) {
+            throw new InvalidPhoneNumberException(PhoneValidator.getErrorMessage());
+        }
+
         // Check if email or phone already exists
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new UserAlreadyExistsException("Email is already registered!");
@@ -45,12 +52,15 @@ public class UserServiceImpl implements UserService {
         // Assign role: HOST → PENDING_HOST, others → USER
         Role assignedRole = (request.getRole() == Role.HOST) ? Role.PENDING_HOST : Role.USER;
 
+        // Clean and format phone number with country code
+        String formattedPhone = PhoneValidator.cleanPhoneNumber(request.getPhone());
+
         // Build user entity
         User user = User.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .email(request.getEmail())
-                .phone(request.getPhone())
+                .phone(formattedPhone)
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(assignedRole)
                 .build();
