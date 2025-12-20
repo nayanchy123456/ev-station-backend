@@ -1,7 +1,9 @@
 package com.evstation.ev_charging_backend.repository;
 
 import com.evstation.ev_charging_backend.entity.Charger;
+import jakarta.persistence.LockModeType;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -25,4 +27,9 @@ public interface ChargerRepository extends JpaRepository<Charger, Long> {
             @Param("minPrice") Double minPrice,
             @Param("maxPrice") Double maxPrice
     );
+
+    // 🔒 Pessimistic lock for booking operations - RETURNS Charger directly
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    @Query("SELECT c FROM Charger c WHERE c.id = :id")
+    Charger findByIdForUpdate(@Param("id") Long id);
 }

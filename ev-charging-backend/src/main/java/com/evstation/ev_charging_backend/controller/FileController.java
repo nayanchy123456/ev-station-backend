@@ -32,7 +32,11 @@ public class FileController {
 
             for (MultipartFile file : files) {
                 // Clean original filename
-                String originalFilename = StringUtils.cleanPath(file.getOriginalFilename());
+                String originalFilename = file.getOriginalFilename();
+                if (originalFilename == null || originalFilename.isEmpty()) {
+                    return ResponseEntity.badRequest().body("File name is invalid");
+                }
+                originalFilename = StringUtils.cleanPath(originalFilename);
                 String fileName = System.currentTimeMillis() + "_" + originalFilename;
 
                 // Create upload directory if it doesn't exist

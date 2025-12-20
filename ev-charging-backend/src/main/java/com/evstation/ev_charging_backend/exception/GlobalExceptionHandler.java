@@ -28,6 +28,61 @@ public class GlobalExceptionHandler {
                 .body(AuthResponse.builder().message(ex.getMessage()).build());
     }
 
+    // --- Booking-specific exceptions ---
+    @ExceptionHandler(BookingConflictException.class)
+    public ResponseEntity<Map<String, Object>> handleBookingConflict(BookingConflictException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(Map.of(
+                        "timestamp", Instant.now(),
+                        "status", HttpStatus.CONFLICT.value(),
+                        "error", "Booking Conflict",
+                        "message", ex.getMessage()
+                ));
+    }
+
+    @ExceptionHandler(BookingNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleBookingNotFound(BookingNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(Map.of(
+                        "timestamp", Instant.now(),
+                        "status", HttpStatus.NOT_FOUND.value(),
+                        "error", "Booking Not Found",
+                        "message", ex.getMessage()
+                ));
+    }
+
+    // --- Validation and state exceptions ---
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Map<String, Object>> handleIllegalArgument(IllegalArgumentException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(Map.of(
+                        "timestamp", Instant.now(),
+                        "status", HttpStatus.BAD_REQUEST.value(),
+                        "error", "Invalid Argument",
+                        "message", ex.getMessage()
+                ));
+    }
+
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<Map<String, Object>> handleIllegalState(IllegalStateException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(Map.of(
+                        "timestamp", Instant.now(),
+                        "status", HttpStatus.BAD_REQUEST.value(),
+                        "error", "Invalid State",
+                        "message", ex.getMessage()
+                ));
+    }
+
+    @ExceptionHandler(SecurityException.class)
+    public ResponseEntity<Map<String, Object>> handleSecurityException(SecurityException ex) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                .body(Map.of(
+                        "timestamp", Instant.now(),
+                        "status", HttpStatus.FORBIDDEN.value(),
+                        "error", "Security Error",
+                        "message", ex.getMessage()
+                ));
     @ExceptionHandler(InvalidPhoneNumberException.class)
     public ResponseEntity<AuthResponse> handleInvalidPhoneNumber(InvalidPhoneNumberException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -58,7 +113,7 @@ public class GlobalExceptionHandler {
                 ));
     }
 
-    // --- Validation errors (like invalid search filters or bad input) ---
+    // --- Validation errors ---
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, Object>> handleValidation(MethodArgumentNotValidException ex) {
         Map<String, Object> errors = new HashMap<>();
@@ -74,7 +129,7 @@ public class GlobalExceptionHandler {
                 ));
     }
 
-    // --- Runtime or filter/search related errors ---
+    // --- Runtime errors ---
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<Map<String, Object>> handleRuntime(RuntimeException ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -86,10 +141,10 @@ public class GlobalExceptionHandler {
                 ));
     }
 
-    // --- Generic fallback for unexpected errors ---
+    // --- Generic fallback ---
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleGenericException(Exception ex) {
-        ex.printStackTrace(); // logs in console (useful for debugging)
+        ex.printStackTrace();
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(Map.of(
                         "timestamp", Instant.now(),
