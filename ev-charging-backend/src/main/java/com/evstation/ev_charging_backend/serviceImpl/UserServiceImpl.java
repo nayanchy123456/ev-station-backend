@@ -56,12 +56,16 @@ public class UserServiceImpl implements UserService {
                 .build();
 
         // Save user
-        userRepository.save(user);
+        User savedUser = userRepository.save(user);
 
-        // Generate token only for USERS
+        // ✅ UPDATED: Generate token WITH userId only for non-PENDING_HOST users
         String token = null;
         if (assignedRole != Role.PENDING_HOST) {
-            token = jwtUtil.generateToken(user.getEmail(), assignedRole.name());
+            token = jwtUtil.generateToken(
+                savedUser.getEmail(), 
+                assignedRole.name(),
+                savedUser.getUserId()  // ← ADDED THIS
+            );
         }
 
         // Build response
@@ -70,12 +74,12 @@ public class UserServiceImpl implements UserService {
                         "Host registration pending approval by admin" :
                         "User registered successfully!")
                 .token(token)
-                .email(user.getEmail())
+                .email(savedUser.getEmail())
                 .role(assignedRole.name())
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
-                .phone(user.getPhone())
-                .createdAt(user.getCreatedAt())
+                .firstName(savedUser.getFirstName())
+                .lastName(savedUser.getLastName())
+                .phone(savedUser.getPhone())
+                .createdAt(savedUser.getCreatedAt())
                 .build();
     }
 
@@ -91,9 +95,14 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new InvalidCredentialsException("Invalid email or password!"));
 
+        // ✅ UPDATED: Generate token WITH userId only for non-PENDING_HOST users
         String token = null;
         if (user.getRole() != Role.PENDING_HOST) {
-            token = jwtUtil.generateToken(user.getEmail(), user.getRole().name());
+            token = jwtUtil.generateToken(
+                user.getEmail(), 
+                user.getRole().name(),
+                user.getUserId()  // ← ADDED THIS
+            );
         }
 
         return AuthResponse.builder()
