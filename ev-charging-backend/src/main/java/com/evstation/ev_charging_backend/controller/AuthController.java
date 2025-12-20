@@ -4,7 +4,9 @@ import com.evstation.ev_charging_backend.dto.AuthResponse;
 import com.evstation.ev_charging_backend.dto.LoginRequest;
 import com.evstation.ev_charging_backend.dto.RegisterRequest;
 import com.evstation.ev_charging_backend.enums.Role;
+import com.evstation.ev_charging_backend.exception.InvalidPhoneNumberException;
 import com.evstation.ev_charging_backend.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +20,14 @@ public class AuthController {
 
     // Register new user
     @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
-        AuthResponse response = userService.register(request);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest request) {
+        try {
+            AuthResponse response = userService.register(request);
+            return ResponseEntity.ok(response);
+        } catch (InvalidPhoneNumberException e) {
+            return ResponseEntity.badRequest()
+                    .body(new AuthResponse(e.getMessage()));
+        }
     }
 
     // Login and return JWT token
