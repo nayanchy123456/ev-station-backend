@@ -83,10 +83,6 @@ public class GlobalExceptionHandler {
                         "error", "Security Error",
                         "message", ex.getMessage()
                 ));
-    @ExceptionHandler(InvalidPhoneNumberException.class)
-    public ResponseEntity<AuthResponse> handleInvalidPhoneNumber(InvalidPhoneNumberException ex) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(AuthResponse.builder().message(ex.getMessage()).build());
     }
 
     // --- Access denied for HOST ownership check ---
