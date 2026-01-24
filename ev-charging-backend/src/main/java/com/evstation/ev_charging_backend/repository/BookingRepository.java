@@ -14,7 +14,7 @@ import java.util.Optional;
 
 public interface BookingRepository extends JpaRepository<Booking, Long> {
 
-    // 🔒 Check overlapping bookings for same charger
+    // Check overlapping bookings - UPDATED to include RESERVED and PAYMENT_PENDING
     @Query("""
         SELECT b FROM Booking b
         WHERE b.charger.id = :chargerId
@@ -28,14 +28,22 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
             @Param("activeStatuses") List<BookingStatus> activeStatuses
     );
 
-    // 👤 User bookings
     List<Booking> findByUserUserIdOrderByStartTimeDesc(Long userId);
 
-    // 🔌 Charger bookings
     List<Booking> findByChargerIdOrderByStartTimeAsc(Long chargerId);
     
-    // 🔍 Find booking with pessimistic lock
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("SELECT b FROM Booking b WHERE b.id = :id")
     Optional<Booking> findByIdForUpdate(@Param("id") Long id);
+
+    List<Booking> findByStatusAndStartTimeBefore(BookingStatus status, LocalDateTime time);
+
+    List<Booking> findByStatusAndEndTimeBefore(BookingStatus status, LocalDateTime time);
+
+    List<Booking> findByChargerHostUserIdOrderByStartTimeDesc(Long hostId);
+
+    List<Booking> findByStatusIn(List<BookingStatus> statuses);
+
+    // NEW: Find expired reservations
+    List<Booking> findByStatusAndReservedUntilBefore(BookingStatus status, LocalDateTime time);
 }

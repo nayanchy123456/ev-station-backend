@@ -68,13 +68,13 @@ public class UserServiceImpl implements UserService {
         // Save user
         User savedUser = userRepository.save(user);
 
-        // ✅ UPDATED: Generate token WITH userId only for non-PENDING_HOST users
+        // Generate token WITH userId only for non-PENDING_HOST users
         String token = null;
         if (assignedRole != Role.PENDING_HOST) {
             token = jwtUtil.generateToken(
                 savedUser.getEmail(), 
                 assignedRole.name(),
-                savedUser.getUserId()  // ← ADDED THIS
+                savedUser.getUserId()  // ✅ INCLUDES userId
             );
         }
 
@@ -105,13 +105,13 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new InvalidCredentialsException("Invalid email or password!"));
 
-        // ✅ UPDATED: Generate token WITH userId only for non-PENDING_HOST users
+        // Generate token WITH userId only for non-PENDING_HOST users
         String token = null;
         if (user.getRole() != Role.PENDING_HOST) {
             token = jwtUtil.generateToken(
                 user.getEmail(), 
                 user.getRole().name(),
-                user.getUserId()  // ← ADDED THIS
+                user.getUserId()  // ✅ INCLUDES userId
             );
         }
 
@@ -125,6 +125,7 @@ public class UserServiceImpl implements UserService {
                 .lastName(user.getLastName())
                 .phone(user.getPhone())
                 .createdAt(user.getCreatedAt())
+                .userId(user.getUserId())  // ✅ Also return userId in response
                 .build();
     }
 
@@ -143,6 +144,7 @@ public class UserServiceImpl implements UserService {
                         .email(user.getEmail())
                         .phone(user.getPhone())
                         .role(user.getRole().name())
+                        .userId(user.getUserId())
                         .createdAt(user.getCreatedAt())
                         .build();
             }

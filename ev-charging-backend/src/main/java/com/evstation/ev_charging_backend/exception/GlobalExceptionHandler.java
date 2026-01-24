@@ -51,6 +51,62 @@ public class GlobalExceptionHandler {
                 ));
     }
 
+    // --- Payment-specific exceptions ---
+    @ExceptionHandler(ReservationExpiredException.class)
+    public ResponseEntity<Map<String, Object>> handleReservationExpired(ReservationExpiredException ex) {
+        return ResponseEntity.status(HttpStatus.GONE)
+                .body(Map.of(
+                        "timestamp", Instant.now(),
+                        "status", HttpStatus.GONE.value(),
+                        "error", "Reservation Expired",
+                        "message", ex.getMessage()
+                ));
+    }
+
+    @ExceptionHandler(PaymentFailedException.class)
+    public ResponseEntity<Map<String, Object>> handlePaymentFailed(PaymentFailedException ex) {
+        return ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED)
+                .body(Map.of(
+                        "timestamp", Instant.now(),
+                        "status", HttpStatus.PAYMENT_REQUIRED.value(),
+                        "error", "Payment Failed",
+                        "message", ex.getMessage()
+                ));
+    }
+
+    @ExceptionHandler(InvalidPaymentStatusException.class)
+    public ResponseEntity<Map<String, Object>> handleInvalidPaymentStatus(InvalidPaymentStatusException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(Map.of(
+                        "timestamp", Instant.now(),
+                        "status", HttpStatus.BAD_REQUEST.value(),
+                        "error", "Invalid Payment Status",
+                        "message", ex.getMessage()
+                ));
+    }
+
+    @ExceptionHandler(RefundNotAllowedException.class)
+    public ResponseEntity<Map<String, Object>> handleRefundNotAllowed(RefundNotAllowedException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(Map.of(
+                        "timestamp", Instant.now(),
+                        "status", HttpStatus.BAD_REQUEST.value(),
+                        "error", "Refund Not Allowed",
+                        "message", ex.getMessage()
+                ));
+    }
+
+    @ExceptionHandler(CancellationDeadlinePassedException.class)
+    public ResponseEntity<Map<String, Object>> handleCancellationDeadline(CancellationDeadlinePassedException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(Map.of(
+                        "timestamp", Instant.now(),
+                        "status", HttpStatus.BAD_REQUEST.value(),
+                        "error", "Cancellation Deadline Passed",
+                        "message", ex.getMessage()
+                ));
+    }
+
     // --- Validation and state exceptions ---
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<Map<String, Object>> handleIllegalArgument(IllegalArgumentException ex) {
@@ -85,7 +141,6 @@ public class GlobalExceptionHandler {
                 ));
     }
 
-    // --- Access denied for HOST ownership check ---
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<Map<String, Object>> handleAccessDenied(AccessDeniedException ex) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN)
@@ -97,7 +152,6 @@ public class GlobalExceptionHandler {
                 ));
     }
 
-    // --- Resource not found ---
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<Map<String, Object>> handleNotFound(ResourceNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -109,7 +163,6 @@ public class GlobalExceptionHandler {
                 ));
     }
 
-    // --- Validation errors ---
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, Object>> handleValidation(MethodArgumentNotValidException ex) {
         Map<String, Object> errors = new HashMap<>();
@@ -125,7 +178,6 @@ public class GlobalExceptionHandler {
                 ));
     }
 
-    // --- Runtime errors ---
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<Map<String, Object>> handleRuntime(RuntimeException ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -137,7 +189,6 @@ public class GlobalExceptionHandler {
                 ));
     }
 
-    // --- Generic fallback ---
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleGenericException(Exception ex) {
         ex.printStackTrace();
