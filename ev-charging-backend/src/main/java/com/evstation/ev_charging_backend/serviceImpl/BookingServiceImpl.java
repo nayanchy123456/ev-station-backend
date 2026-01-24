@@ -47,21 +47,16 @@ public class BookingServiceImpl implements BookingService {
     @Override
     @Transactional
     public BookingResponseDto createBooking(BookingRequestDto dto, Long userId) {
-
-        // 1️⃣ Validate user
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
-        // 2️⃣ Lock charger (prevents race conditions)
         Charger charger = chargerRepository.findByIdForUpdate(dto.getChargerId());
         if (charger == null) {
             throw new ResourceNotFoundException("Charger not found");
         }
 
-        // 3️⃣ Time validation (includes future time check)
         validateTime(dto.getStartTime(), dto.getEndTime());
 
-        // 4️⃣ Conflict check
         List<Booking> conflicts = bookingRepository.findConflictingBookings(
                 charger.getId(),
                 dto.getStartTime(),
@@ -73,7 +68,6 @@ public class BookingServiceImpl implements BookingService {
             throw new BookingConflictException("Charger already booked for selected time");
         }
 
-        // 5️⃣ Create booking
         Booking booking = Booking.builder()
                 .user(user)
                 .charger(charger)
@@ -107,16 +101,13 @@ public class BookingServiceImpl implements BookingService {
     @Override
     @Transactional
     public void cancelBooking(Long bookingId, Long userId) {
-
         Booking booking = bookingRepository.findById(bookingId)
                 .orElseThrow(() -> new BookingNotFoundException("Booking not found"));
 
-        // Ownership check
         if (!booking.getUser().getUserId().equals(userId)) {
             throw new SecurityException("You are not allowed to cancel this booking");
         }
 
-        // Status check
         if (booking.getStatus() == BookingStatus.CANCELLED) {
             throw new IllegalStateException("Booking is already cancelled");
         }
@@ -125,13 +116,12 @@ public class BookingServiceImpl implements BookingService {
             throw new IllegalStateException("Cannot cancel completed booking");
         }
 
-        // Time rule - cannot cancel within 1 hour of start time
         LocalDateTime cancellationDeadline = booking.getStartTime()
                 .minusHours(CANCELLATION_DEADLINE_HOURS);
-        
+
         if (LocalDateTime.now().isAfter(cancellationDeadline)) {
             throw new IllegalStateException(
-                "Cannot cancel within " + CANCELLATION_DEADLINE_HOURS + " hour(s) of start time"
+                    "Cannot cancel within " + CANCELLATION_DEADLINE_HOURS + " hour(s) of start time"
             );
         }
 
@@ -139,47 +129,70 @@ public class BookingServiceImpl implements BookingService {
         bookingRepository.save(booking);
     }
 
+    // ✅ FIXED: Host can see all bookings for their chargers
+    @Override
+    public List<BookingResponseDto> getBookingsByHost(Long hostId) {
+        // Use the optimized repository query instead of loading all bookings
+        return bookingRepository.findByChargerHostUserIdOrderByStartTimeDesc(hostId)
+                .stream()
+                .map(this::mapToResponse)
+                .toList();
+    }
+
     // ================= PRIVATE METHODS =================
 
     private void validateTime(LocalDateTime start, LocalDateTime end) {
         LocalDateTime now = LocalDateTime.now();
 
-        // Check if start time is in the future
         if (start.isBefore(now)) {
             throw new IllegalArgumentException("Start time must be in the future");
         }
 
-        // Check minimum advance booking time
         if (start.isBefore(now.plusMinutes(MIN_ADVANCE_MINUTES))) {
             throw new IllegalArgumentException(
-                "Booking must be at least " + MIN_ADVANCE_MINUTES + " minutes in advance"
+                    "Booking must be at least " + MIN_ADVANCE_MINUTES + " minutes in advance"
             );
         }
 
-        // Check end time is after start time
         if (!end.isAfter(start)) {
             throw new IllegalArgumentException("End time must be after start time");
         }
 
         long duration = Duration.between(start, end).toMinutes();
 
-        // Check minimum duration
         if (duration < MIN_DURATION_MINUTES) {
             throw new IllegalArgumentException(
-                "Minimum booking duration is " + MIN_DURATION_MINUTES + " minutes"
+                    "Minimum booking duration is " + MIN_DURATION_MINUTES + " minutes"
             );
         }
 
-        // Check maximum duration
         if (duration > MAX_DURATION_MINUTES) {
             throw new IllegalArgumentException(
-                "Maximum booking duration is " + (MAX_DURATION_MINUTES / 60) + " hours"
+                    "Maximum booking duration is " + (MAX_DURATION_MINUTES / 60) + " hours"
             );
         }
     }
 
-    private BookingResponseDto mapToResponse(Booking booking) {
+    /**
+     * Helper method to map booking status in real-time
+     */
+    private BookingStatus mapStatusRealTime(Booking booking) {
+        if (booking.getStatus() == BookingStatus.CANCELLED) {
+            return BookingStatus.CANCELLED;
+        }
 
+        LocalDateTime now = LocalDateTime.now();
+
+        if (now.isBefore(booking.getStartTime())) {
+            return BookingStatus.CONFIRMED;
+        } else if (now.isBefore(booking.getEndTime())) {
+            return BookingStatus.ACTIVE;
+        } else {
+            return BookingStatus.COMPLETED;
+        }
+    }
+
+    private BookingResponseDto mapToResponse(Booking booking) {
         BigDecimal totalPrice = null;
         if (booking.getTotalEnergyKwh() != null) {
             totalPrice = booking.getPricePerKwh()
@@ -193,7 +206,7 @@ public class BookingServiceImpl implements BookingService {
                 .chargerName(booking.getCharger().getName())
                 .startTime(booking.getStartTime())
                 .endTime(booking.getEndTime())
-                .status(booking.getStatus())
+                .status(mapStatusRealTime(booking)) // ✅ Real-time status
                 .pricePerKwh(booking.getPricePerKwh())
                 .totalPrice(totalPrice)
                 .build();

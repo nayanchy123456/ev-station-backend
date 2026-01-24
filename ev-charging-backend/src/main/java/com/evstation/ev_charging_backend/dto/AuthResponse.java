@@ -1,17 +1,16 @@
 package com.evstation.ev_charging_backend.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Data
-@Builder
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class AuthResponse {
+
     private String message;
     private String token;
     private String email;
@@ -19,9 +18,11 @@ public class AuthResponse {
     private String firstName;
     private String lastName;
     private String phone;
+    private Long userId;  // ✅ Make sure this field exists
     private LocalDateTime createdAt;
 
-     public AuthResponse(String message) {
+    // Constructor for error messages
+    public AuthResponse(String message) {
         this.message = message;
     }
 }
