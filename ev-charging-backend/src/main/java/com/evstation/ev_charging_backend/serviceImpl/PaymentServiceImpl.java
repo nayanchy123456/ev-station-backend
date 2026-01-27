@@ -9,6 +9,7 @@ import com.evstation.ev_charging_backend.enums.PaymentStatus;
 import com.evstation.ev_charging_backend.exception.*;
 import com.evstation.ev_charging_backend.repository.BookingRepository;
 import com.evstation.ev_charging_backend.repository.PaymentRepository;
+import com.evstation.ev_charging_backend.service.EmailService;
 import com.evstation.ev_charging_backend.service.NotificationService;
 import com.evstation.ev_charging_backend.service.PaymentService;
 import com.evstation.ev_charging_backend.service.ReceiptService;
@@ -30,6 +31,7 @@ public class PaymentServiceImpl implements PaymentService {
     private final NotificationService notificationService;
     private final ReceiptService receiptService;
     private final MockPaymentUtil mockPaymentUtil;
+    private final EmailService emailService;
 
     public PaymentServiceImpl(
             PaymentRepository paymentRepository,
@@ -37,7 +39,8 @@ public class PaymentServiceImpl implements PaymentService {
             ReservationService reservationService,
             NotificationService notificationService,
             ReceiptService receiptService,
-            MockPaymentUtil mockPaymentUtil
+            MockPaymentUtil mockPaymentUtil,
+            EmailService emailService
     ) {
         this.paymentRepository = paymentRepository;
         this.bookingRepository = bookingRepository;
@@ -45,6 +48,7 @@ public class PaymentServiceImpl implements PaymentService {
         this.notificationService = notificationService;
         this.receiptService = receiptService;
         this.mockPaymentUtil = mockPaymentUtil;
+        this.emailService = emailService;
     }
 
     @Override
@@ -154,6 +158,11 @@ public class PaymentServiceImpl implements PaymentService {
                 booking
             );
 
+            // ✅ Send email with receipt (ONLY to user, NOT to host)
+            emailService.sendReceiptEmail(booking.getUser(), booking, payment);
+            emailService.sendBookingConfirmation(booking.getUser(), booking, payment);
+            // ❌ REMOVED: emailService.sendHostBookingNotification() - Host gets dashboard notification only
+
             return PaymentProcessResponseDto.builder()
                     .success(true)
                     .paymentId(payment.getId())
@@ -178,6 +187,9 @@ public class PaymentServiceImpl implements PaymentService {
 
             // Send failure notification
             notificationService.notifyUser(userId, NotificationType.PAYMENT_FAILED, booking);
+
+            // ✅ Send failure email
+            emailService.sendPaymentFailure(booking.getUser(), payment, failureReason);
 
             throw new PaymentFailedException("Payment failed: " + failureReason);
         }
@@ -220,6 +232,9 @@ public class PaymentServiceImpl implements PaymentService {
             NotificationType.BOOKING_CANCELLED,
             booking
         );
+
+        // ✅ Send cancellation email
+        emailService.sendCancellationConfirmation(booking.getUser(), booking, payment);
 
         return CancellationResponseDto.builder()
                 .success(true)
