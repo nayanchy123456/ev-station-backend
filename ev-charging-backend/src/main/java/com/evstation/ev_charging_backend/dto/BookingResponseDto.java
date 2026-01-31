@@ -24,6 +24,7 @@ public class BookingResponseDto {
     private LocalDateTime endTime;
 
     private BookingStatus status;
+    private LocalDateTime reservedUntil; // For payment timer
 
     private BigDecimal pricePerKwh;
     private BigDecimal totalPrice;
