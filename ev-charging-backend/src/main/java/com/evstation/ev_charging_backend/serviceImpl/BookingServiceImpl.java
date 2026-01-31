@@ -115,7 +115,20 @@ public class BookingServiceImpl implements BookingService {
         if (booking.getStatus() == BookingStatus.COMPLETED) {
             throw new IllegalStateException("Cannot cancel completed booking");
         }
+        
+        if (booking.getStatus() == BookingStatus.EXPIRED) {
+            throw new IllegalStateException("Cannot cancel expired reservation");
+        }
 
+        // Allow cancellation of RESERVED and PAYMENT_PENDING without time restrictions
+        if (booking.getStatus() == BookingStatus.RESERVED || 
+            booking.getStatus() == BookingStatus.PAYMENT_PENDING) {
+            booking.setStatus(BookingStatus.CANCELLED);
+            bookingRepository.save(booking);
+            return;
+        }
+
+        // For CONFIRMED bookings, check the cancellation deadline
         LocalDateTime cancellationDeadline = booking.getStartTime()
                 .minusHours(CANCELLATION_DEADLINE_HOURS);
 
@@ -129,10 +142,8 @@ public class BookingServiceImpl implements BookingService {
         bookingRepository.save(booking);
     }
 
-    // ✅ FIXED: Host can see all bookings for their chargers
     @Override
     public List<BookingResponseDto> getBookingsByHost(Long hostId) {
-        // Use the optimized repository query instead of loading all bookings
         return bookingRepository.findByChargerHostUserIdOrderByStartTimeDesc(hostId)
                 .stream()
                 .map(this::mapToResponse)
@@ -175,21 +186,31 @@ public class BookingServiceImpl implements BookingService {
 
     /**
      * Helper method to map booking status in real-time
+     * Only applies to CONFIRMED bookings - other statuses remain as-is
      */
     private BookingStatus mapStatusRealTime(Booking booking) {
-        if (booking.getStatus() == BookingStatus.CANCELLED) {
-            return BookingStatus.CANCELLED;
+        // Don't modify these statuses
+        if (booking.getStatus() == BookingStatus.CANCELLED ||
+            booking.getStatus() == BookingStatus.RESERVED ||
+            booking.getStatus() == BookingStatus.PAYMENT_PENDING ||
+            booking.getStatus() == BookingStatus.EXPIRED) {
+            return booking.getStatus();
         }
 
         LocalDateTime now = LocalDateTime.now();
 
-        if (now.isBefore(booking.getStartTime())) {
-            return BookingStatus.CONFIRMED;
-        } else if (now.isBefore(booking.getEndTime())) {
-            return BookingStatus.ACTIVE;
-        } else {
-            return BookingStatus.COMPLETED;
+        // Only CONFIRMED bookings can transition to ACTIVE/COMPLETED
+        if (booking.getStatus() == BookingStatus.CONFIRMED) {
+            if (now.isBefore(booking.getStartTime())) {
+                return BookingStatus.CONFIRMED;
+            } else if (now.isBefore(booking.getEndTime())) {
+                return BookingStatus.ACTIVE;
+            } else {
+                return BookingStatus.COMPLETED;
+            }
         }
+
+        return booking.getStatus();
     }
 
     private BookingResponseDto mapToResponse(Booking booking) {
@@ -197,6 +218,8 @@ public class BookingServiceImpl implements BookingService {
         if (booking.getTotalEnergyKwh() != null) {
             totalPrice = booking.getPricePerKwh()
                     .multiply(BigDecimal.valueOf(booking.getTotalEnergyKwh()));
+        } else if (booking.getTotalPrice() != null) {
+            totalPrice = booking.getTotalPrice();
         }
 
         return BookingResponseDto.builder()
@@ -206,7 +229,8 @@ public class BookingServiceImpl implements BookingService {
                 .chargerName(booking.getCharger().getName())
                 .startTime(booking.getStartTime())
                 .endTime(booking.getEndTime())
-                .status(mapStatusRealTime(booking)) // ✅ Real-time status
+                .status(mapStatusRealTime(booking))
+                .reservedUntil(booking.getReservedUntil())
                 .pricePerKwh(booking.getPricePerKwh())
                 .totalPrice(totalPrice)
                 .build();
