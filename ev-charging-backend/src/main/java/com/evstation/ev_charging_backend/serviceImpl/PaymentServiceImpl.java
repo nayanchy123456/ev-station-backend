@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class PaymentServiceImpl implements PaymentService {
@@ -60,10 +61,36 @@ public class PaymentServiceImpl implements PaymentService {
         Booking booking = bookingRepository.findById(dto.getReservationId())
                 .orElseThrow(() -> new BookingNotFoundException("Reservation not found"));
 
-        // Check if payment already exists
-        paymentRepository.findByBookingId(booking.getId()).ifPresent(p -> {
-            throw new IllegalStateException("Payment already initiated for this booking");
-        });
+        // ✅ FIXED: Check if payment already exists
+        Optional<Payment> existingPayment = paymentRepository.findByBookingId(booking.getId());
+        
+        if (existingPayment.isPresent()) {
+            Payment payment = existingPayment.get();
+            
+            // If payment is PENDING, allow re-initiation (user can retry)
+            if (payment.getStatus() == PaymentStatus.PENDING) {
+                // Check if reservation has expired
+                if (booking.getReservedUntil() != null && 
+                    LocalDateTime.now().isAfter(booking.getReservedUntil())) {
+                    throw new ReservationExpiredException("Reservation has expired. Please create a new booking.");
+                }
+                
+                // Return existing payment details for retry
+                return PaymentInitiateResponseDto.builder()
+                        .paymentId(payment.getId())
+                        .bookingId(booking.getId())
+                        .amount(payment.getAmount())
+                        .currency(payment.getCurrency())
+                        .status(PaymentStatus.PENDING)
+                        .paymentMethod(payment.getPaymentMethod())
+                        .expiresAt(booking.getReservedUntil())
+                        .message("Payment is pending. You can proceed to complete the payment.")
+                        .build();
+            }
+            
+            // If payment is already SUCCESS, FAILED, or REFUNDED, block re-initiation
+            throw new IllegalStateException("Payment already " + payment.getStatus().toString().toLowerCase() + " for this booking");
+        }
 
         // Calculate amount (estimated based on duration)
         long durationMinutes = Duration.between(booking.getStartTime(), booking.getEndTime()).toMinutes();
