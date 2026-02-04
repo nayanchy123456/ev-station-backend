@@ -12,10 +12,22 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
+/**
+ * Security configuration for the EV Charging Station Backend.
+ * 
+ * ⭐ UPDATED FOR PHASE 1 CHAT SYSTEM:
+ * - Added WebSocket endpoint (/ws/**) - permitAll (JWT validated in interceptor)
+ * - Added Chat API endpoints (/api/chat/**) - authenticated
+ * - Added health endpoint (/api/chat/health) - permitAll for monitoring
+ * - CORS handled by CorsFilter class (not Spring Security's cors())
+ * 
+ * ALL EXISTING FUNCTIONALITY PRESERVED - NO CHANGES TO:
+ * - Authentication endpoints
+ * - Admin endpoints
+ * - File uploads
+ * - All other API endpoints
+ */
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfig {
@@ -33,43 +45,50 @@ public class SecurityConfig {
         return authConfig.getAuthenticationManager();
     }
 
-    // CORS
-    @Bean
-    public CorsFilter corsFilter() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://localhost:5173");
-        config.addAllowedHeader("*");
-        config.addAllowedMethod("*");
-        source.registerCorsConfiguration("/**", config);
-        return new CorsFilter(source);
-    }
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .csrf(csrf -> csrf.disable())
-            .cors(cors -> {})
+            // ❌ REMOVED: .cors(cors -> {})  
+            // CORS is now handled by CorsFilter class which runs before Spring Security
             .authorizeHttpRequests(auth -> auth
 
-                // ✅ Allow uploads folder (images)
+                // ========== EXISTING - UNCHANGED ==========
+                
+                // ✅ Allow uploads folder (images) - EXISTING
                 .requestMatchers("/uploads/**").permitAll()
 
-                // Auth endpoints open
+                // ✅ Auth endpoints open - EXISTING
                 .requestMatchers("/api/auth/**").permitAll()
 
-                // Admin endpoints
+                // ========== PHASE 1 CHAT SYSTEM - NEW ==========
+                
+                // ⭐ WebSocket endpoint - permitAll because JWT validation happens
+                //    in WebSocketAuthInterceptor during STOMP CONNECT frame
+                //    This is the standard Spring Security pattern for WebSocket + JWT
+                .requestMatchers("/ws/**").permitAll()
+
+                // ⭐ Health check endpoint - permitAll for monitoring/debugging
+                //    This allows testing if backend is running without authentication
+                .requestMatchers("/api/chat/health").permitAll()
+
+                // ⭐ Chat REST API - requires authentication via JWT filter
+                //    All other chat endpoints need valid JWT token in Authorization header
+                .requestMatchers("/api/chat/**").authenticated()
+
+                // ========== EXISTING - UNCHANGED ==========
+
+                // ✅ Admin endpoints - EXISTING
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
 
-                // Everything else needs login
+                // ✅ Everything else needs login - EXISTING
                 .anyRequest().authenticated()
             )
             .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             );
 
-        // Add JWT filter
+        // Add JWT filter - UNCHANGED
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
