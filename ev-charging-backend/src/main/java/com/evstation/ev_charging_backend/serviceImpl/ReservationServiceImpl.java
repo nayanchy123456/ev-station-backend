@@ -28,7 +28,7 @@ public class ReservationServiceImpl implements ReservationService {
     private static final long MIN_DURATION_MINUTES = 30;
     private static final long MAX_DURATION_MINUTES = 8 * 60;
     private static final long MIN_ADVANCE_MINUTES = 15;
-    private static final long RESERVATION_TIMEOUT_MINUTES = 10;
+    private static final long RESERVATION_TIMEOUT_MINUTES = 3;
 
     private final BookingRepository bookingRepository;
     private final ChargerRepository chargerRepository;

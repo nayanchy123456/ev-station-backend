@@ -229,78 +229,94 @@ public class ChatMessageServiceImpl implements ChatMessageService {
     
     // ==================== CONVERSATION OPERATIONS ====================
     
-    @Override
-    @Transactional
-    public ConversationResponse initiateConversation(
-        Long currentUserId,
-        ConversationInitiateRequest request
-    ) {
-        log.info("🆕 Initiating conversation: user {} → user {}, type: {}", 
-                 currentUserId, request.getParticipantId(), request.getConversationType());
-        
-        // Validate request
-        if (request.getParticipantId() == null) {
-            throw new IllegalArgumentException("Participant ID is required");
-        }
-        
-        if (currentUserId.equals(request.getParticipantId())) {
-            throw new IllegalArgumentException("Cannot create conversation with yourself");
-        }
-        
-        // Verify participant exists
-        User participant = loadUser(request.getParticipantId(), "Participant");
-        
-        // Determine conversation type
-        ConversationType type = request.getConversationType() != null 
-            ? request.getConversationType() 
-            : ConversationType.DIRECT;
-        
-        // For USER_HOST type, verify charger exists
-        Long chargerId = request.getChargerId();
-        if (type == ConversationType.USER_HOST) {
-            if (chargerId == null) {
-                throw new IllegalArgumentException("Charger ID is required for USER_HOST conversation");
-            }
-            
-            // Verify charger exists and participant is the host
-            Charger charger = chargerRepository.findById(chargerId)
-                .orElseThrow(() -> new ResourceNotFoundException("Charger not found"));
-            
-            if (!charger.getHost().getUserId().equals(request.getParticipantId())) {
-                throw new IllegalArgumentException(
-                    "Participant is not the host of the specified charger"
-                );
-            }
-        }
-        
-        // Get or create conversation
-        Conversation conversation = findOrCreateConversation(
-            currentUserId,
-            request.getParticipantId(),
-            type,
-            chargerId
-        );
-        
-        // Set title if provided
-        if (request.getTitle() != null && !request.getTitle().isBlank()) {
-            conversation.setTitle(request.getTitle());
-            conversationRepository.save(conversation);
-        }
-        
-        // Send initial message if provided
-        if (request.getInitialMessage() != null && !request.getInitialMessage().isBlank()) {
-            ChatMessageRequest messageRequest = ChatMessageRequest.builder()
-                .receiverId(request.getParticipantId())
-                .content(request.getInitialMessage())
-                .conversationType(type)
-                .chargerId(chargerId)
-                .build();
-            
-            sendMessage(currentUserId, messageRequest);
-        }
-        
-        return mapToConversationResponse(conversation, currentUserId);
+   @Override
+@Transactional
+public ConversationResponse initiateConversation(
+    Long currentUserId,
+    ConversationInitiateRequest request
+) {
+    log.info("🆕 Initiating conversation: user {} → user {}, type: {}", 
+             currentUserId, request.getParticipantId(), request.getConversationType());
+    
+    // Validate request
+    if (request.getParticipantId() == null) {
+        throw new IllegalArgumentException("Participant ID is required");
     }
+    
+    if (currentUserId.equals(request.getParticipantId())) {
+        throw new IllegalArgumentException("Cannot create conversation with yourself");
+    }
+    
+    // Verify participant exists
+    User participant = loadUser(request.getParticipantId(), "Participant");
+    
+    // Determine conversation type
+    ConversationType type = request.getConversationType() != null 
+        ? request.getConversationType() 
+        : ConversationType.DIRECT;
+    
+    // For USER_HOST type, verify charger exists
+    Long chargerId = request.getChargerId();
+    if (type == ConversationType.USER_HOST) {
+        if (chargerId == null) {
+            throw new IllegalArgumentException("Charger ID is required for USER_HOST conversation");
+        }
+        
+        // Verify charger exists and participant is the host
+        Charger charger = chargerRepository.findById(chargerId)
+            .orElseThrow(() -> new ResourceNotFoundException("Charger not found"));
+        
+        if (!charger.getHost().getUserId().equals(request.getParticipantId())) {
+            throw new IllegalArgumentException(
+                "Participant is not the host of the specified charger"
+            );
+        }
+    }
+    
+    // ✅ NEW: Check if conversation already exists
+    Conversation existingConv = conversationRepository
+        .findByParticipantsAndTypeAndCharger(
+            currentUserId, 
+            request.getParticipantId(), 
+            type, 
+            chargerId
+        )
+        .orElse(null);
+    
+    boolean conversationAlreadyExists = (existingConv != null);
+    
+    // Get or create conversation
+    Conversation conversation = conversationAlreadyExists 
+        ? existingConv 
+        : findOrCreateConversation(currentUserId, request.getParticipantId(), type, chargerId);
+    
+    // Set title if provided
+    if (request.getTitle() != null && !request.getTitle().isBlank()) {
+        conversation.setTitle(request.getTitle());
+        conversationRepository.save(conversation);
+    }
+    
+    // ✅ FIXED: Only send initial message if conversation is NEW
+    if (!conversationAlreadyExists && 
+        request.getInitialMessage() != null && 
+        !request.getInitialMessage().isBlank()) {
+        
+        log.info("📤 Sending initial message to new conversation");
+        
+        ChatMessageRequest messageRequest = ChatMessageRequest.builder()
+            .receiverId(request.getParticipantId())
+            .content(request.getInitialMessage())
+            .conversationType(type)
+            .chargerId(chargerId)
+            .build();
+        
+        sendMessage(currentUserId, messageRequest);
+    } else if (conversationAlreadyExists) {
+        log.info("♻️ Conversation already exists, skipping initial message");
+    }
+    
+    return mapToConversationResponse(conversation, currentUserId);
+}
     
     @Override
     @Transactional

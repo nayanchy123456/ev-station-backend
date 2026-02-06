@@ -27,14 +27,12 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 /**
- * ENHANCED BookingServiceImpl with Auto-Conversation Creation
+ * ✅ FIXED BookingServiceImpl
  * 
- * ✅ NEW FEATURES:
- * 1. Automatically creates a conversation between user and host when booking is created
- * 2. Ensures conversation exists for seamless communication
- * 3. Handles edge cases where conversation already exists
- * 
- * This enables users and hosts to communicate directly about their bookings.
+ * CHANGES:
+ * 1. createBooking() now follows reservation flow (starts with RESERVED)
+ * 2. Added enhanced logging for debugging
+ * 3. Maintains all existing functionality
  */
 @Service
 @Slf4j
@@ -44,17 +42,18 @@ public class BookingServiceImpl implements BookingService {
     private static final long MAX_DURATION_MINUTES = 8 * 60;
     private static final long MIN_ADVANCE_MINUTES = 15;
     private static final long CANCELLATION_DEADLINE_HOURS = 1;
+    private static final long RESERVATION_TIMEOUT_MINUTES = 3; // ✅ ADDED
 
     private final BookingRepository bookingRepository;
     private final ChargerRepository chargerRepository;
     private final UserRepository userRepository;
-    private final ConversationRepository conversationRepository;  // NEW: Added for conversation management
+    private final ConversationRepository conversationRepository;
 
     public BookingServiceImpl(
             BookingRepository bookingRepository,
             ChargerRepository chargerRepository,
             UserRepository userRepository,
-            ConversationRepository conversationRepository  // NEW: Added dependency
+            ConversationRepository conversationRepository
     ) {
         this.bookingRepository = bookingRepository;
         this.chargerRepository = chargerRepository;
@@ -63,12 +62,13 @@ public class BookingServiceImpl implements BookingService {
     }
 
     /**
-     * Create Booking with Auto-Conversation Creation
+     * ✅ FIXED: Create Booking - Now follows reservation flow
      * 
-     * ✅ ENHANCED:
-     * - Creates a conversation between user and charger host automatically
-     * - Logs conversation creation for debugging
-     * - Handles cases where conversation already exists (idempotent)
+     * CHANGES:
+     * - Status starts as RESERVED (not CONFIRMED)
+     * - Sets reservedUntil timestamp
+     * - Logs host ID for debugging
+     * - Auto-creates conversation between user and host
      * 
      * @param dto Booking request data
      * @param userId ID of the user creating the booking
@@ -96,6 +96,9 @@ public class BookingServiceImpl implements BookingService {
             throw new ResourceNotFoundException("Charger host not found");
         }
 
+        // ✅ LOG HOST ID
+        log.info("🏠 Charger host ID: {}", host.getUserId());
+
         // Validate booking time
         validateTime(dto.getStartTime(), dto.getEndTime());
 
@@ -104,44 +107,51 @@ public class BookingServiceImpl implements BookingService {
                 charger.getId(),
                 dto.getStartTime(),
                 dto.getEndTime(),
-                List.of(BookingStatus.CONFIRMED, BookingStatus.ACTIVE)
+                List.of(BookingStatus.RESERVED, BookingStatus.PAYMENT_PENDING, 
+                       BookingStatus.CONFIRMED, BookingStatus.ACTIVE)
         );
 
         if (!conflicts.isEmpty()) {
             throw new BookingConflictException("Charger already booked for selected time");
         }
 
-        // Create the booking
+        // ✅ FIXED: Create booking with RESERVED status (not CONFIRMED)
+        LocalDateTime reservedUntil = LocalDateTime.now().plusMinutes(RESERVATION_TIMEOUT_MINUTES);
+        
         Booking booking = Booking.builder()
                 .user(user)
                 .charger(charger)
                 .startTime(dto.getStartTime())
                 .endTime(dto.getEndTime())
-                .status(BookingStatus.CONFIRMED)
+                .status(BookingStatus.RESERVED)  // ✅ CHANGED FROM CONFIRMED
+                .reservedUntil(reservedUntil)    // ✅ ADDED
                 .pricePerKwh(charger.getPricePerKwh())
                 .build();
 
         Booking savedBooking = bookingRepository.save(booking);
-        log.info("✅ Booking created successfully: {}", savedBooking.getId());
+        
+        // ✅ ENHANCED LOGGING
+        log.info("✅ Booking #{} created with status RESERVED for user {} on charger {} (host: {})", 
+                 savedBooking.getId(), userId, charger.getId(), host.getUserId());
+        log.info("⏰ Reservation expires at: {}", reservedUntil);
 
-        // ==================== AUTO-CONVERSATION CREATION ====================
-        // NEW: Create conversation between user and host (if not exists)
+        // Auto-create conversation between user and host
         try {
             createOrGetConversation(userId, host.getUserId());
         } catch (Exception e) {
-            // Log but don't fail the booking if conversation creation fails
             log.error("⚠️ Failed to create conversation between user {} and host {}: {}", 
                      userId, host.getUserId(), e.getMessage(), e);
         }
-        // ====================================================================
 
         return mapToResponse(savedBooking);
     }
 
     @Override
     public List<BookingResponseDto> getMyBookings(Long userId) {
-        return bookingRepository.findByUserUserIdOrderByStartTimeDesc(userId)
-                .stream()
+        List<Booking> bookings = bookingRepository.findByUserUserIdOrderByStartTimeDesc(userId);
+        log.debug("📊 User {} has {} total bookings", userId, bookings.size());
+        
+        return bookings.stream()
                 .map(this::mapToResponse)
                 .toList();
     }
@@ -181,6 +191,9 @@ public class BookingServiceImpl implements BookingService {
             booking.getStatus() == BookingStatus.PAYMENT_PENDING) {
             booking.setStatus(BookingStatus.CANCELLED);
             bookingRepository.save(booking);
+            
+            log.info("🚫 User {} cancelled booking #{} (was {})", 
+                     userId, bookingId, booking.getStatus());
             return;
         }
 
@@ -196,46 +209,42 @@ public class BookingServiceImpl implements BookingService {
 
         booking.setStatus(BookingStatus.CANCELLED);
         bookingRepository.save(booking);
+        
+        log.info("🚫 User {} cancelled confirmed booking #{}", userId, bookingId);
     }
 
     @Override
     public List<BookingResponseDto> getBookingsByHost(Long hostId) {
-        return bookingRepository.findByChargerHostUserIdOrderByStartTimeDesc(hostId)
-                .stream()
+        List<Booking> bookings = bookingRepository.findByChargerHostUserIdOrderByStartTimeDesc(hostId);
+        
+        // ✅ ENHANCED LOGGING
+        long reservedCount = bookings.stream().filter(b -> b.getStatus() == BookingStatus.RESERVED).count();
+        long paymentPendingCount = bookings.stream().filter(b -> b.getStatus() == BookingStatus.PAYMENT_PENDING).count();
+        long confirmedCount = bookings.stream().filter(b -> b.getStatus() == BookingStatus.CONFIRMED).count();
+        
+        log.info("📊 Host {} bookings: Total={}, RESERVED={}, PAYMENT_PENDING={}, CONFIRMED={}", 
+                 hostId, bookings.size(), reservedCount, paymentPendingCount, confirmedCount);
+        
+        return bookings.stream()
                 .map(this::mapToResponse)
                 .toList();
     }
 
     // ================= PRIVATE METHODS =================
 
-    /**
-     * Create or Get Conversation Between User and Host
-     * 
-     * This method ensures a conversation exists between the booking user and charger host.
-     * It's idempotent - won't create duplicates if conversation already exists.
-     * 
-     * @param userId ID of the booking user
-     * @param hostId ID of the charger host
-     * @return Conversation entity
-     */
     private Conversation createOrGetConversation(Long userId, Long hostId) {
-        // Don't create conversation if user is booking their own charger
         if (userId.equals(hostId)) {
             log.debug("ℹ️ User {} is booking their own charger, skipping conversation creation", userId);
             return null;
         }
 
-        // Check if conversation already exists
         return conversationRepository.findByUsers(userId, hostId)
             .orElseGet(() -> {
-                // Normalize: smaller ID first (database constraint)
                 Long user1Id = Math.min(userId, hostId);
                 Long user2Id = Math.max(userId, hostId);
                 
-                // Double-check to prevent race conditions
                 return conversationRepository.findByUsers(user1Id, user2Id)
                     .orElseGet(() -> {
-                        // Create new conversation
                         Conversation newConversation = Conversation.builder()
                             .user1Id(user1Id)
                             .user2Id(user2Id)
@@ -285,12 +294,7 @@ public class BookingServiceImpl implements BookingService {
         }
     }
 
-    /**
-     * Helper method to map booking status in real-time
-     * Only applies to CONFIRMED bookings - other statuses remain as-is
-     */
     private BookingStatus mapStatusRealTime(Booking booking) {
-        // Don't modify these statuses
         if (booking.getStatus() == BookingStatus.CANCELLED ||
             booking.getStatus() == BookingStatus.RESERVED ||
             booking.getStatus() == BookingStatus.PAYMENT_PENDING ||
@@ -300,7 +304,6 @@ public class BookingServiceImpl implements BookingService {
 
         LocalDateTime now = LocalDateTime.now();
 
-        // Only CONFIRMED bookings can transition to ACTIVE/COMPLETED
         if (booking.getStatus() == BookingStatus.CONFIRMED) {
             if (now.isBefore(booking.getStartTime())) {
                 return BookingStatus.CONFIRMED;

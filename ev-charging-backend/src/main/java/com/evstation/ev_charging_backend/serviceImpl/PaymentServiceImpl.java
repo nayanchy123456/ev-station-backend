@@ -16,6 +16,7 @@ import com.evstation.ev_charging_backend.service.ReceiptService;
 import com.evstation.ev_charging_backend.service.ReservationService;
 import com.evstation.ev_charging_backend.util.MockPaymentUtil;
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -23,7 +24,16 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+/**
+ * ✅ ENHANCED PaymentServiceImpl with Better Logging
+ * 
+ * CHANGES:
+ * 1. Added comprehensive logging for debugging
+ * 2. Logs host ID when status changes
+ * 3. Maintains all existing functionality
+ */
 @Service
+@Slf4j
 public class PaymentServiceImpl implements PaymentService {
 
     private final PaymentRepository paymentRepository;
@@ -55,27 +65,34 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     @Transactional
     public PaymentInitiateResponseDto initiatePayment(PaymentInitiateRequestDto dto, Long userId) {
+        log.info("💳 User {} initiating payment for reservation {}", userId, dto.getReservationId());
+        
         // Validate reservation
         reservationService.validateReservation(dto.getReservationId(), userId);
 
         Booking booking = bookingRepository.findById(dto.getReservationId())
                 .orElseThrow(() -> new BookingNotFoundException("Reservation not found"));
 
-        // ✅ FIXED: Check if payment already exists
+        // ✅ LOG CURRENT STATUS AND HOST
+        Long hostId = booking.getCharger().getHost().getUserId();
+        log.info("📋 Booking #{} current status: {} (host: {})", 
+                 booking.getId(), booking.getStatus(), hostId);
+
+        // Check if payment already exists
         Optional<Payment> existingPayment = paymentRepository.findByBookingId(booking.getId());
         
         if (existingPayment.isPresent()) {
             Payment payment = existingPayment.get();
             
-            // If payment is PENDING, allow re-initiation (user can retry)
             if (payment.getStatus() == PaymentStatus.PENDING) {
-                // Check if reservation has expired
                 if (booking.getReservedUntil() != null && 
                     LocalDateTime.now().isAfter(booking.getReservedUntil())) {
                     throw new ReservationExpiredException("Reservation has expired. Please create a new booking.");
                 }
                 
-                // Return existing payment details for retry
+                log.info("♻️ Returning existing PENDING payment {} for booking {}", 
+                         payment.getId(), booking.getId());
+                
                 return PaymentInitiateResponseDto.builder()
                         .paymentId(payment.getId())
                         .bookingId(booking.getId())
@@ -88,13 +105,12 @@ public class PaymentServiceImpl implements PaymentService {
                         .build();
             }
             
-            // If payment is already SUCCESS, FAILED, or REFUNDED, block re-initiation
             throw new IllegalStateException("Payment already " + payment.getStatus().toString().toLowerCase() + " for this booking");
         }
 
-        // Calculate amount (estimated based on duration)
+        // Calculate amount
         long durationMinutes = Duration.between(booking.getStartTime(), booking.getEndTime()).toMinutes();
-        double estimatedKwh = (durationMinutes / 60.0) * 7.0; // Assume 7 kWh per hour
+        double estimatedKwh = (durationMinutes / 60.0) * 7.0;
         BigDecimal amount = booking.getPricePerKwh()
                 .multiply(BigDecimal.valueOf(estimatedKwh))
                 .setScale(2, BigDecimal.ROUND_HALF_UP);
@@ -111,10 +127,17 @@ public class PaymentServiceImpl implements PaymentService {
 
         paymentRepository.save(payment);
 
-        // Update booking status
+        // ✅ ENHANCED: Update booking status to PAYMENT_PENDING
+        BookingStatus previousStatus = booking.getStatus();
         booking.setStatus(BookingStatus.PAYMENT_PENDING);
         booking.setTotalPrice(amount);
         bookingRepository.save(booking);
+
+        // ✅ ENHANCED LOGGING
+        log.info("✅ Payment #{} initiated for booking #{}", payment.getId(), booking.getId());
+        log.info("📊 Booking #{} status: {} → PAYMENT_PENDING (host: {})", 
+                 booking.getId(), previousStatus, hostId);
+        log.info("💰 Payment amount: NPR {}", amount);
 
         return PaymentInitiateResponseDto.builder()
                 .paymentId(payment.getId())
@@ -131,10 +154,13 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     @Transactional
     public PaymentProcessResponseDto processPayment(PaymentProcessRequestDto dto, Long userId) {
+        log.info("💳 User {} processing payment {}", userId, dto.getPaymentId());
+        
         Payment payment = paymentRepository.findById(dto.getPaymentId())
                 .orElseThrow(() -> new ResourceNotFoundException("Payment not found"));
 
         Booking booking = payment.getBooking();
+        Long hostId = booking.getCharger().getHost().getUserId();
 
         if (!booking.getUser().getUserId().equals(userId)) {
             throw new SecurityException("You are not allowed to process this payment");
@@ -155,6 +181,9 @@ public class PaymentServiceImpl implements PaymentService {
             booking.setStatus(BookingStatus.EXPIRED);
             bookingRepository.save(booking);
 
+            log.warn("⏰ Payment {} failed - reservation expired (host: {})", 
+                     payment.getId(), hostId);
+
             throw new ReservationExpiredException("Reservation has expired. Please create a new booking.");
         }
 
@@ -171,24 +200,29 @@ public class PaymentServiceImpl implements PaymentService {
             payment.setCompletedAt(LocalDateTime.now());
             paymentRepository.save(payment);
 
+            // ✅ ENHANCED: Update booking status to CONFIRMED
+            BookingStatus previousStatus = booking.getStatus();
             booking.setStatus(BookingStatus.CONFIRMED);
             bookingRepository.save(booking);
+
+            // ✅ ENHANCED LOGGING
+            log.info("✅ Payment {} successful for booking #{}", payment.getId(), booking.getId());
+            log.info("📊 Booking #{} status: {} → CONFIRMED (host: {})", 
+                     booking.getId(), previousStatus, hostId);
+            log.info("🎫 Transaction ID: {}", transactionId);
 
             // Generate receipt
             ReceiptDto receipt = receiptService.generateReceipt(booking, payment);
 
             // Send notifications
             notificationService.notifyUser(userId, NotificationType.BOOKING_CONFIRMED, booking);
-            notificationService.notifyHost(
-                booking.getCharger().getHost().getUserId(), 
-                NotificationType.BOOKING_CONFIRMED, 
-                booking
-            );
+            notificationService.notifyHost(hostId, NotificationType.BOOKING_CONFIRMED, booking);
+            
+            log.info("🔔 Notifications sent to user {} and host {}", userId, hostId);
 
-            // ✅ Send email with receipt (ONLY to user, NOT to host)
+            // Send emails
             emailService.sendReceiptEmail(booking.getUser(), booking, payment);
             emailService.sendBookingConfirmation(booking.getUser(), booking, payment);
-            // ❌ REMOVED: emailService.sendHostBookingNotification() - Host gets dashboard notification only
 
             return PaymentProcessResponseDto.builder()
                     .success(true)
@@ -212,10 +246,14 @@ public class PaymentServiceImpl implements PaymentService {
             booking.setStatus(BookingStatus.CANCELLED);
             bookingRepository.save(booking);
 
+            // ✅ ENHANCED LOGGING
+            log.warn("❌ Payment {} failed for booking #{} (host: {})", 
+                     payment.getId(), booking.getId(), hostId);
+            log.warn("❌ Failure reason: {}", failureReason);
+            log.info("📊 Booking #{} status: PAYMENT_PENDING → CANCELLED", booking.getId());
+
             // Send failure notification
             notificationService.notifyUser(userId, NotificationType.PAYMENT_FAILED, booking);
-
-            // ✅ Send failure email
             emailService.sendPaymentFailure(booking.getUser(), payment, failureReason);
 
             throw new PaymentFailedException("Payment failed: " + failureReason);
@@ -225,10 +263,13 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     @Transactional
     public CancellationResponseDto processRefund(Long paymentId, Long userId, String reason) {
+        log.info("💸 User {} requesting refund for payment {}", userId, paymentId);
+        
         Payment payment = paymentRepository.findById(paymentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Payment not found"));
 
         Booking booking = payment.getBooking();
+        Long hostId = booking.getCharger().getHost().getUserId();
 
         if (!booking.getUser().getUserId().equals(userId)) {
             throw new SecurityException("You are not allowed to refund this payment");
@@ -252,15 +293,17 @@ public class PaymentServiceImpl implements PaymentService {
         booking.setStatus(BookingStatus.CANCELLED);
         bookingRepository.save(booking);
 
+        // ✅ ENHANCED LOGGING
+        log.info("✅ Refund {} processed for payment {}, booking #{}", 
+                 refundId, paymentId, booking.getId());
+        log.info("📊 Booking #{} status: CONFIRMED → CANCELLED (host: {})", 
+                 booking.getId(), hostId);
+        log.info("💰 Refund amount: NPR {}", payment.getAmount());
+
         // Send notifications
         notificationService.notifyUser(userId, NotificationType.REFUND_PROCESSED, booking);
-        notificationService.notifyHost(
-            booking.getCharger().getHost().getUserId(),
-            NotificationType.BOOKING_CANCELLED,
-            booking
-        );
+        notificationService.notifyHost(hostId, NotificationType.BOOKING_CANCELLED, booking);
 
-        // ✅ Send cancellation email
         emailService.sendCancellationConfirmation(booking.getUser(), booking, payment);
 
         return CancellationResponseDto.builder()
