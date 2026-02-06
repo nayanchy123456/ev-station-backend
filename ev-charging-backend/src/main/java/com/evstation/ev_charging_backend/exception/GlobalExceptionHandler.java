@@ -107,6 +107,51 @@ public class GlobalExceptionHandler {
                 ));
     }
 
+    // --- Rating-specific exceptions (NEW) ---
+    @ExceptionHandler(RatingAlreadyExistsException.class)
+    public ResponseEntity<Map<String, Object>> handleRatingAlreadyExists(RatingAlreadyExistsException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(Map.of(
+                        "timestamp", Instant.now(),
+                        "status", HttpStatus.CONFLICT.value(),
+                        "error", "Rating Already Exists",
+                        "message", ex.getMessage()
+                ));
+    }
+
+    @ExceptionHandler(RatingNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleRatingNotFound(RatingNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(Map.of(
+                        "timestamp", Instant.now(),
+                        "status", HttpStatus.NOT_FOUND.value(),
+                        "error", "Rating Not Found",
+                        "message", ex.getMessage()
+                ));
+    }
+
+    @ExceptionHandler(InvalidRatingException.class)
+    public ResponseEntity<Map<String, Object>> handleInvalidRating(InvalidRatingException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(Map.of(
+                        "timestamp", Instant.now(),
+                        "status", HttpStatus.BAD_REQUEST.value(),
+                        "error", "Invalid Rating",
+                        "message", ex.getMessage()
+                ));
+    }
+
+    @ExceptionHandler(UnauthorizedRatingAccessException.class)
+    public ResponseEntity<Map<String, Object>> handleUnauthorizedRatingAccess(UnauthorizedRatingAccessException ex) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                .body(Map.of(
+                        "timestamp", Instant.now(),
+                        "status", HttpStatus.FORBIDDEN.value(),
+                        "error", "Unauthorized Access",
+                        "message", ex.getMessage()
+                ));
+    }
+
     // --- Validation and state exceptions ---
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<Map<String, Object>> handleIllegalArgument(IllegalArgumentException ex) {

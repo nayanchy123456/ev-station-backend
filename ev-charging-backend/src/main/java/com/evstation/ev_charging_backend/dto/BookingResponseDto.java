@@ -28,4 +28,10 @@ public class BookingResponseDto {
 
     private BigDecimal pricePerKwh;
     private BigDecimal totalPrice;
+
+    // ⭐ NEW - Rating information
+    private Long ratingId;           // ID of the rating if exists
+    private Integer ratingScore;     // Rating score (1-5) if exists
+    private String ratingComment;    // Rating comment if exists
+    private LocalDateTime ratingCreatedAt; // When the rating was created
 }
