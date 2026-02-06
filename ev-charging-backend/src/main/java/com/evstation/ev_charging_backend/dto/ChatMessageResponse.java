@@ -32,14 +32,24 @@ public class ChatMessageResponse {
     private Long conversationId;
     
     /**
-     * Sender information
+     * Sender ID
      */
-    private UserBasicInfo sender;
+    private Long senderId;
     
     /**
-     * Receiver information
+     * Sender's full name
      */
-    private UserBasicInfo receiver;
+    private String senderName;
+    
+    /**
+     * Receiver ID
+     */
+    private Long receiverId;
+    
+    /**
+     * Receiver's full name
+     */
+    private String receiverName;
     
     /**
      * The actual message content
@@ -50,6 +60,16 @@ public class ChatMessageResponse {
      * Current status: SENT, DELIVERED, or READ
      */
     private MessageStatus status;
+    
+    /**
+     * Whether the current user is the sender
+     */
+    private Boolean isSender;
+    
+    /**
+     * Whether this message has been deleted
+     */
+    private Boolean isDeleted;
     
     /**
      * When the message was created
@@ -65,31 +85,4 @@ public class ChatMessageResponse {
      * When the message was read (if applicable)
      */
     private LocalDateTime readAt;
-    
-    /**
-     * Whether this message has been deleted
-     */
-    private Boolean isDeleted;
-    
-    /**
-     * Nested class for basic user information
-     * Avoids circular references and reduces payload size
-     */
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Builder
-    public static class UserBasicInfo {
-        private Long userId;
-        private String firstName;
-        private String lastName;
-        private String email;
-        
-        /**
-         * Get full name of user
-         */
-        public String getFullName() {
-            return firstName + " " + lastName;
-        }
-    }
 }

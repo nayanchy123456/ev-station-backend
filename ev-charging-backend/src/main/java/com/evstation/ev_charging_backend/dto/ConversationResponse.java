@@ -1,23 +1,20 @@
 package com.evstation.ev_charging_backend.dto;
 
-import com.evstation.ev_charging_backend.enums.UserPresenceStatus;
+import com.evstation.ev_charging_backend.enums.ConversationType;
 import lombok.*;
 
 import java.time.LocalDateTime;
 
 /**
- * Data Transfer Object for conversation list responses.
+ * Data Transfer Object for conversation responses.
  * 
- * Used when:
- * - Fetching list of all conversations for a user
- * - Displaying conversation preview in sidebar
- * 
- * Contains:
- * - Basic conversation info
- * - Other participant details
+ * Contains complete conversation information including:
+ * - Conversation metadata
+ * - Participant information
+ * - Charger context (for USER_HOST conversations)
  * - Last message preview
- * - Unread count
- * - Online status of other user
+ * - Unread counts
+ * - Online status
  */
 @Data
 @NoArgsConstructor
@@ -28,12 +25,27 @@ public class ConversationResponse {
     /**
      * Unique conversation ID
      */
-    private Long conversationId;
+    private Long id;
     
     /**
      * Information about the other participant in the conversation
      */
-    private ParticipantInfo otherUser;
+    private ParticipantInfo otherParticipant;
+    
+    /**
+     * Type of conversation (DIRECT, USER_HOST, USER_ADMIN, HOST_ADMIN)
+     */
+    private ConversationType conversationType;
+    
+    /**
+     * Charger context information (for USER_HOST conversations)
+     */
+    private ChargerContextInfo chargerContext;
+    
+    /**
+     * Optional conversation title
+     */
+    private String title;
     
     /**
      * Preview of the last message sent
@@ -41,8 +53,12 @@ public class ConversationResponse {
     private String lastMessage;
     
     /**
+     * ID of the user who sent the last message
+     */
+    private Long lastMessageSenderId;
+    
+    /**
      * Timestamp of the last message
-     * Used for sorting conversations (most recent first)
      */
     private LocalDateTime lastMessageTime;
     
@@ -52,9 +68,29 @@ public class ConversationResponse {
     private Integer unreadCount;
     
     /**
+     * Whether conversation is archived for current user
+     */
+    private Boolean isArchived;
+    
+    /**
+     * Whether the other participant is currently online
+     */
+    private Boolean isOtherParticipantOnline;
+    
+    /**
+     * Last seen timestamp of other participant
+     */
+    private LocalDateTime otherParticipantLastSeen;
+    
+    /**
      * When this conversation was created
      */
     private LocalDateTime createdAt;
+    
+    /**
+     * When this conversation was last updated
+     */
+    private LocalDateTime updatedAt;
     
     /**
      * Nested class for participant information
@@ -68,29 +104,29 @@ public class ConversationResponse {
         private String firstName;
         private String lastName;
         private String email;
-        
-        /**
-         * Online status of the participant
-         */
-        private UserPresenceStatus presenceStatus;
-        
-        /**
-         * Last time the participant was seen online
-         */
+        private String role;
+        private Boolean isOnline;
         private LocalDateTime lastSeen;
         
         /**
-         * Get full name
+         * Get full name of participant
          */
         public String getFullName() {
             return firstName + " " + lastName;
         }
-        
-        /**
-         * Check if user is currently online
-         */
-        public boolean isOnline() {
-            return presenceStatus == UserPresenceStatus.ONLINE;
-        }
+    }
+    
+    /**
+     * Nested class for charger context (USER_HOST conversations)
+     */
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class ChargerContextInfo {
+        private Long chargerId;
+        private String chargerName;
+        private String chargerLocation;
+        private String chargerImage;
     }
 }

@@ -8,10 +8,10 @@ import java.time.LocalDateTime;
 /**
  * Data Transfer Object for user presence information.
  * 
- * Used when:
- * - Checking if a user is online
- * - Broadcasting presence updates
- * - Displaying user's online status in UI
+ * Used for:
+ * - Real-time presence updates via WebSocket
+ * - Displaying online/offline status in chat UI
+ * - Last seen timestamps
  */
 @Data
 @NoArgsConstructor
@@ -20,29 +20,27 @@ import java.time.LocalDateTime;
 public class UserPresenceDto {
     
     /**
-     * ID of the user
+     * User ID
      */
     private Long userId;
     
     /**
-     * Current presence status: ONLINE or OFFLINE
+     * Current presence status
      */
     private UserPresenceStatus status;
     
     /**
+     * Whether user is online (convenience field)
+     */
+    private Boolean isOnline;
+    
+    /**
      * Last time the user was seen online
      */
-    private LocalDateTime lastSeen;
+    private LocalDateTime lastSeenAt;
     
     /**
-     * When this presence status was last updated
+     * When this presence record was last updated
      */
     private LocalDateTime updatedAt;
-    
-    /**
-     * Helper method to check if user is online
-     */
-    public boolean isOnline() {
-        return status == UserPresenceStatus.ONLINE;
-    }
 }
