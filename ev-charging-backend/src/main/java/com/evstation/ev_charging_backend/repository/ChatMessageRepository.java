@@ -5,33 +5,23 @@ import com.evstation.ev_charging_backend.enums.MessageStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
- * Repository for managing ChatMessage entities.
- * 
- * Key Features:
- * - Retrieve messages by conversation
- * - Mark messages as read/delivered
- * - Count unread messages
- * - Search messages
- * 
- * 🔧 FIXED: Changed findLatestMessage to use Optional instead of invalid LIMIT clause
+ * Enhanced Repository for ChatMessage Entity
  */
 @Repository
 public interface ChatMessageRepository extends JpaRepository<ChatMessage, Long> {
     
     /**
-     * Find all messages in a conversation, ordered by creation time (newest first).
-     * Excludes soft-deleted messages.
+     * Get messages in a conversation (excluding deleted messages)
+     * Ordered by creation time descending (newest first) for pagination
      * 
-     * @param conversationId The conversation ID
+     * @param conversationId Conversation ID
      * @param pageable Pagination parameters
      * @return Page of messages
      */
@@ -39,104 +29,71 @@ public interface ChatMessageRepository extends JpaRepository<ChatMessage, Long> 
            "m.conversation.id = :conversationId AND " +
            "m.isDeleted = false " +
            "ORDER BY m.createdAt DESC")
-    Page<ChatMessage> findByConversationId(
+    Page<ChatMessage> findByConversationIdAndIsDeletedFalse(
         @Param("conversationId") Long conversationId,
         Pageable pageable
     );
     
     /**
-     * Count unread messages in a conversation for a specific user.
+     * Get unread messages for a user in a conversation
      * 
-     * @param conversationId The conversation ID
-     * @param receiverId The receiver's user ID
+     * @param conversationId Conversation ID
+     * @param userId User ID (receiver)
+     * @return List of unread messages
+     */
+    @Query("SELECT m FROM ChatMessage m WHERE " +
+           "m.conversation.id = :conversationId AND " +
+           "m.receiver.userId = :userId AND " +
+           "m.status != 'READ' AND " +
+           "m.isDeleted = false " +
+           "ORDER BY m.createdAt ASC")
+    List<ChatMessage> findUnreadMessagesForUser(
+        @Param("conversationId") Long conversationId,
+        @Param("userId") Long userId
+    );
+    
+    /**
+     * Count unread messages for a user in a conversation
+     * 
+     * @param conversationId Conversation ID
+     * @param userId User ID (receiver)
      * @return Count of unread messages
      */
     @Query("SELECT COUNT(m) FROM ChatMessage m WHERE " +
            "m.conversation.id = :conversationId AND " +
-           "m.receiver.userId = :receiverId AND " +
+           "m.receiver.userId = :userId AND " +
            "m.status != 'READ' AND " +
            "m.isDeleted = false")
     Long countUnreadMessages(
         @Param("conversationId") Long conversationId,
-        @Param("receiverId") Long receiverId
+        @Param("userId") Long userId
     );
     
     /**
-     * Mark all messages in a conversation as READ for a specific receiver.
-     * Used when user opens a conversation.
+     * Find pending messages (SENT but not DELIVERED) for a user
+     * Used when user comes online to mark messages as delivered
      * 
-     * @param conversationId The conversation ID
-     * @param receiverId The receiver's user ID
-     * @return Number of messages updated
+     * @param receiverId Receiver user ID
+     * @param status Message status (typically SENT)
+     * @return List of pending messages
      */
-    @Modifying
-    @Query("UPDATE ChatMessage m SET " +
-           "m.status = 'READ', " +
-           "m.readAt = CURRENT_TIMESTAMP " +
-           "WHERE m.conversation.id = :conversationId AND " +
-           "m.receiver.userId = :receiverId AND " +
-           "m.status != 'READ' AND " +
-           "m.isDeleted = false")
-    int markAllAsRead(
-        @Param("conversationId") Long conversationId,
-        @Param("receiverId") Long receiverId
+    List<ChatMessage> findByReceiverUserIdAndStatusAndIsDeletedFalse(
+        Long receiverId,
+        MessageStatus status
     );
     
     /**
-     * Mark a specific message as READ.
+     * Search messages in a conversation by content
      * 
-     * @param messageId The message ID
-     * @return Number of messages updated (should be 0 or 1)
-     */
-    @Modifying
-    @Query("UPDATE ChatMessage m SET " +
-           "m.status = 'READ', " +
-           "m.readAt = CURRENT_TIMESTAMP " +
-           "WHERE m.id = :messageId AND m.status != 'READ'")
-    int markAsRead(@Param("messageId") Long messageId);
-    
-    /**
-     * Mark messages as DELIVERED for a specific receiver.
-     * Used when user comes online and receives pending messages.
-     * 
-     * @param receiverId The receiver's user ID
-     * @return Number of messages updated
-     */
-    @Modifying
-    @Query("UPDATE ChatMessage m SET " +
-           "m.status = 'DELIVERED', " +
-           "m.deliveredAt = CURRENT_TIMESTAMP " +
-           "WHERE m.receiver.userId = :receiverId AND " +
-           "m.status = 'SENT' AND " +
-           "m.isDeleted = false")
-    int markAsDelivered(@Param("receiverId") Long receiverId);
-    
-    /**
-     * Find unread messages for a user across all conversations.
-     * 
-     * @param receiverId The receiver's user ID
-     * @return List of unread messages
-     */
-    @Query("SELECT m FROM ChatMessage m WHERE " +
-           "m.receiver.userId = :receiverId AND " +
-           "m.status != 'READ' AND " +
-           "m.isDeleted = false " +
-           "ORDER BY m.createdAt DESC")
-    List<ChatMessage> findUnreadMessages(@Param("receiverId") Long receiverId);
-    
-    /**
-     * Search messages in a conversation by content.
-     * Case-insensitive search.
-     * 
-     * @param conversationId The conversation ID
-     * @param searchTerm The search term
-     * @param pageable Pagination parameters
+     * @param conversationId Conversation ID
+     * @param searchTerm Search term
+     * @param pageable Pagination
      * @return Page of matching messages
      */
     @Query("SELECT m FROM ChatMessage m WHERE " +
            "m.conversation.id = :conversationId AND " +
-           "LOWER(m.content) LIKE LOWER(CONCAT('%', :searchTerm, '%')) AND " +
-           "m.isDeleted = false " +
+           "m.isDeleted = false AND " +
+           "LOWER(m.content) LIKE LOWER(CONCAT('%', :searchTerm, '%')) " +
            "ORDER BY m.createdAt DESC")
     Page<ChatMessage> searchInConversation(
         @Param("conversationId") Long conversationId,
@@ -145,23 +102,60 @@ public interface ChatMessageRepository extends JpaRepository<ChatMessage, Long> 
     );
     
     /**
-     * 🔧 FIXED: Get the latest message in a conversation.
-     * Changed from invalid LIMIT clause to using First naming convention.
+     * Get last message in a conversation
      * 
-     * @param conversationId The conversation ID
-     * @return Optional containing the most recent message if exists
+     * @param conversationId Conversation ID
+     * @return Last message or null
      */
-    Optional<ChatMessage> findFirstByConversationIdAndIsDeletedFalseOrderByCreatedAtDesc(
-        Long conversationId
-    );
+    @Query("SELECT m FROM ChatMessage m WHERE " +
+           "m.conversation.id = :conversationId AND " +
+           "m.isDeleted = false " +
+           "ORDER BY m.createdAt DESC")
+    List<ChatMessage> findLastMessage(@Param("conversationId") Long conversationId, Pageable pageable);
     
     /**
-     * Count total messages sent by a user.
+     * Count total messages in a conversation
      * 
-     * @param userId The user's ID
-     * @return Total message count
+     * @param conversationId Conversation ID
+     * @return Message count
      */
     @Query("SELECT COUNT(m) FROM ChatMessage m WHERE " +
-           "m.sender.userId = :userId AND m.isDeleted = false")
-    Long countByUserId(@Param("userId") Long userId);
+           "m.conversation.id = :conversationId AND " +
+           "m.isDeleted = false")
+    Long countMessagesByConversationId(@Param("conversationId") Long conversationId);
+    
+    /**
+     * Get messages sent by a specific user
+     * 
+     * @param userId User ID
+     * @param pageable Pagination
+     * @return Page of messages
+     */
+    @Query("SELECT m FROM ChatMessage m WHERE " +
+           "m.sender.userId = :userId AND " +
+           "m.isDeleted = false " +
+           "ORDER BY m.createdAt DESC")
+    Page<ChatMessage> findBySenderId(@Param("userId") Long userId, Pageable pageable);
+    
+    /**
+     * Get messages received by a specific user
+     * 
+     * @param userId User ID
+     * @param pageable Pagination
+     * @return Page of messages
+     */
+    @Query("SELECT m FROM ChatMessage m WHERE " +
+           "m.receiver.userId = :userId AND " +
+           "m.isDeleted = false " +
+           "ORDER BY m.createdAt DESC")
+    Page<ChatMessage> findByReceiverId(@Param("userId") Long userId, Pageable pageable);
+    
+    /**
+     * Delete all messages in a conversation (soft delete)
+     * 
+     * @param conversationId Conversation ID
+     * @return Number of messages deleted
+     */
+    @Query("UPDATE ChatMessage m SET m.isDeleted = true WHERE m.conversation.id = :conversationId")
+    int softDeleteAllByConversationId(@Param("conversationId") Long conversationId);
 }

@@ -35,11 +35,17 @@ public class UserPresence {
     private Long id;
     
     /**
-     * Reference to the user
-     * One-to-one relationship with unique constraint
+     * User ID reference (using Long directly instead of entity relationship)
+     * This allows us to build UserPresence without loading User entity
+     */
+    @Column(name = "user_id", nullable = false, unique = true)
+    private Long userId;
+    
+    /**
+     * Reference to the user entity (optional for queries)
      */
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false, unique = true)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User user;
     
     /**
@@ -57,8 +63,8 @@ public class UserPresence {
      * - User disconnects (set to disconnect time)
      * - Heartbeat received (optional, can update periodically)
      */
-    @Column(name = "last_seen")
-    private LocalDateTime lastSeen;
+    @Column(name = "last_seen_at")
+    private LocalDateTime lastSeenAt;
     
     /**
      * Auto-updated timestamp for tracking changes
@@ -72,7 +78,7 @@ public class UserPresence {
      */
     public void setOnline() {
         this.status = UserPresenceStatus.ONLINE;
-        this.lastSeen = LocalDateTime.now();
+        this.lastSeenAt = LocalDateTime.now();
     }
     
     /**
@@ -80,14 +86,14 @@ public class UserPresence {
      */
     public void setOffline() {
         this.status = UserPresenceStatus.OFFLINE;
-        this.lastSeen = LocalDateTime.now();
+        this.lastSeenAt = LocalDateTime.now();
     }
     
     /**
      * Update last seen timestamp (for heartbeat)
      */
     public void updateLastSeen() {
-        this.lastSeen = LocalDateTime.now();
+        this.lastSeenAt = LocalDateTime.now();
     }
     
     /**

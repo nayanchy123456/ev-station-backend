@@ -2,38 +2,34 @@ package com.evstation.ev_charging_backend.serviceImpl;
 
 import com.evstation.ev_charging_backend.dto.*;
 import com.evstation.ev_charging_backend.entity.*;
-import com.evstation.ev_charging_backend.enums.MessageStatus;
-import com.evstation.ev_charging_backend.enums.UserPresenceStatus;
+import com.evstation.ev_charging_backend.enums.*;
 import com.evstation.ev_charging_backend.exception.ResourceNotFoundException;
 import com.evstation.ev_charging_backend.repository.*;
 import com.evstation.ev_charging_backend.service.ChatMessageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
- * ENHANCED ChatMessageService Implementation
+ * Complete Enhanced ChatMessageService Implementation
  * 
- * ✅ IMPROVEMENTS:
- * 1. Better transaction management
- * 2. Optimized database queries with batch operations
- * 3. Enhanced error handling with specific exceptions
- * 4. Caching for frequently accessed data
- * 5. Input validation and sanitization
- * 6. Race condition prevention
- * 7. Performance monitoring
- * 8. Retry logic for failed operations
- * 
- * All methods are transactional to ensure data consistency.
- * Read-only transactions are optimized for performance.
+ * Features:
+ * - Support for different conversation types
+ * - User-Host chat through chargers
+ * - User/Host support chat with admin
+ * - Admin can search and chat with anyone
+ * - Real-time presence tracking
+ * - Message read receipts
+ * - Conversation archiving
  */
 @Service
 @RequiredArgsConstructor
@@ -44,518 +40,745 @@ public class ChatMessageServiceImpl implements ChatMessageService {
     private final ConversationRepository conversationRepository;
     private final UserPresenceRepository userPresenceRepository;
     private final UserRepository userRepository;
+    private final ChargerRepository chargerRepository;
     
     private static final int MAX_MESSAGE_LENGTH = 5000;
     private static final int MESSAGE_PREVIEW_LENGTH = 100;
     
-    /**
-     * Send Message with Enhanced Error Handling
-     * 
-     * ✅ IMPROVEMENTS:
-     * - Input validation
-     * - Optimistic locking prevention
-     * - Better error messages
-     * - Transaction isolation
-     * 
-     * @param senderId ID of the sender
-     * @param request Message request
-     * @return ChatMessageResponse
-     */
+    // ==================== MESSAGE OPERATIONS ====================
+    
     @Override
-    @Transactional(isolation = Isolation.READ_COMMITTED)
-    @CacheEvict(value = {"conversations", "unreadCounts"}, allEntries = true)
+    @Transactional
     public ChatMessageResponse sendMessage(Long senderId, ChatMessageRequest request) {
-        long startTime = System.currentTimeMillis();
         log.info("📤 Sending message from user {} to user {}", senderId, request.getReceiverId());
         
-        try {
-            // Validate input
-            validateMessageRequest(senderId, request);
-            
-            // Load users with error handling
-            User sender = loadUser(senderId, "Sender");
-            User receiver = loadUser(request.getReceiverId(), "Receiver");
-            
-            // Prevent self-messaging
-            if (senderId.equals(request.getReceiverId())) {
-                throw new IllegalArgumentException("Cannot send message to yourself");
-            }
-            
-            // Find or create conversation
-            Conversation conversation = findOrCreateConversation(senderId, request.getReceiverId());
-            
-            // Create message entity
-            ChatMessage message = buildChatMessage(sender, receiver, conversation, request.getContent());
-            
-            // Save message to database
-            ChatMessage savedMessage = chatMessageRepository.save(message);
-            log.debug("💾 Message saved with ID: {}", savedMessage.getId());
-            
-            // Update conversation metadata
-            updateConversationMetadata(conversation, request.getContent(), 
-                                      savedMessage.getCreatedAt(), request.getReceiverId());
-            
-            // Check receiver online status and mark as delivered if online
-            boolean isReceiverOnline = userPresenceRepository.isUserOnline(request.getReceiverId());
-            if (isReceiverOnline) {
-                savedMessage.markAsDelivered();
-                chatMessageRepository.save(savedMessage);
-                log.debug("📨 Message marked as DELIVERED (receiver online)");
-            } else {
-                log.debug("📪 Message status: SENT (receiver offline)");
-            }
-            
-            long duration = System.currentTimeMillis() - startTime;
-            log.info("✅ Message sent successfully in {}ms. Receiver online: {}", 
-                     duration, isReceiverOnline);
-            
-            return convertToMessageResponse(savedMessage);
-            
-        } catch (IllegalArgumentException e) {
-            log.error("❌ Validation error: {}", e.getMessage());
-            throw e;
-        } catch (ResourceNotFoundException e) {
-            log.error("❌ Resource not found: {}", e.getMessage());
-            throw e;
-        } catch (Exception e) {
-            log.error("❌ Unexpected error sending message: {}", e.getMessage(), e);
-            throw new RuntimeException("Failed to send message: " + e.getMessage(), e);
-        }
-    }
-    
-    /**
-     * Get Conversation History with Optimization
-     * 
-     * ✅ IMPROVEMENTS:
-     * - Read-only optimization
-     * - Better error handling
-     * - Pagination validation
-     */
-    @Override
-    @Transactional(readOnly = true)
-    public Page<ChatMessageResponse> getConversationHistory(
-        Long conversationId, 
-        Long currentUserId, 
-        Pageable pageable
-    ) {
-        long startTime = System.currentTimeMillis();
-        log.info("📜 Fetching conversation history: conversationId={}, userId={}, page={}", 
-                 conversationId, currentUserId, pageable.getPageNumber());
+        // Validate input
+        validateMessageRequest(senderId, request);
         
-        try {
-            // Validate conversation access
-            Conversation conversation = validateConversationAccess(conversationId, currentUserId);
-            
-            // Fetch messages with pagination
-            Page<ChatMessage> messages = chatMessageRepository.findByConversationId(
-                conversationId, 
-                pageable
-            );
-            
-            long duration = System.currentTimeMillis() - startTime;
-            log.info("✅ Retrieved {} messages in {}ms", messages.getNumberOfElements(), duration);
-            
-            return messages.map(this::convertToMessageResponse);
-            
-        } catch (Exception e) {
-            log.error("❌ Error fetching conversation history: {}", e.getMessage(), e);
-            throw e;
-        }
-    }
-    
-    /**
-     * Get User Conversations with Caching
-     * 
-     * ✅ IMPROVEMENTS:
-     * - Caching for better performance
-     * - Optimized queries
-     */
-    @Override
-    @Transactional(readOnly = true)
-    @Cacheable(value = "conversations", key = "#userId + '-' + #pageable.pageNumber")
-    public Page<ConversationResponse> getUserConversations(Long userId, Pageable pageable) {
-        log.info("📋 Fetching conversations for user {}, page {}", userId, pageable.getPageNumber());
+        // Load users
+        User sender = loadUser(senderId, "Sender");
+        User receiver = loadUser(request.getReceiverId(), "Receiver");
         
-        try {
-            // Verify user exists
-            if (!userRepository.existsById(userId)) {
-                throw new ResourceNotFoundException("User not found with ID: " + userId);
-            }
-            
-            // Fetch conversations
-            Page<Conversation> conversations = conversationRepository.findByUserId(userId, pageable);
-            
-            log.info("✅ Retrieved {} conversations", conversations.getNumberOfElements());
-            
-            return conversations.map(conversation -> 
-                convertToConversationResponse(conversation, userId)
-            );
-            
-        } catch (Exception e) {
-            log.error("❌ Error fetching conversations: {}", e.getMessage(), e);
-            throw e;
+        // Prevent self-messaging
+        if (senderId.equals(request.getReceiverId())) {
+            throw new IllegalArgumentException("Cannot send message to yourself");
         }
-    }
-    
-    /**
-     * Get or Create Conversation with Race Condition Prevention
-     * 
-     * ✅ IMPROVEMENTS:
-     * - Handles concurrent creation attempts
-     * - Better transaction management
-     */
-    @Override
-    @Transactional(isolation = Isolation.SERIALIZABLE)
-    public ConversationResponse getOrCreateConversation(Long user1Id, Long user2Id) {
-        log.info("🔍 Get/create conversation between user {} and user {}", user1Id, user2Id);
         
-        try {
-            // Validate both users exist
-            User user1 = loadUser(user1Id, "User 1");
-            User user2 = loadUser(user2Id, "User 2");
-            
-            // Prevent conversation with self
-            if (user1Id.equals(user2Id)) {
-                throw new IllegalArgumentException("Cannot create conversation with yourself");
-            }
-            
-            // Find or create conversation
-            Conversation conversation = findOrCreateConversation(user1Id, user2Id);
-            
-            return convertToConversationResponse(conversation, user1Id);
-            
-        } catch (Exception e) {
-            log.error("❌ Error getting/creating conversation: {}", e.getMessage(), e);
-            throw e;
-        }
-    }
-    
-    /**
-     * Mark Conversation as Read with Batch Update
-     * 
-     * ✅ IMPROVEMENTS:
-     * - Single batch update query
-     * - Cache invalidation
-     * - Better logging
-     */
-    @Override
-    @Transactional
-    @CacheEvict(value = {"conversations", "unreadCounts"}, key = "#userId")
-    public int markConversationAsRead(Long conversationId, Long userId) {
-        log.info("✅ Marking conversation {} as read for user {}", conversationId, userId);
+        // Find or create conversation
+        // For backward compatibility, if no type specified, create DIRECT conversation
+        ConversationType type = request.getConversationType() != null 
+            ? request.getConversationType() 
+            : ConversationType.DIRECT;
         
-        try {
-            // Validate conversation access
-            Conversation conversation = validateConversationAccess(conversationId, userId);
-            
-            // Mark all messages as read in single query
-            int updatedCount = chatMessageRepository.markAllAsRead(conversationId, userId);
-            
-            // Reset unread count
-            if (updatedCount > 0) {
-                conversation.resetUnreadCount(userId);
-                conversationRepository.save(conversation);
-            }
-            
-            log.info("✅ Marked {} messages as read in conversation {}", 
-                     updatedCount, conversationId);
-            
-            return updatedCount;
-            
-        } catch (Exception e) {
-            log.error("❌ Error marking conversation as read: {}", e.getMessage(), e);
-            throw e;
-        }
-    }
-    
-    /**
-     * Mark Message as Read with Validation
-     * 
-     * ✅ IMPROVEMENTS:
-     * - Validates receiver
-     * - Updates conversation unread count
-     * - Better error handling
-     */
-    @Override
-    @Transactional
-    @CacheEvict(value = "unreadCounts", key = "#userId")
-    public ChatMessageResponse markMessageAsRead(Long messageId, Long userId) {
-        log.info("✅ Marking message {} as read by user {}", messageId, userId);
+        Conversation conversation = findOrCreateConversation(
+            senderId, 
+            request.getReceiverId(), 
+            type,
+            request.getChargerId()
+        );
         
-        try {
-            // Load message
-            ChatMessage message = chatMessageRepository.findById(messageId)
-                .orElseThrow(() -> new ResourceNotFoundException(
-                    "Message not found with ID: " + messageId));
-            
-            // Verify user is the receiver
-            if (!message.getReceiver().getUserId().equals(userId)) {
-                throw new IllegalArgumentException(
-                    "Only the receiver can mark a message as read");
-            }
-            
-            // Skip if already read
-            if (message.isRead()) {
-                log.debug("Message {} already marked as read", messageId);
-                return convertToMessageResponse(message);
-            }
-            
-            // Mark as read
-            message.markAsRead();
-            ChatMessage updatedMessage = chatMessageRepository.save(message);
-            
-            // Decrement unread count in conversation
-            Conversation conversation = message.getConversation();
-            Integer currentUnread = conversation.getUnreadCountForUser(userId);
-            if (currentUnread > 0) {
-                conversation.resetUnreadCount(userId);
-                conversationRepository.save(conversation);
-            }
-            
-            log.info("✅ Message {} marked as read", messageId);
-            
-            return convertToMessageResponse(updatedMessage);
-            
-        } catch (Exception e) {
-            log.error("❌ Error marking message as read: {}", e.getMessage(), e);
-            throw e;
-        }
-    }
-    
-    /**
-     * Get Unread Count with Caching
-     */
-    @Override
-    @Transactional(readOnly = true)
-    @Cacheable(value = "unreadCounts", key = "#conversationId + '-' + #userId")
-    public Long getUnreadCount(Long conversationId, Long userId) {
-        return chatMessageRepository.countUnreadMessages(conversationId, userId);
-    }
-    
-    /**
-     * Get Total Unread Count with Caching
-     */
-    @Override
-    @Transactional(readOnly = true)
-    @Cacheable(value = "unreadCounts", key = "'total-' + #userId")
-    public Long getTotalUnreadCount(Long userId) {
-        return conversationRepository.getTotalUnreadCount(userId);
-    }
-    
-    /**
-     * Set User Online with Enhanced Error Handling
-     * 
-     * ✅ IMPROVEMENTS:
-     * - Creates presence if doesn't exist
-     * - Delivers pending messages
-     * - Better error handling
-     */
-    @Override
-    @Transactional
-    public void setUserOnline(Long userId) {
-        log.info("🟢 Setting user {} online", userId);
-        
-        try {
-            // Verify user exists
-            User user = loadUser(userId, "User");
-            
-            // Find or create presence record
-            UserPresence presence = userPresenceRepository.findByUserId(userId)
-                .orElseGet(() -> {
-                    log.info("Creating new presence record for user {}", userId);
-                    return UserPresence.builder()
-                        .user(user)
-                        .status(UserPresenceStatus.OFFLINE)
-                        .build();
-                });
-            
-            // Set online
-            presence.setOnline();
-            userPresenceRepository.save(presence);
-            
-            // Deliver pending messages
-            int deliveredCount = markPendingMessagesAsDelivered(userId);
-            
-            log.info("✅ User {} is now ONLINE. Delivered {} pending messages", 
-                     userId, deliveredCount);
-            
-        } catch (Exception e) {
-            log.error("❌ Error setting user {} online: {}", userId, e.getMessage(), e);
-            throw e;
-        }
-    }
-    
-    /**
-     * Set User Offline with Safety Checks
-     * 
-     * ✅ IMPROVEMENTS:
-     * - Handles missing presence gracefully
-     * - Updates last seen time
-     */
-    @Override
-    @Transactional
-    public void setUserOffline(Long userId) {
-        log.info("🔴 Setting user {} offline", userId);
-        
-        try {
-            // Find presence (create if doesn't exist for safety)
-            UserPresence presence = userPresenceRepository.findByUserId(userId)
-                .orElseGet(() -> {
-                    log.warn("Presence not found for user {}, creating with OFFLINE status", userId);
-                    User user = userRepository.findById(userId)
-                        .orElseThrow(() -> new ResourceNotFoundException(
-                            "User not found with ID: " + userId));
-                    return UserPresence.builder()
-                        .user(user)
-                        .status(UserPresenceStatus.OFFLINE)
-                        .build();
-                });
-            
-            // Set offline
-            presence.setOffline();
-            userPresenceRepository.save(presence);
-            
-            log.info("✅ User {} is now OFFLINE", userId);
-            
-        } catch (Exception e) {
-            log.error("❌ Error setting user {} offline: {}", userId, e.getMessage(), e);
-            throw e;
-        }
-    }
-    
-    /**
-     * Get User Presence with Caching
-     */
-    @Override
-    @Transactional(readOnly = true)
-    @Cacheable(value = "userPresence", key = "#userId")
-    public UserPresenceDto getUserPresence(Long userId) {
-        UserPresence presence = userPresenceRepository.findByUserId(userId)
-            .orElseGet(() -> UserPresence.builder()
-                .status(UserPresenceStatus.OFFLINE)
-                .lastSeen(null)
-                .build());
-        
-        return UserPresenceDto.builder()
-            .userId(userId)
-            .status(presence.getStatus())
-            .lastSeen(presence.getLastSeen())
-            .updatedAt(presence.getUpdatedAt())
+        // Create message entity
+        ChatMessage message = ChatMessage.builder()
+            .conversation(conversation)
+            .sender(sender)
+            .receiver(receiver)
+            .content(request.getContent().trim())
+            .status(MessageStatus.SENT)
+            .isDeleted(false)
             .build();
-    }
-    
-    /**
-     * Mark Pending Messages as Delivered
-     * 
-     * ✅ IMPROVEMENTS:
-     * - Single batch update
-     * - Better logging
-     */
-    @Override
-    @Transactional
-    public int markPendingMessagesAsDelivered(Long userId) {
-        log.info("📬 Marking pending messages as delivered for user {}", userId);
         
-        try {
-            int count = chatMessageRepository.markAsDelivered(userId);
-            
-            if (count > 0) {
-                log.info("✅ Marked {} messages as DELIVERED", count);
-            } else {
-                log.debug("No pending messages for user {}", userId);
-            }
-            
-            return count;
-            
-        } catch (Exception e) {
-            log.error("❌ Error marking messages as delivered: {}", e.getMessage(), e);
-            return 0; // Don't throw exception, just log error
+        // Save message
+        ChatMessage savedMessage = chatMessageRepository.save(message);
+        log.debug("💾 Message saved with ID: {}", savedMessage.getId());
+        
+        // Update conversation metadata
+        updateConversationMetadata(
+            conversation, 
+            request.getContent(), 
+            savedMessage.getCreatedAt(), 
+            request.getReceiverId(),
+            senderId
+        );
+        
+        // Check if receiver is online and mark as delivered
+        boolean isReceiverOnline = isUserOnline(request.getReceiverId());
+        if (isReceiverOnline) {
+            savedMessage.markAsDelivered();
+            chatMessageRepository.save(savedMessage);
+            log.debug("✅ Message marked as delivered (receiver online)");
         }
+        
+        log.info("✅ Message sent successfully: ID={}", savedMessage.getId());
+        
+        return mapToMessageResponse(savedMessage, senderId);
     }
     
-    /**
-     * Search Messages with Validation
-     */
     @Override
     @Transactional(readOnly = true)
-    public Page<ChatMessageResponse> searchMessages(
+    public Page<ChatMessageResponse> getConversationMessages(
         Long conversationId, 
-        String searchTerm, 
         Long userId, 
         Pageable pageable
     ) {
-        log.info("🔍 Searching messages: conversationId={}, term='{}', user={}", 
-                 conversationId, searchTerm, userId);
+        log.info("📨 Fetching messages for conversation {} by user {}", conversationId, userId);
         
-        try {
-            // Validate inputs
-            if (searchTerm == null || searchTerm.trim().isEmpty()) {
-                throw new IllegalArgumentException("Search term cannot be empty");
-            }
-            
-            // Validate conversation access
-            validateConversationAccess(conversationId, userId);
-            
-            // Search messages
-            Page<ChatMessage> messages = chatMessageRepository.searchInConversation(
-                conversationId, 
-                searchTerm.trim(), 
-                pageable
-            );
-            
-            log.info("✅ Found {} matching messages", messages.getNumberOfElements());
-            
-            return messages.map(this::convertToMessageResponse);
-            
-        } catch (Exception e) {
-            log.error("❌ Error searching messages: {}", e.getMessage(), e);
-            throw e;
-        }
+        // Verify conversation exists and user is participant
+        Conversation conversation = getConversationOrThrow(conversationId);
+        validateUserIsParticipant(conversation, userId);
+        
+        // Fetch messages
+        Page<ChatMessage> messages = chatMessageRepository
+            .findByConversationIdAndIsDeletedFalse(conversationId, pageable);
+        
+        log.info("Found {} messages in conversation {}", messages.getTotalElements(), conversationId);
+        
+        return messages.map(msg -> mapToMessageResponse(msg, userId));
     }
     
-    /**
-     * Delete Message with Validation
-     */
+    @Override
+    @Transactional
+    public ChatMessageResponse markMessageAsRead(Long messageId, Long userId) {
+        log.info("👁️ Marking message {} as read by user {}", messageId, userId);
+        
+        ChatMessage message = chatMessageRepository.findById(messageId)
+            .orElseThrow(() -> new ResourceNotFoundException("Message not found"));
+        
+        // Only receiver can mark message as read
+        if (!message.getReceiver().getUserId().equals(userId)) {
+            throw new IllegalArgumentException("Only receiver can mark message as read");
+        }
+        
+        // Mark as read if not already
+        if (!message.isRead()) {
+            message.markAsRead();
+            chatMessageRepository.save(message);
+            log.debug("✅ Message marked as read");
+        }
+        
+        return mapToMessageResponse(message, userId);
+    }
+    
+    @Override
+    @Transactional
+    public Integer markConversationAsRead(Long conversationId, Long userId) {
+        log.info("👁️ Marking all messages in conversation {} as read by user {}", 
+                 conversationId, userId);
+        
+        Conversation conversation = getConversationOrThrow(conversationId);
+        validateUserIsParticipant(conversation, userId);
+        
+        // Get all unread messages where user is receiver
+        List<ChatMessage> unreadMessages = chatMessageRepository
+            .findUnreadMessagesForUser(conversationId, userId);
+        
+        // Mark all as read
+        unreadMessages.forEach(ChatMessage::markAsRead);
+        chatMessageRepository.saveAll(unreadMessages);
+        
+        // Reset unread count in conversation
+        conversation.resetUnreadCount(userId);
+        conversationRepository.save(conversation);
+        
+        log.info("✅ Marked {} messages as read in conversation {}", 
+                 unreadMessages.size(), conversationId);
+        
+        return unreadMessages.size();
+    }
+    
     @Override
     @Transactional
     public void deleteMessage(Long messageId, Long userId) {
         log.info("🗑️ Deleting message {} by user {}", messageId, userId);
         
-        try {
-            // Load message
-            ChatMessage message = chatMessageRepository.findById(messageId)
-                .orElseThrow(() -> new ResourceNotFoundException(
-                    "Message not found with ID: " + messageId));
-            
-            // Only sender can delete
-            if (!message.getSender().getUserId().equals(userId)) {
-                throw new IllegalArgumentException("Only the sender can delete a message");
-            }
-            
-            // Soft delete
-            message.softDelete();
-            chatMessageRepository.save(message);
-            
-            log.info("✅ Message {} soft deleted", messageId);
-            
-        } catch (Exception e) {
-            log.error("❌ Error deleting message: {}", e.getMessage(), e);
-            throw e;
+        ChatMessage message = chatMessageRepository.findById(messageId)
+            .orElseThrow(() -> new ResourceNotFoundException("Message not found"));
+        
+        // Only sender can delete message
+        if (!message.getSender().getUserId().equals(userId)) {
+            throw new IllegalArgumentException("Only sender can delete their own message");
         }
+        
+        // Soft delete
+        message.softDelete();
+        chatMessageRepository.save(message);
+        
+        log.info("✅ Message soft deleted: {}", messageId);
     }
     
-    // ==================== VALIDATION METHODS ====================
+    @Override
+    @Transactional(readOnly = true)
+    public Page<ChatMessageResponse> searchMessages(
+        Long conversationId,
+        String searchTerm,
+        Long userId,
+        Pageable pageable
+    ) {
+        log.info("🔍 Searching messages in conversation {} with term: '{}'", 
+                 conversationId, searchTerm);
+        
+        Conversation conversation = getConversationOrThrow(conversationId);
+        validateUserIsParticipant(conversation, userId);
+        
+        Page<ChatMessage> messages = chatMessageRepository
+            .searchInConversation(conversationId, searchTerm, pageable);
+        
+        log.info("Found {} matching messages", messages.getTotalElements());
+        
+        return messages.map(msg -> mapToMessageResponse(msg, userId));
+    }
+    
+    // ==================== CONVERSATION OPERATIONS ====================
+    
+    @Override
+    @Transactional
+    public ConversationResponse initiateConversation(
+        Long currentUserId,
+        ConversationInitiateRequest request
+    ) {
+        log.info("🆕 Initiating conversation: user {} → user {}, type: {}", 
+                 currentUserId, request.getParticipantId(), request.getConversationType());
+        
+        // Validate request
+        if (request.getParticipantId() == null) {
+            throw new IllegalArgumentException("Participant ID is required");
+        }
+        
+        if (currentUserId.equals(request.getParticipantId())) {
+            throw new IllegalArgumentException("Cannot create conversation with yourself");
+        }
+        
+        // Verify participant exists
+        User participant = loadUser(request.getParticipantId(), "Participant");
+        
+        // Determine conversation type
+        ConversationType type = request.getConversationType() != null 
+            ? request.getConversationType() 
+            : ConversationType.DIRECT;
+        
+        // For USER_HOST type, verify charger exists
+        Long chargerId = request.getChargerId();
+        if (type == ConversationType.USER_HOST) {
+            if (chargerId == null) {
+                throw new IllegalArgumentException("Charger ID is required for USER_HOST conversation");
+            }
+            
+            // Verify charger exists and participant is the host
+            Charger charger = chargerRepository.findById(chargerId)
+                .orElseThrow(() -> new ResourceNotFoundException("Charger not found"));
+            
+            if (!charger.getHost().getUserId().equals(request.getParticipantId())) {
+                throw new IllegalArgumentException(
+                    "Participant is not the host of the specified charger"
+                );
+            }
+        }
+        
+        // Get or create conversation
+        Conversation conversation = findOrCreateConversation(
+            currentUserId,
+            request.getParticipantId(),
+            type,
+            chargerId
+        );
+        
+        // Set title if provided
+        if (request.getTitle() != null && !request.getTitle().isBlank()) {
+            conversation.setTitle(request.getTitle());
+            conversationRepository.save(conversation);
+        }
+        
+        // Send initial message if provided
+        if (request.getInitialMessage() != null && !request.getInitialMessage().isBlank()) {
+            ChatMessageRequest messageRequest = ChatMessageRequest.builder()
+                .receiverId(request.getParticipantId())
+                .content(request.getInitialMessage())
+                .conversationType(type)
+                .chargerId(chargerId)
+                .build();
+            
+            sendMessage(currentUserId, messageRequest);
+        }
+        
+        return mapToConversationResponse(conversation, currentUserId);
+    }
+    
+    @Override
+    @Transactional
+    public ConversationResponse getOrCreateConversation(
+        Long user1Id,
+        Long user2Id,
+        ConversationType type,
+        Long chargerId
+    ) {
+        Conversation conversation = findOrCreateConversation(user1Id, user2Id, type, chargerId);
+        return mapToConversationResponse(conversation, user1Id);
+    }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public Page<ConversationResponse> getUserConversations(Long userId, Pageable pageable) {
+        log.info("📋 Fetching conversations for user {}", userId);
+        
+        Page<Conversation> conversations = conversationRepository.findByUserId(userId, pageable);
+        
+        log.info("Found {} conversations for user {}", conversations.getTotalElements(), userId);
+        
+        return conversations.map(conv -> mapToConversationResponse(conv, userId));
+    }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public Page<ConversationResponse> getUserConversationsByType(
+        Long userId,
+        ConversationType type,
+        Pageable pageable
+    ) {
+        log.info("📋 Fetching {} conversations for user {}", type, userId);
+        
+        Page<Conversation> conversations = conversationRepository
+            .findByUserIdAndType(userId, type, pageable);
+        
+        log.info("Found {} {} conversations", conversations.getTotalElements(), type);
+        
+        return conversations.map(conv -> mapToConversationResponse(conv, userId));
+    }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public ConversationResponse getConversationById(Long conversationId, Long userId) {
+        log.info("🔍 Fetching conversation {} for user {}", conversationId, userId);
+        
+        Conversation conversation = getConversationOrThrow(conversationId);
+        validateUserIsParticipant(conversation, userId);
+        
+        return mapToConversationResponse(conversation, userId);
+    }
+    
+    @Override
+    @Transactional
+    public void toggleArchiveConversation(Long conversationId, Long userId, boolean archive) {
+        log.info("📦 {} conversation {} for user {}", 
+                 archive ? "Archiving" : "Unarchiving", conversationId, userId);
+        
+        Conversation conversation = getConversationOrThrow(conversationId);
+        validateUserIsParticipant(conversation, userId);
+        
+        if (archive) {
+            conversation.archiveForUser(userId);
+        } else {
+            conversation.unarchiveForUser(userId);
+        }
+        
+        conversationRepository.save(conversation);
+        
+        log.info("✅ Conversation {} {}", conversationId, archive ? "archived" : "unarchived");
+    }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public Page<ConversationResponse> searchConversations(
+        Long userId,
+        String searchTerm,
+        Pageable pageable
+    ) {
+        log.info("🔍 Searching conversations for user {} with term: '{}'", userId, searchTerm);
+        
+        Page<Conversation> conversations = conversationRepository
+            .searchConversations(userId, searchTerm, pageable);
+        
+        log.info("Found {} matching conversations", conversations.getTotalElements());
+        
+        return conversations.map(conv -> mapToConversationResponse(conv, userId));
+    }
+    
+    // CONTINUED IN NEXT FILE...// CONTINUATION OF ChatMessageServiceImpl.java
+    
+    // ==================== ADMIN OPERATIONS ====================
+    
+    @Override
+    @Transactional(readOnly = true)
+    public Page<ConversationResponse> getAdminSupportConversations(
+        Long adminId,
+        Pageable pageable
+    ) {
+        log.info("👨‍💼 Fetching support conversations for admin {}", adminId);
+        
+        // Verify user is admin
+        User admin = loadUser(adminId, "Admin");
+        if (admin.getRole() != Role.ADMIN) {
+            throw new IllegalArgumentException("User is not an admin");
+        }
+        
+        Page<Conversation> conversations = conversationRepository
+            .findAdminSupportConversations(adminId, pageable);
+        
+        log.info("Found {} support conversations", conversations.getTotalElements());
+        
+        return conversations.map(conv -> mapToConversationResponse(conv, adminId));
+    }
+    
+ // ============================================
+// REPLACE THIS METHOD IN ChatMessageServiceImpl.java
+// Location: Around line 422-475
+// ============================================
+
+@Override
+@Transactional(readOnly = true)
+public Page<UserSearchResponse> searchUsersForAdminChat(
+    Long userId,  // ⚠️ CHANGED FROM: adminId
+    AdminChatSearchRequest request
+) {
+    log.info("🔍 User {} searching users with term: '{}', roleFilter: {}", 
+        userId, request.getSearchTerm(), request.getRoleFilter());
+    
+    // Load the requesting user
+    User requestingUser = loadUser(userId, "User");
+    
+    // Build search query
+    String searchTerm = request.getSearchTerm() != null 
+        ? request.getSearchTerm().trim() 
+        : "";
+    
+    Page<User> users;
+    
+    // Check user permissions
+    if (requestingUser.getRole() == Role.ADMIN) {
+        // ✅ ADMINS can search for anyone (existing functionality)
+        log.info("👨‍💼 Admin searching for users");
+        
+        if (searchTerm.isEmpty()) {
+            if (request.getRoleFilter() != null) {
+                users = userRepository.findByRoleAndUserIdNot(
+                    request.getRoleFilter(),
+                    userId,
+                    Pageable.ofSize(request.getSize()).withPage(request.getPage())
+                );
+            } else {
+                users = userRepository.findByUserIdNot(
+                    userId,
+                    Pageable.ofSize(request.getSize()).withPage(request.getPage())
+                );
+            }
+        } else {
+            if (request.getRoleFilter() != null) {
+                users = userRepository.searchByTermAndRole(
+                    searchTerm,
+                    request.getRoleFilter(),
+                    userId,
+                    Pageable.ofSize(request.getSize()).withPage(request.getPage())
+                );
+            } else {
+                users = userRepository.searchByTerm(
+                    searchTerm,
+                    userId,
+                    Pageable.ofSize(request.getSize()).withPage(request.getPage())
+                );
+            }
+        }
+        
+    } else if (request.getRoleFilter() == Role.ADMIN) {
+        // ✅ USERS/HOSTS can ONLY search for ADMINS (for support) - THIS IS NEW!
+        log.info("👤 User/Host {} searching for admins for support", userId);
+        
+        if (searchTerm.isEmpty()) {
+            users = userRepository.findByRoleAndUserIdNot(
+                Role.ADMIN,
+                userId,
+                Pageable.ofSize(request.getSize()).withPage(request.getPage())
+            );
+        } else {
+            users = userRepository.searchByTermAndRole(
+                searchTerm,
+                Role.ADMIN,
+                userId,
+                Pageable.ofSize(request.getSize()).withPage(request.getPage())
+            );
+        }
+        
+    } else {
+        // ❌ NON-ADMINS cannot search for other non-admins
+        log.warn("❌ Unauthorized search attempt by user {} (role: {})", 
+            userId, requestingUser.getRole());
+        throw new IllegalArgumentException(
+            "Only admins can search for users. Regular users can only search for admins for support."
+        );
+    }
+    
+    // Map to response with conversation info (existing code - unchanged)
+    return users.map(user -> mapToUserSearchResponse(user, userId));
+}
+
+// ============================================
+// THAT'S IT! No other changes needed in backend
+// ============================================
+    
+    @Override
+    @Transactional
+    public ConversationResponse adminInitiateChat(
+        Long adminId,
+        Long targetUserId,
+        String initialMessage
+    ) {
+        log.info("👨‍💼 Admin {} initiating chat with user {}", adminId, targetUserId);
+        
+        // Verify admin
+        User admin = loadUser(adminId, "Admin");
+        if (admin.getRole() != Role.ADMIN) {
+            throw new IllegalArgumentException("User is not an admin");
+        }
+        
+        // Verify target user exists
+        User targetUser = loadUser(targetUserId, "Target User");
+        
+        // Determine conversation type based on target user role
+        ConversationType type;
+        if (targetUser.getRole() == Role.USER) {
+            type = ConversationType.USER_ADMIN;
+        } else if (targetUser.getRole() == Role.HOST || targetUser.getRole() == Role.PENDING_HOST) {
+            type = ConversationType.HOST_ADMIN;
+        } else {
+            throw new IllegalArgumentException("Cannot create support conversation with admin");
+        }
+        
+        // Get or create conversation
+        Conversation conversation = findOrCreateConversation(
+            targetUserId,  // User/Host ID
+            adminId,       // Admin ID
+            type,
+            null  // No charger for support conversations
+        );
+        
+        // Set default title if not set
+        if (conversation.getTitle() == null || conversation.getTitle().isBlank()) {
+            String title = type == ConversationType.USER_ADMIN 
+                ? "Support Chat" 
+                : "Host Support";
+            conversation.setTitle(title);
+            conversationRepository.save(conversation);
+        }
+        
+        // Send initial message if provided
+        if (initialMessage != null && !initialMessage.isBlank()) {
+            ChatMessageRequest messageRequest = ChatMessageRequest.builder()
+                .receiverId(targetUserId)
+                .content(initialMessage)
+                .conversationType(type)
+                .build();
+            
+            sendMessage(adminId, messageRequest);
+        }
+        
+        return mapToConversationResponse(conversation, adminId);
+    }
+    
+    // ==================== CHARGER-SPECIFIC OPERATIONS ====================
+    
+    @Override
+    @Transactional(readOnly = true)
+    public Long getChargerHostId(Long chargerId) {
+        Charger charger = chargerRepository.findById(chargerId)
+            .orElseThrow(() -> new ResourceNotFoundException("Charger not found"));
+        
+        if (charger.getHost() == null) {
+            throw new IllegalStateException("Charger has no host assigned");
+        }
+        
+        return charger.getHost().getUserId();
+    }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public Page<ConversationResponse> getChargerConversations(
+        Long chargerId,
+        Long hostId,
+        Pageable pageable
+    ) {
+        log.info("🔌 Fetching conversations for charger {} by host {}", chargerId, hostId);
+        
+        // Verify charger exists and user is the host
+        Charger charger = chargerRepository.findById(chargerId)
+            .orElseThrow(() -> new ResourceNotFoundException("Charger not found"));
+        
+        if (!charger.getHost().getUserId().equals(hostId)) {
+            throw new IllegalArgumentException("User is not the host of this charger");
+        }
+        
+        Page<Conversation> conversations = conversationRepository
+            .findByChargerId(chargerId, pageable);
+        
+        log.info("Found {} conversations for charger {}", conversations.getTotalElements(), chargerId);
+        
+        return conversations.map(conv -> mapToConversationResponse(conv, hostId));
+    }
+    
+    // ==================== PRESENCE & STATUS ====================
+    
+    @Override
+    @Transactional(readOnly = true)
+    public UserPresenceDto getUserPresence(Long userId) {
+        User user = loadUser(userId, "User");
+        
+        UserPresence presence = userPresenceRepository.findByUserId(userId)
+            .orElse(null);
+        
+        return UserPresenceDto.builder()
+            .userId(userId)
+            .status(presence != null ? presence.getStatus() : UserPresenceStatus.OFFLINE)
+            .isOnline(presence != null && presence.getStatus() == UserPresenceStatus.ONLINE)
+            .lastSeenAt(presence != null ? presence.getLastSeenAt() : null)
+            .build();
+    }
+    
+    @Override
+    @Transactional
+    public void updateUserPresence(Long userId, boolean isOnline) {
+        UserPresence presence = userPresenceRepository.findByUserId(userId)
+            .orElse(UserPresence.builder()
+                .userId(userId)
+                .status(UserPresenceStatus.OFFLINE)
+                .build());
+        
+        if (isOnline) {
+            presence.setStatus(UserPresenceStatus.ONLINE);
+        } else {
+            presence.setStatus(UserPresenceStatus.OFFLINE);
+            presence.setLastSeenAt(LocalDateTime.now());
+        }
+        
+        userPresenceRepository.save(presence);
+        
+        log.debug("✅ User {} presence updated: {}", userId, isOnline ? "ONLINE" : "OFFLINE");
+    }
+    
+    // ==================== UNREAD COUNT ====================
+    
+    @Override
+    @Transactional(readOnly = true)
+    public Long getUnreadCount(Long conversationId, Long userId) {
+        Conversation conversation = getConversationOrThrow(conversationId);
+        validateUserIsParticipant(conversation, userId);
+        
+        return chatMessageRepository.countUnreadMessages(conversationId, userId);
+    }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public Long getTotalUnreadCount(Long userId) {
+        return conversationRepository.getTotalUnreadCount(userId);
+    }
+    
+    // ==================== HELPER METHODS ====================
     
     /**
-     * Validate Message Request
+     * Find existing conversation or create new one
+     */
+    private Conversation findOrCreateConversation(
+        Long user1Id,
+        Long user2Id,
+        ConversationType type,
+        Long chargerId
+    ) {
+        // Try to find existing conversation
+        return conversationRepository
+            .findByParticipantsAndTypeAndCharger(user1Id, user2Id, type, chargerId)
+            .orElseGet(() -> createNewConversation(user1Id, user2Id, type, chargerId));
+    }
+    
+    /**
+     * Create a new conversation
+     */
+    private Conversation createNewConversation(
+        Long user1Id,
+        Long user2Id,
+        ConversationType type,
+        Long chargerId
+    ) {
+        log.info("🆕 Creating new {} conversation between users {} and {}", 
+                 type, user1Id, user2Id);
+        
+        // For DIRECT conversations, normalize user IDs (smaller first)
+        // For typed conversations, keep as-is
+        Long normalizedUser1Id = user1Id;
+        Long normalizedUser2Id = user2Id;
+        
+        if (type == ConversationType.DIRECT && user1Id > user2Id) {
+            normalizedUser1Id = user2Id;
+            normalizedUser2Id = user1Id;
+        }
+        
+        Conversation conversation = Conversation.builder()
+            .user1Id(normalizedUser1Id)
+            .user2Id(normalizedUser2Id)
+            .conversationType(type)
+            .chargerId(chargerId)
+            .unreadCountUser1(0)
+            .unreadCountUser2(0)
+            .archivedUser1(false)
+            .archivedUser2(false)
+            .isActive(true)
+            .build();
+        
+        // Set default title based on type
+        if (type == ConversationType.USER_HOST && chargerId != null) {
+            Charger charger = chargerRepository.findById(chargerId).orElse(null);
+            if (charger != null) {
+                conversation.setTitle("Chat about " + charger.getName());
+            }
+        } else if (type == ConversationType.USER_ADMIN) {
+            conversation.setTitle("Support Chat");
+        } else if (type == ConversationType.HOST_ADMIN) {
+            conversation.setTitle("Host Support");
+        }
+        
+        Conversation saved = conversationRepository.save(conversation);
+        log.info("✅ Conversation created: ID={}", saved.getId());
+        
+        return saved;
+    }
+    
+    /**
+     * Update conversation metadata after new message
+     */
+    private void updateConversationMetadata(
+        Conversation conversation,
+        String messageContent,
+        LocalDateTime messageTime,
+        Long receiverId,
+        Long senderId
+    ) {
+        // Update last message preview
+        String preview = messageContent.length() > MESSAGE_PREVIEW_LENGTH
+            ? messageContent.substring(0, MESSAGE_PREVIEW_LENGTH) + "..."
+            : messageContent;
+        
+        conversation.setLastMessage(preview);
+        conversation.setLastMessageTime(messageTime);
+        conversation.setLastMessageSenderId(senderId);
+        
+        // Increment unread count for receiver
+        conversation.incrementUnreadCount(receiverId);
+        
+        // Unarchive conversation for both participants if archived
+        if (conversation.isArchivedForUser(receiverId)) {
+            conversation.unarchiveForUser(receiverId);
+        }
+        if (conversation.isArchivedForUser(senderId)) {
+            conversation.unarchiveForUser(senderId);
+        }
+        
+        conversationRepository.save(conversation);
+    }
+    
+    /**
+     * Validate message request
      */
     private void validateMessageRequest(Long senderId, ChatMessageRequest request) {
-        if (request == null) {
-            throw new IllegalArgumentException("Message request cannot be null");
+        if (senderId == null) {
+            throw new IllegalArgumentException("Sender ID cannot be null");
         }
         
         if (request.getReceiverId() == null) {
-            throw new IllegalArgumentException("Receiver ID cannot be null");
+            throw new IllegalArgumentException("Receiver ID is required");
         }
         
         if (request.getContent() == null || request.getContent().trim().isEmpty()) {
@@ -564,190 +787,244 @@ public class ChatMessageServiceImpl implements ChatMessageService {
         
         if (request.getContent().length() > MAX_MESSAGE_LENGTH) {
             throw new IllegalArgumentException(
-                "Message content exceeds maximum length of " + MAX_MESSAGE_LENGTH + " characters");
-        }
-    }
-    
-    /**
-     * Validate Conversation Access
-     * 
-     * @return Conversation if access is valid
-     * @throws ResourceNotFoundException if conversation not found
-     * @throws IllegalArgumentException if user is not participant
-     */
-    private Conversation validateConversationAccess(Long conversationId, Long userId) {
-        Conversation conversation = conversationRepository.findById(conversationId)
-            .orElseThrow(() -> new ResourceNotFoundException(
-                "Conversation not found with ID: " + conversationId));
-        
-        validateUserIsParticipant(conversation, userId);
-        
-        return conversation;
-    }
-    
-    /**
-     * Validate User is Participant
-     */
-    private void validateUserIsParticipant(Conversation conversation, Long userId) {
-        if (!conversation.getUser1Id().equals(userId) && 
-            !conversation.getUser2Id().equals(userId)) {
-            throw new IllegalArgumentException(
-                "User " + userId + " is not a participant in conversation " + 
-                conversation.getId()
+                "Message too long. Maximum length is " + MAX_MESSAGE_LENGTH + " characters"
             );
         }
     }
     
-    // ==================== HELPER METHODS ====================
-    
     /**
-     * Load User with Better Error Message
+     * Load user or throw exception
      */
     private User loadUser(Long userId, String userType) {
         return userRepository.findById(userId)
-            .orElseThrow(() -> new ResourceNotFoundException(
-                userType + " not found with ID: " + userId));
+            .orElseThrow(() -> new ResourceNotFoundException(userType + " not found"));
     }
     
     /**
-     * Build Chat Message Entity
+     * Get conversation or throw exception
      */
-    private ChatMessage buildChatMessage(User sender, User receiver, 
-                                        Conversation conversation, String content) {
-        return ChatMessage.builder()
-            .conversation(conversation)
-            .sender(sender)
-            .receiver(receiver)
-            .content(content.trim())
-            .status(MessageStatus.SENT)
-            .isDeleted(false)
-            .build();
+    private Conversation getConversationOrThrow(Long conversationId) {
+        return conversationRepository.findById(conversationId)
+            .orElseThrow(() -> new ResourceNotFoundException("Conversation not found"));
     }
     
     /**
-     * Update Conversation Metadata
+     * Validate user is participant in conversation
      */
-    private void updateConversationMetadata(Conversation conversation, String messageContent,
-                                           LocalDateTime messageTime, Long receiverId) {
-        conversation.setLastMessage(truncateMessage(messageContent));
-        conversation.setLastMessageTime(messageTime);
-        conversation.incrementUnreadCount(receiverId);
-        conversationRepository.save(conversation);
+    private void validateUserIsParticipant(Conversation conversation, Long userId) {
+        if (!conversation.isParticipant(userId)) {
+            throw new IllegalArgumentException("User is not a participant in this conversation");
+        }
     }
     
     /**
-     * Find or Create Conversation with Race Condition Handling
+     * Check if user is online
      */
-    private Conversation findOrCreateConversation(Long userId1, Long userId2) {
-        return conversationRepository.findByUsers(userId1, userId2)
-            .orElseGet(() -> {
-                // Normalize: smaller ID first
-                Long user1 = Math.min(userId1, userId2);
-                Long user2 = Math.max(userId1, userId2);
-                
-                // Check again after normalization (race condition prevention)
-                return conversationRepository.findByUsers(user1, user2)
-                    .orElseGet(() -> {
-                        Conversation newConversation = Conversation.builder()
-                            .user1Id(user1)
-                            .user2Id(user2)
-                            .lastMessage(null)
-                            .lastMessageTime(null)
-                            .unreadCountUser1(0)
-                            .unreadCountUser2(0)
-                            .build();
-                        
-                        Conversation saved = conversationRepository.save(newConversation);
-                        log.info("✨ Created new conversation {} between user {} and user {}", 
-                                 saved.getId(), user1, user2);
-                        return saved;
-                    });
-            });
+    private boolean isUserOnline(Long userId) {
+        return userPresenceRepository.isUserOnline(userId);
     }
     
-    /**
-     * Truncate Message for Preview
-     */
-    private String truncateMessage(String content) {
-        if (content == null) return null;
-        String trimmed = content.trim();
-        return trimmed.length() > MESSAGE_PREVIEW_LENGTH 
-            ? trimmed.substring(0, MESSAGE_PREVIEW_LENGTH - 3) + "..." 
-            : trimmed;
-    }
-    
-    // ==================== CONVERSION METHODS ====================
+    // CONTINUED IN NEXT FILE FOR MAPPING METHODS...// CONTINUATION OF ChatMessageServiceImpl.java - MAPPING METHODS
     
     /**
-     * Convert ChatMessage to Response DTO
+     * Map ChatMessage entity to ChatMessageResponse DTO
      */
-    private ChatMessageResponse convertToMessageResponse(ChatMessage message) {
+    private ChatMessageResponse mapToMessageResponse(ChatMessage message, Long currentUserId) {
+        boolean isSender = message.getSender().getUserId().equals(currentUserId);
+        
         return ChatMessageResponse.builder()
             .id(message.getId())
             .conversationId(message.getConversation().getId())
-            .sender(convertToUserBasicInfo(message.getSender()))
-            .receiver(convertToUserBasicInfo(message.getReceiver()))
+            .senderId(message.getSender().getUserId())
+            .senderName(message.getSender().getFirstName() + " " + message.getSender().getLastName())
+            .receiverId(message.getReceiver().getUserId())
+            .receiverName(message.getReceiver().getFirstName() + " " + message.getReceiver().getLastName())
             .content(message.getContent())
             .status(message.getStatus())
+            .isSender(isSender)
+            .isDeleted(message.getIsDeleted())
             .createdAt(message.getCreatedAt())
             .deliveredAt(message.getDeliveredAt())
             .readAt(message.getReadAt())
-            .isDeleted(message.getIsDeleted())
             .build();
     }
     
     /**
-     * Convert User to Basic Info DTO
+     * Map Conversation entity to ConversationResponse DTO
      */
-    private ChatMessageResponse.UserBasicInfo convertToUserBasicInfo(User user) {
-        return ChatMessageResponse.UserBasicInfo.builder()
+    private ConversationResponse mapToConversationResponse(Conversation conversation, Long currentUserId) {
+        Long otherUserId = conversation.getOtherUserId(currentUserId);
+        User otherUser = loadUser(otherUserId, "Other User");
+        
+        // Get presence information
+        UserPresence presence = userPresenceRepository.findByUserId(otherUserId).orElse(null);
+        boolean isOnline = presence != null && presence.getStatus() == UserPresenceStatus.ONLINE;
+        LocalDateTime lastSeen = presence != null ? presence.getLastSeenAt() : null;
+        
+        // Build participant info
+        ConversationResponse.ParticipantInfo participantInfo = ConversationResponse.ParticipantInfo.builder()
+            .userId(otherUser.getUserId())
+            .firstName(otherUser.getFirstName())
+            .lastName(otherUser.getLastName())
+            .email(otherUser.getEmail())
+            .role(otherUser.getRole().name())
+            .isOnline(isOnline)
+            .lastSeen(lastSeen)
+            .build();
+        
+        // Build charger context if applicable
+        ConversationResponse.ChargerContextInfo chargerContext = null;
+        if (conversation.getConversationType() == ConversationType.USER_HOST 
+            && conversation.getChargerId() != null) {
+            
+            Charger charger = chargerRepository.findById(conversation.getChargerId())
+                .orElse(null);
+            
+            if (charger != null) {
+                chargerContext = ConversationResponse.ChargerContextInfo.builder()
+                    .chargerId(charger.getId())
+                    .chargerName(charger.getName())
+                    .chargerLocation(charger.getLocation())
+                    .chargerImage(charger.getImages() != null && !charger.getImages().isEmpty() 
+                        ? charger.getImages().get(0) 
+                        : null)
+                    .build();
+            }
+        }
+        
+        return ConversationResponse.builder()
+            .id(conversation.getId())
+            .otherParticipant(participantInfo)
+            .conversationType(conversation.getConversationType())
+            .chargerContext(chargerContext)
+            .title(conversation.getTitle())
+            .lastMessage(conversation.getLastMessage())
+            .lastMessageSenderId(conversation.getLastMessageSenderId())
+            .lastMessageTime(conversation.getLastMessageTime())
+            .unreadCount(conversation.getUnreadCountForUser(currentUserId))
+            .isArchived(conversation.isArchivedForUser(currentUserId))
+            .isOtherParticipantOnline(isOnline)
+            .otherParticipantLastSeen(lastSeen)
+            .createdAt(conversation.getCreatedAt())
+            .updatedAt(conversation.getUpdatedAt())
+            .build();
+    }
+    
+    /**
+     * Map User to UserSearchResponse for admin chat search
+     */
+    private UserSearchResponse mapToUserSearchResponse(User user, Long adminId) {
+        // Check if there's an existing conversation
+        List<Conversation> existingConversations = conversationRepository
+            .findByParticipants(user.getUserId(), adminId);
+        
+        Conversation adminConversation = existingConversations.stream()
+            .filter(c -> c.getConversationType() == ConversationType.USER_ADMIN 
+                      || c.getConversationType() == ConversationType.HOST_ADMIN)
+            .findFirst()
+            .orElse(null);
+        
+        // Get presence information
+        UserPresence presence = userPresenceRepository.findByUserId(user.getUserId()).orElse(null);
+        boolean isOnline = presence != null && presence.getStatus() == UserPresenceStatus.ONLINE;
+        LocalDateTime lastSeen = presence != null ? presence.getLastSeenAt() : null;
+        
+        return UserSearchResponse.builder()
             .userId(user.getUserId())
             .firstName(user.getFirstName())
             .lastName(user.getLastName())
             .email(user.getEmail())
+            .phone(user.getPhone())
+            .role(user.getRole().name())
+            .isOnline(isOnline)
+            .lastSeen(lastSeen)
+            .createdAt(user.getCreatedAt())
+            .hasExistingConversation(adminConversation != null)
+            .existingConversationId(adminConversation != null ? adminConversation.getId() : null)
+            .unreadCount(adminConversation != null 
+                ? adminConversation.getUnreadCountForUser(adminId) 
+                : 0)
             .build();
+    }
+
+
+    // ==================== ADDITIONAL METHODS FOR WEBSOCKET SUPPORT ====================
+// Add these methods to ChatMessageServiceImpl.java
+
+/**
+ * Set user as online (called when WebSocket connects)
+ */
+@Override
+@Transactional
+public void setUserOnline(Long userId) {
+    log.info("👋 Setting user {} status to ONLINE", userId);
+    
+    UserPresence presence = userPresenceRepository.findByUserId(userId)
+        .orElse(UserPresence.builder()
+            .userId(userId)
+            .status(UserPresenceStatus.OFFLINE)
+            .build());
+    
+    presence.setOnline(); // Sets status to ONLINE and updates lastSeenAt
+    userPresenceRepository.save(presence);
+    
+    log.debug("✅ User {} is now ONLINE", userId);
+}
+
+/**
+ * Set user as offline (called when WebSocket disconnects)
+ */
+@Override
+@Transactional
+public void setUserOffline(Long userId) {
+    log.info("👋 Setting user {} status to OFFLINE", userId);
+    
+    UserPresence presence = userPresenceRepository.findByUserId(userId)
+        .orElse(UserPresence.builder()
+            .userId(userId)
+            .status(UserPresenceStatus.ONLINE)
+            .build());
+    
+    presence.setOffline(); // Sets status to OFFLINE and updates lastSeenAt
+    userPresenceRepository.save(presence);
+    
+    log.debug("✅ User {} is now OFFLINE", userId);
+}
+
+/**
+ * Mark pending messages as delivered when user comes online
+ * This is called when a user connects via WebSocket
+ * 
+ * @param userId User ID who just came online
+ * @return Number of messages marked as delivered
+ */
+@Override
+@Transactional
+public int markPendingMessagesAsDelivered(Long userId) {
+    log.info("📬 Marking pending messages as delivered for user {}", userId);
+    
+    // Find all messages where:
+    // 1. User is the receiver
+    // 2. Status is SENT (not yet DELIVERED)
+    // 3. Message is not deleted
+    List<ChatMessage> pendingMessages = chatMessageRepository
+        .findByReceiverUserIdAndStatusAndIsDeletedFalse(
+            userId, 
+            MessageStatus.SENT
+        );
+    
+    if (pendingMessages.isEmpty()) {
+        log.debug("No pending messages to deliver for user {}", userId);
+        return 0;
     }
     
-    /**
-     * Convert Conversation to Response DTO
-     */
-    private ConversationResponse convertToConversationResponse(
-        Conversation conversation, 
-        Long currentUserId
-    ) {
-        // Get other user ID
-        Long otherUserId = conversation.getOtherUserId(currentUserId);
-        
-        // Fetch other user
-        User otherUser = userRepository.findById(otherUserId)
-            .orElseThrow(() -> new ResourceNotFoundException(
-                "User not found with ID: " + otherUserId));
-        
-        // Get presence
-        UserPresence presence = userPresenceRepository.findByUserId(otherUserId)
-            .orElseGet(() -> UserPresence.builder()
-                .status(UserPresenceStatus.OFFLINE)
-                .lastSeen(null)
-                .build());
-        
-        // Build participant info
-        ConversationResponse.ParticipantInfo participantInfo = 
-            ConversationResponse.ParticipantInfo.builder()
-                .userId(otherUser.getUserId())
-                .firstName(otherUser.getFirstName())
-                .lastName(otherUser.getLastName())
-                .email(otherUser.getEmail())
-                .presenceStatus(presence.getStatus())
-                .lastSeen(presence.getLastSeen())
-                .build();
-        
-        return ConversationResponse.builder()
-            .conversationId(conversation.getId())
-            .otherUser(participantInfo)
-            .lastMessage(conversation.getLastMessage())
-            .lastMessageTime(conversation.getLastMessageTime())
-            .unreadCount(conversation.getUnreadCountForUser(currentUserId))
-            .createdAt(conversation.getCreatedAt())
-            .build();
-    }
+    // Mark all as delivered
+    pendingMessages.forEach(ChatMessage::markAsDelivered);
+    chatMessageRepository.saveAll(pendingMessages);
+    
+    int count = pendingMessages.size();
+    log.info("✅ Marked {} messages as delivered for user {}", count, userId);
+    
+    return count;
+}
 }

@@ -68,7 +68,7 @@ public interface UserPresenceRepository extends JpaRepository<UserPresence, Long
     @Modifying
     @Query("UPDATE UserPresence p SET " +
            "p.status = 'ONLINE', " +
-           "p.lastSeen = CURRENT_TIMESTAMP " +
+           "p.lastSeenAt = CURRENT_TIMESTAMP " +
            "WHERE p.user.userId = :userId")
     int setUserOnline(@Param("userId") Long userId);
     
@@ -81,7 +81,7 @@ public interface UserPresenceRepository extends JpaRepository<UserPresence, Long
     @Modifying
     @Query("UPDATE UserPresence p SET " +
            "p.status = 'OFFLINE', " +
-           "p.lastSeen = CURRENT_TIMESTAMP " +
+           "p.lastSeenAt = CURRENT_TIMESTAMP " +
            "WHERE p.user.userId = :userId")
     int setUserOffline(@Param("userId") Long userId);
     

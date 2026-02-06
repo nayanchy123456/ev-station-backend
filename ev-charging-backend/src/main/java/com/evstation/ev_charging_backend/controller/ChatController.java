@@ -1,6 +1,7 @@
 package com.evstation.ev_charging_backend.controller;
 
 import com.evstation.ev_charging_backend.dto.*;
+import com.evstation.ev_charging_backend.enums.ConversationType;
 import com.evstation.ev_charging_backend.security.CustomUserDetails;
 import com.evstation.ev_charging_backend.service.ChatMessageService;
 import jakarta.validation.Valid;
@@ -11,13 +12,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,42 +23,48 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * ENHANCED Chat Controller for Real-Time Messaging
+ * COMPLETE ENHANCED Chat Controller for Real-Time Messaging
  * 
- * ✅ IMPROVEMENTS:
- * 1. Better error handling and validation
- * 2. Typing indicators support
- * 3. Message delivery receipts
- * 4. Enhanced presence features
- * 5. Connection health checks
- * 6. Better logging and monitoring
+ * Features:
+ * - Role-based conversations (USER-HOST, USER-ADMIN, HOST-ADMIN)
+ * - Real-time WebSocket messaging
+ * - Admin search and chat functionality
+ * - Charger-specific conversations
+ * - Typing indicators
+ * - Read receipts
+ * - Conversation management
  * 
- * REST Endpoints (HTTP):
- * - GET  /api/chat/conversations              → List all conversations
- * - GET  /api/chat/conversations/{id}         → Get conversation history
- * - GET  /api/chat/conversations/user/{id}    → Get/create conversation with user
- * - POST /api/chat/send                       → Send message (fallback)
- * - PUT  /api/chat/conversations/{id}/read    → Mark conversation as read
- * - PUT  /api/chat/messages/{id}/read         → Mark single message as read
- * - GET  /api/chat/presence/{userId}          → Get user presence
- * - GET  /api/chat/unread/total               → Get total unread count
- * - GET  /api/chat/conversations/{id}/search  → Search messages
- * - DELETE /api/chat/messages/{id}            → Delete message
+ * REST Endpoints:
+ * - POST   /api/chat/conversations/initiate       → Initiate conversation with context
+ * - GET    /api/chat/conversations                → List all conversations
+ * - GET    /api/chat/conversations/type/{type}    → Filter by conversation type
+ * - GET    /api/chat/conversations/{id}           → Get conversation details
+ * - GET    /api/chat/conversations/{id}/messages  → Get conversation messages
+ * - PUT    /api/chat/conversations/{id}/read      → Mark conversation as read
+ * - PUT    /api/chat/conversations/{id}/archive   → Archive/unarchive conversation
+ * - GET    /api/chat/conversations/search         → Search conversations
  * 
- * WebSocket Endpoints (STOMP):
- * - /app/chat.sendMessage                     → Send message in real-time
- * - /app/chat.typing                          → Send typing indicator
- * - /app/chat.stopTyping                      → Stop typing indicator
- * - /app/chat.markAsRead                      → Mark message as read
- * - /topic/messages/{conversationId}          → Subscribe to conversation
- * - /user/queue/messages                      → Personal message queue
- * - /topic/typing/{conversationId}            → Typing indicators
+ * Admin Endpoints:
+ * - GET    /api/chat/admin/support                → Get support conversations
+ * - POST   /api/chat/admin/search-users           → Search users for chat
+ * - POST   /api/chat/admin/initiate               → Initiate chat with user
+ * 
+ * Charger Endpoints:
+ * - GET    /api/chat/charger/{id}/host            → Get charger host for chat
+ * - GET    /api/chat/charger/{id}/conversations   → Get conversations about charger
+ * 
+ * WebSocket Endpoints:
+ * - /app/chat.sendMessage                         → Send message
+ * - /app/chat.typing                              → Typing indicator
+ * - /app/chat.stopTyping                          → Stop typing
+ * - /topic/messages/{conversationId}              → Subscribe to conversation
+ * - /user/queue/messages                          → Personal message queue
  */
 @RestController
 @RequestMapping("/api/chat")
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:3000", "*"})
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:3000", "http://localhost:5174"})
 public class ChatController {
     
     private final ChatMessageService chatMessageService;
@@ -71,21 +75,14 @@ public class ChatController {
     /**
      * WebSocket: Send Message
      * 
-     * ✅ ENHANCED:
-     * - Better error handling
-     * - Validates sender authentication
-     * - Broadcasts to multiple destinations
-     * - Returns delivery confirmation
-     * 
      * Client sends to: /app/chat.sendMessage
      * Server broadcasts to: 
-     *   1. /topic/messages/{conversationId} (both participants)
-     *   2. /user/{receiverId}/queue/messages (receiver's personal queue)
-     *   3. Sender gets response directly
+     *   1. /topic/messages/{conversationId}
+     *   2. /user/{receiverId}/queue/messages
      * 
      * @param request Message request
      * @param headerAccessor Session header accessor
-     * @return Message response with delivery status
+     * @return Message response
      */
     @MessageMapping("/chat.sendMessage")
     public ChatMessageResponse sendMessage(
@@ -98,34 +95,30 @@ public class ChatController {
         
         // Validate authentication
         if (senderId == null) {
-            log.error("❌ Attempted to send message without authenticated user - Session: {}", 
-                     headerAccessor.getSessionId());
-            throw new IllegalStateException("User not authenticated. Please reconnect.");
+            log.error("❌ Unauthenticated WebSocket message attempt");
+            throw new IllegalStateException("User not authenticated");
         }
         
-        log.info("💬 WebSocket message from user {} ({}) to user {}", 
-                 senderUsername, senderId, request.getReceiverId());
+        log.info("💬 WebSocket message from {} ({}) to {}", senderUsername, senderId, request.getReceiverId());
         
         try {
-            // Process message through service layer
+            // Send message through service
             ChatMessageResponse response = chatMessageService.sendMessage(senderId, request);
             
-            // Broadcast to conversation topic (both sender and receiver can subscribe)
+            // Broadcast to conversation topic
             messagingTemplate.convertAndSend(
                 "/topic/messages/" + response.getConversationId(),
                 response
             );
-            log.debug("📢 Broadcasted to conversation topic: {}", response.getConversationId());
             
-            // Send to receiver's personal queue (guaranteed delivery when they're online)
+            // Send to receiver's personal queue
             messagingTemplate.convertAndSendToUser(
                 request.getReceiverId().toString(),
                 "/queue/messages",
                 response
             );
-            log.debug("📬 Sent to receiver's personal queue: {}", request.getReceiverId());
             
-            // Optional: Send delivery confirmation to sender's personal queue
+            // Send confirmation to sender
             Map<String, Object> confirmation = new HashMap<>();
             confirmation.put("messageId", response.getId());
             confirmation.put("status", "sent");
@@ -137,25 +130,18 @@ public class ChatController {
                 confirmation
             );
             
-            log.info("✅ Message {} sent successfully in conversation {}", 
-                     response.getId(), response.getConversationId());
+            log.info("✅ Message {} sent successfully", response.getId());
             
             return response;
             
         } catch (Exception e) {
-            log.error("❌ Error sending message from user {} to user {}: {}", 
-                     senderId, request.getReceiverId(), e.getMessage(), e);
+            log.error("❌ Error sending message: {}", e.getMessage(), e);
             throw new RuntimeException("Failed to send message: " + e.getMessage());
         }
     }
     
     /**
      * WebSocket: Typing Indicator
-     * 
-     * ✅ NEW FEATURE: Real-time typing indicators
-     * 
-     * Client sends to: /app/chat.typing
-     * Server broadcasts to: /topic/typing/{conversationId}
      * 
      * @param conversationId Conversation ID
      * @param headerAccessor Session header accessor
@@ -181,14 +167,10 @@ public class ChatController {
             "/topic/typing/" + conversationId,
             typingIndicator
         );
-        
-        log.debug("⌨️ User {} is typing in conversation {}", userId, conversationId);
     }
     
     /**
      * WebSocket: Stop Typing Indicator
-     * 
-     * ✅ NEW FEATURE: Stop typing notification
      * 
      * @param conversationId Conversation ID
      * @param headerAccessor Session header accessor
@@ -212,165 +194,71 @@ public class ChatController {
             "/topic/typing/" + conversationId,
             typingIndicator
         );
-        
-        log.debug("⌨️ User {} stopped typing in conversation {}", userId, conversationId);
     }
     
-    /**
-     * WebSocket: Mark Message as Read
-     * 
-     * ✅ NEW FEATURE: Real-time read receipts via WebSocket
-     * 
-     * @param messageId Message ID to mark as read
-     * @param headerAccessor Session header accessor
-     */
-    @MessageMapping("/chat.markAsRead")
-    public void markMessageAsReadViaWebSocket(
-        @Payload Long messageId,
-        SimpMessageHeaderAccessor headerAccessor
-    ) {
-        Long userId = (Long) headerAccessor.getSessionAttributes().get("userId");
-        
-        if (userId == null) return;
-        
-        try {
-            ChatMessageResponse response = chatMessageService.markMessageAsRead(messageId, userId);
-            
-            // Broadcast read receipt to conversation
-            Map<String, Object> readReceipt = new HashMap<>();
-            readReceipt.put("messageId", messageId);
-            readReceipt.put("readBy", userId);
-            readReceipt.put("readAt", response.getReadAt());
-            readReceipt.put("conversationId", response.getConversationId());
-            
-            messagingTemplate.convertAndSend(
-                "/topic/read-receipts/" + response.getConversationId(),
-                readReceipt
-            );
-            
-            log.debug("✅ Message {} marked as read by user {}", messageId, userId);
-            
-        } catch (Exception e) {
-            log.error("❌ Error marking message {} as read: {}", messageId, e.getMessage());
-        }
-    }
+    // ==================== CONVERSATION MANAGEMENT ====================
     
     /**
-     * WebSocket: Subscribe to Conversation
+     * REST: Initiate or Get Conversation with Context
      * 
-     * ✅ NEW: Handles subscription events
-     * Returns recent messages when user subscribes
+     * POST /api/chat/conversations/initiate
      * 
-     * @param conversationId Conversation ID
-     * @param headerAccessor Session header accessor
-     * @return Recent messages in conversation
-     */
-    @SubscribeMapping("/topic/messages/{conversationId}")
-    public Page<ChatMessageResponse> handleConversationSubscription(
-        @DestinationVariable Long conversationId,
-        SimpMessageHeaderAccessor headerAccessor
-    ) {
-        Long userId = (Long) headerAccessor.getSessionAttributes().get("userId");
-        
-        if (userId == null) {
-            return Page.empty();
-        }
-        
-        log.info("📡 User {} subscribed to conversation {}", userId, conversationId);
-        
-        try {
-            // Return recent messages (last 20)
-            Pageable pageable = PageRequest.of(0, 20);
-            return chatMessageService.getConversationHistory(conversationId, userId, pageable);
-        } catch (Exception e) {
-            log.error("❌ Error loading initial messages for conversation {}: {}", 
-                     conversationId, e.getMessage());
-            return Page.empty();
-        }
-    }
-    
-    // ==================== REST ENDPOINTS ====================
-    
-    /**
-     * REST: Send Message (Fallback)
+     * This endpoint handles:
+     * - User initiating chat with host about a charger
+     * - User/Host requesting support from admin
+     * - Admin initiating chat with user/host
      * 
-     * ✅ ENHANCED: Better error responses
-     * 
-     * Use when WebSocket is not available.
-     * Message is saved but may not deliver in real-time.
-     * 
-     * POST /api/chat/send
-     * 
-     * @param request Message request
+     * @param request Conversation initiation request
      * @param userDetails Authenticated user
-     * @return Sent message response
+     * @return Conversation response
      */
-    @PostMapping("/send")
-    public ResponseEntity<?> sendMessageRest(
-        @Valid @RequestBody ChatMessageRequest request,
+    @PostMapping("/conversations/initiate")
+    public ResponseEntity<ConversationResponse> initiateConversation(
+        @RequestBody @Valid ConversationInitiateRequest request,
         @AuthenticationPrincipal CustomUserDetails userDetails
     ) {
         try {
-            Long senderId = userDetails.getUserId();
-            log.info("💬 REST message from user {} to user {}", senderId, request.getReceiverId());
+            Long currentUserId = userDetails.getUserId();
+            log.info("🆕 User {} initiating conversation with user {}, type: {}", 
+                     currentUserId, request.getParticipantId(), request.getConversationType());
             
-            ChatMessageResponse response = chatMessageService.sendMessage(senderId, request);
+            ConversationResponse conversation = chatMessageService
+                .initiateConversation(currentUserId, request);
             
-            // Attempt WebSocket broadcast (best effort)
-            try {
-                messagingTemplate.convertAndSend(
-                    "/topic/messages/" + response.getConversationId(),
-                    response
-                );
-                
-                messagingTemplate.convertAndSendToUser(
-                    request.getReceiverId().toString(),
-                    "/queue/messages",
-                    response
-                );
-                log.debug("✅ Successfully broadcasted via WebSocket");
-            } catch (Exception e) {
-                log.warn("⚠️ Failed to broadcast via WebSocket (receiver may not be online): {}", 
-                        e.getMessage());
-            }
+            return ResponseEntity.ok(conversation);
             
-            return ResponseEntity.ok(response);
-            
+        } catch (IllegalArgumentException e) {
+            log.error("❌ Invalid request: {}", e.getMessage());
+            return ResponseEntity.badRequest().build();
         } catch (Exception e) {
-            log.error("❌ Error sending message via REST: {}", e.getMessage(), e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(Map.of("error", "Failed to send message", "message", e.getMessage()));
+            log.error("❌ Error initiating conversation: {}", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
     
     /**
-     * REST: Get All Conversations
+     * REST: Get All Conversations for Current User
      * 
      * GET /api/chat/conversations?page=0&size=20
      * 
-     * Returns conversations sorted by last message time (most recent first).
-     * Includes unread count and presence status.
-     * 
-     * @param page Page number (default: 0)
-     * @param size Page size (default: 20)
+     * @param page Page number
+     * @param size Page size
      * @param userDetails Authenticated user
      * @return Page of conversations
      */
     @GetMapping("/conversations")
-    public ResponseEntity<Page<ConversationResponse>> getConversations(
+    public ResponseEntity<Page<ConversationResponse>> getUserConversations(
         @RequestParam(defaultValue = "0") int page,
         @RequestParam(defaultValue = "20") int size,
         @AuthenticationPrincipal CustomUserDetails userDetails
     ) {
         try {
             Long userId = userDetails.getUserId();
-            log.info("📋 Fetching conversations for user {}, page {}, size {}", userId, page, size);
+            log.info("📋 Fetching conversations for user {} (page {}, size {})", userId, page, size);
             
             Pageable pageable = PageRequest.of(page, size);
-            Page<ConversationResponse> conversations = chatMessageService.getUserConversations(
-                userId, 
-                pageable
-            );
+            Page<ConversationResponse> conversations = chatMessageService
+                .getUserConversations(userId, pageable);
             
             return ResponseEntity.ok(conversations);
             
@@ -381,21 +269,85 @@ public class ChatController {
     }
     
     /**
-     * REST: Get Conversation History
+     * REST: Get Conversations Filtered by Type
      * 
-     * GET /api/chat/conversations/{conversationId}?page=0&size=50
+     * GET /api/chat/conversations/type/USER_HOST?page=0&size=20
      * 
-     * Returns messages in descending order (newest first).
-     * Automatically marks messages as READ.
+     * @param type Conversation type
+     * @param page Page number
+     * @param size Page size
+     * @param userDetails Authenticated user
+     * @return Page of conversations
+     */
+    @GetMapping("/conversations/type/{type}")
+    public ResponseEntity<Page<ConversationResponse>> getConversationsByType(
+        @PathVariable ConversationType type,
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "20") int size,
+        @AuthenticationPrincipal CustomUserDetails userDetails
+    ) {
+        try {
+            Long userId = userDetails.getUserId();
+            log.info("📋 Fetching {} conversations for user {}", type, userId);
+            
+            Pageable pageable = PageRequest.of(page, size);
+            Page<ConversationResponse> conversations = chatMessageService
+                .getUserConversationsByType(userId, type, pageable);
+            
+            return ResponseEntity.ok(conversations);
+            
+        } catch (Exception e) {
+            log.error("❌ Error fetching conversations: {}", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    
+    // CONTINUED IN NEXT FILE...// CONTINUATION OF ChatController.java
+    
+    /**
+     * REST: Get Specific Conversation
+     * 
+     * GET /api/chat/conversations/{conversationId}
      * 
      * @param conversationId Conversation ID
-     * @param page Page number (default: 0)
-     * @param size Page size (default: 50)
+     * @param userDetails Authenticated user
+     * @return Conversation details
+     */
+    @GetMapping("/conversations/{conversationId}")
+    public ResponseEntity<ConversationResponse> getConversation(
+        @PathVariable Long conversationId,
+        @AuthenticationPrincipal CustomUserDetails userDetails
+    ) {
+        try {
+            Long userId = userDetails.getUserId();
+            log.info("🔍 Fetching conversation {} for user {}", conversationId, userId);
+            
+            ConversationResponse conversation = chatMessageService
+                .getConversationById(conversationId, userId);
+            
+            return ResponseEntity.ok(conversation);
+            
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        } catch (Exception e) {
+            log.error("❌ Error fetching conversation: {}", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    
+    /**
+     * REST: Get Messages in Conversation
+     * 
+     * GET /api/chat/conversations/{conversationId}/messages?page=0&size=50
+     * 
+     * @param conversationId Conversation ID
+     * @param page Page number
+     * @param size Page size
      * @param userDetails Authenticated user
      * @return Page of messages
      */
-    @GetMapping("/conversations/{conversationId}")
-    public ResponseEntity<Page<ChatMessageResponse>> getConversationHistory(
+    @GetMapping("/conversations/{conversationId}/messages")
+    public ResponseEntity<Page<ChatMessageResponse>> getConversationMessages(
         @PathVariable Long conversationId,
         @RequestParam(defaultValue = "0") int page,
         @RequestParam(defaultValue = "50") int size,
@@ -403,54 +355,18 @@ public class ChatController {
     ) {
         try {
             Long userId = userDetails.getUserId();
-            log.info("📜 Fetching history for conversation {}, user {}, page {}", 
-                     conversationId, userId, page);
+            log.info("📨 Fetching messages for conversation {} by user {}", conversationId, userId);
             
             Pageable pageable = PageRequest.of(page, size);
-            Page<ChatMessageResponse> messages = chatMessageService.getConversationHistory(
-                conversationId,
-                userId,
-                pageable
-            );
+            Page<ChatMessageResponse> messages = chatMessageService
+                .getConversationMessages(conversationId, userId, pageable);
             
             return ResponseEntity.ok(messages);
             
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         } catch (Exception e) {
-            log.error("❌ Error fetching conversation history: {}", e.getMessage(), e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-    
-    /**
-     * REST: Get or Create Conversation
-     * 
-     * GET /api/chat/conversations/user/{otherUserId}
-     * 
-     * If conversation exists, returns it.
-     * If not, creates a new conversation.
-     * 
-     * @param otherUserId ID of the other user
-     * @param userDetails Authenticated user
-     * @return Conversation details
-     */
-    @GetMapping("/conversations/user/{otherUserId}")
-    public ResponseEntity<ConversationResponse> getOrCreateConversation(
-        @PathVariable Long otherUserId,
-        @AuthenticationPrincipal CustomUserDetails userDetails
-    ) {
-        try {
-            Long userId = userDetails.getUserId();
-            log.info("🔍 Get/create conversation between user {} and user {}", userId, otherUserId);
-            
-            ConversationResponse conversation = chatMessageService.getOrCreateConversation(
-                userId,
-                otherUserId
-            );
-            
-            return ResponseEntity.ok(conversation);
-            
-        } catch (Exception e) {
-            log.error("❌ Error getting/creating conversation: {}", e.getMessage(), e);
+            log.error("❌ Error fetching messages: {}", e.getMessage(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
@@ -460,12 +376,9 @@ public class ChatController {
      * 
      * PUT /api/chat/conversations/{conversationId}/read
      * 
-     * Marks all unread messages as read and resets unread count.
-     * Broadcasts read receipts via WebSocket.
-     * 
      * @param conversationId Conversation ID
      * @param userDetails Authenticated user
-     * @return Number of messages marked as read
+     * @return Success response
      */
     @PutMapping("/conversations/{conversationId}/read")
     public ResponseEntity<Map<String, Object>> markConversationAsRead(
@@ -474,114 +387,288 @@ public class ChatController {
     ) {
         try {
             Long userId = userDetails.getUserId();
-            log.info("✅ Marking conversation {} as read for user {}", conversationId, userId);
+            log.info("👁️ Marking conversation {} as read by user {}", conversationId, userId);
             
-            int count = chatMessageService.markConversationAsRead(conversationId, userId);
+            Integer count = chatMessageService.markConversationAsRead(conversationId, userId);
             
             // Broadcast read receipt
-            if (count > 0) {
-                Map<String, Object> readReceipt = new HashMap<>();
-                readReceipt.put("conversationId", conversationId);
-                readReceipt.put("readBy", userId);
-                readReceipt.put("count", count);
-                readReceipt.put("timestamp", System.currentTimeMillis());
-                
-                messagingTemplate.convertAndSend(
-                    "/topic/read-receipts/" + conversationId,
-                    readReceipt
-                );
-            }
+            Map<String, Object> readReceipt = new HashMap<>();
+            readReceipt.put("conversationId", conversationId);
+            readReceipt.put("readBy", userId);
+            readReceipt.put("count", count);
+            
+            messagingTemplate.convertAndSend(
+                "/topic/read-receipts/" + conversationId,
+                readReceipt
+            );
             
             return ResponseEntity.ok(Map.of(
-                "count", count,
                 "conversationId", conversationId,
-                "message", "Marked " + count + " messages as read"
+                "markedAsRead", count
             ));
             
         } catch (Exception e) {
             log.error("❌ Error marking conversation as read: {}", e.getMessage(), e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(Map.of("error", e.getMessage()));
-        }
-    }
-    
-    /**
-     * REST: Mark Single Message as Read
-     * 
-     * ✅ NEW: Mark individual message as read
-     * 
-     * PUT /api/chat/messages/{messageId}/read
-     * 
-     * @param messageId Message ID
-     * @param userDetails Authenticated user
-     * @return Updated message
-     */
-    @PutMapping("/messages/{messageId}/read")
-    public ResponseEntity<ChatMessageResponse> markMessageAsRead(
-        @PathVariable Long messageId,
-        @AuthenticationPrincipal CustomUserDetails userDetails
-    ) {
-        try {
-            Long userId = userDetails.getUserId();
-            ChatMessageResponse response = chatMessageService.markMessageAsRead(messageId, userId);
-            
-            // Broadcast read receipt
-            Map<String, Object> readReceipt = new HashMap<>();
-            readReceipt.put("messageId", messageId);
-            readReceipt.put("readBy", userId);
-            readReceipt.put("readAt", response.getReadAt());
-            
-            messagingTemplate.convertAndSend(
-                "/topic/read-receipts/" + response.getConversationId(),
-                readReceipt
-            );
-            
-            return ResponseEntity.ok(response);
-            
-        } catch (Exception e) {
-            log.error("❌ Error marking message as read: {}", e.getMessage(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
     
     /**
-     * REST: Get Unread Count for Conversation
+     * REST: Archive/Unarchive Conversation
      * 
-     * GET /api/chat/conversations/{conversationId}/unread
+     * PUT /api/chat/conversations/{conversationId}/archive?archive=true
      * 
      * @param conversationId Conversation ID
+     * @param archive true to archive, false to unarchive
      * @param userDetails Authenticated user
-     * @return Unread count
+     * @return Success response
      */
-    @GetMapping("/conversations/{conversationId}/unread")
-    public ResponseEntity<Map<String, Object>> getUnreadCount(
+    @PutMapping("/conversations/{conversationId}/archive")
+    public ResponseEntity<Map<String, String>> toggleArchiveConversation(
         @PathVariable Long conversationId,
+        @RequestParam boolean archive,
         @AuthenticationPrincipal CustomUserDetails userDetails
     ) {
         try {
             Long userId = userDetails.getUserId();
-            Long count = chatMessageService.getUnreadCount(conversationId, userId);
+            log.info("📦 {} conversation {} for user {}", 
+                     archive ? "Archiving" : "Unarchiving", conversationId, userId);
+            
+            chatMessageService.toggleArchiveConversation(conversationId, userId, archive);
             
             return ResponseEntity.ok(Map.of(
-                "conversationId", conversationId,
-                "unreadCount", count
+                "message", archive ? "Conversation archived" : "Conversation unarchived",
+                "conversationId", conversationId.toString()
             ));
             
         } catch (Exception e) {
-            log.error("❌ Error getting unread count: {}", e.getMessage());
+            log.error("❌ Error archiving conversation: {}", e.getMessage(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+    
+    /**
+     * REST: Search Conversations
+     * 
+     * GET /api/chat/conversations/search?q=hello&page=0&size=20
+     * 
+     * @param searchTerm Search term
+     * @param page Page number
+     * @param size Page size
+     * @param userDetails Authenticated user
+     * @return Page of matching conversations
+     */
+    @GetMapping("/conversations/search")
+    public ResponseEntity<Page<ConversationResponse>> searchConversations(
+        @RequestParam String q,
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "20") int size,
+        @AuthenticationPrincipal CustomUserDetails userDetails
+    ) {
+        try {
+            Long userId = userDetails.getUserId();
+            log.info("🔍 Searching conversations for user {} with query: '{}'", userId, q);
+            
+            Pageable pageable = PageRequest.of(page, size);
+            Page<ConversationResponse> conversations = chatMessageService
+                .searchConversations(userId, q, pageable);
+            
+            return ResponseEntity.ok(conversations);
+            
+        } catch (Exception e) {
+            log.error("❌ Error searching conversations: {}", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    
+    // ==================== ADMIN ENDPOINTS ====================
+    
+    /**
+     * REST: Get Admin Support Conversations
+     * 
+     * GET /api/chat/admin/support?page=0&size=20
+     * 
+     * Admin endpoint to view all USER_ADMIN and HOST_ADMIN conversations
+     * 
+     * @param page Page number
+     * @param size Page size
+     * @param userDetails Authenticated user (must be admin)
+     * @return Page of support conversations
+     */
+    @GetMapping("/admin/support")
+    public ResponseEntity<Page<ConversationResponse>> getAdminSupportConversations(
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "20") int size,
+        @AuthenticationPrincipal CustomUserDetails userDetails
+    ) {
+        try {
+            Long adminId = userDetails.getUserId();
+            log.info("👨‍💼 Admin {} fetching support conversations", adminId);
+            
+            Pageable pageable = PageRequest.of(page, size);
+            Page<ConversationResponse> conversations = chatMessageService
+                .getAdminSupportConversations(adminId, pageable);
+            
+            return ResponseEntity.ok(conversations);
+            
+        } catch (IllegalArgumentException e) {
+            log.error("❌ Unauthorized admin access: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        } catch (Exception e) {
+            log.error("❌ Error fetching admin support conversations: {}", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    
+    /**
+     * REST: Search Users for Admin Chat
+     * 
+     * POST /api/chat/admin/search-users
+     * 
+     * Admin endpoint to search for users/hosts to initiate chat
+     * 
+     * @param request Search request with filters
+     * @param userDetails Authenticated user (must be admin)
+     * @return Page of users matching search criteria
+     */
+    @PostMapping("/admin/search-users")
+    public ResponseEntity<Page<UserSearchResponse>> searchUsersForAdminChat(
+        @RequestBody AdminChatSearchRequest request,
+        @AuthenticationPrincipal CustomUserDetails userDetails
+    ) {
+        try {
+            Long adminId = userDetails.getUserId();
+            log.info("👨‍💼 Admin {} searching users with term: '{}'", adminId, request.getSearchTerm());
+            
+            Page<UserSearchResponse> users = chatMessageService
+                .searchUsersForAdminChat(adminId, request);
+            
+            return ResponseEntity.ok(users);
+            
+        } catch (IllegalArgumentException e) {
+            log.error("❌ Unauthorized admin access: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        } catch (Exception e) {
+            log.error("❌ Error searching users: {}", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    
+    /**
+     * REST: Admin Initiate Chat
+     * 
+     * POST /api/chat/admin/initiate
+     * 
+     * Admin initiates a support conversation with a user or host
+     * 
+     * @param request Contains target user ID and optional initial message
+     * @param userDetails Authenticated user (must be admin)
+     * @return Created conversation
+     */
+    @PostMapping("/admin/initiate")
+    public ResponseEntity<ConversationResponse> adminInitiateChat(
+        @RequestBody Map<String, Object> request,
+        @AuthenticationPrincipal CustomUserDetails userDetails
+    ) {
+        try {
+            Long adminId = userDetails.getUserId();
+            Long targetUserId = Long.valueOf(request.get("targetUserId").toString());
+            String initialMessage = request.get("initialMessage") != null 
+                ? request.get("initialMessage").toString() 
+                : null;
+            
+            log.info("👨‍💼 Admin {} initiating chat with user {}", adminId, targetUserId);
+            
+            ConversationResponse conversation = chatMessageService
+                .adminInitiateChat(adminId, targetUserId, initialMessage);
+            
+            return ResponseEntity.ok(conversation);
+            
+        } catch (IllegalArgumentException e) {
+            log.error("❌ Invalid admin request: {}", e.getMessage());
+            return ResponseEntity.badRequest().build();
+        } catch (Exception e) {
+            log.error("❌ Error admin initiating chat: {}", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    
+    // ==================== CHARGER ENDPOINTS ====================
+    
+    /**
+     * REST: Get Charger Host ID
+     * 
+     * GET /api/chat/charger/{chargerId}/host
+     * 
+     * Get the host user ID for a specific charger
+     * Useful for initiating USER_HOST conversation
+     * 
+     * @param chargerId Charger ID
+     * @return Map with host ID
+     */
+    @GetMapping("/charger/{chargerId}/host")
+    public ResponseEntity<Map<String, Long>> getChargerHost(@PathVariable Long chargerId) {
+        try {
+            log.info("🔌 Fetching host for charger {}", chargerId);
+            
+            Long hostId = chatMessageService.getChargerHostId(chargerId);
+            
+            return ResponseEntity.ok(Map.of("hostId", hostId));
+            
+        } catch (Exception e) {
+            log.error("❌ Error fetching charger host: {}", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    
+    /**
+     * REST: Get Conversations About Charger
+     * 
+     * GET /api/chat/charger/{chargerId}/conversations?page=0&size=20
+     * 
+     * Get all conversations related to a specific charger (for host)
+     * 
+     * @param chargerId Charger ID
+     * @param page Page number
+     * @param size Page size
+     * @param userDetails Authenticated user (must be host)
+     * @return Page of conversations
+     */
+    @GetMapping("/charger/{chargerId}/conversations")
+    public ResponseEntity<Page<ConversationResponse>> getChargerConversations(
+        @PathVariable Long chargerId,
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "20") int size,
+        @AuthenticationPrincipal CustomUserDetails userDetails
+    ) {
+        try {
+            Long hostId = userDetails.getUserId();
+            log.info("🔌 Fetching conversations for charger {} by host {}", chargerId, hostId);
+            
+            Pageable pageable = PageRequest.of(page, size);
+            Page<ConversationResponse> conversations = chatMessageService
+                .getChargerConversations(chargerId, hostId, pageable);
+            
+            return ResponseEntity.ok(conversations);
+            
+        } catch (IllegalArgumentException e) {
+            log.error("❌ Unauthorized access: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        } catch (Exception e) {
+            log.error("❌ Error fetching charger conversations: {}", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    
+    // ==================== UTILITY ENDPOINTS ====================
     
     /**
      * REST: Get Total Unread Count
      * 
      * GET /api/chat/unread/total
      * 
-     * Useful for displaying notification badge.
-     * 
      * @param userDetails Authenticated user
-     * @return Total unread count across all conversations
+     * @return Total unread count
      */
     @GetMapping("/unread/total")
     public ResponseEntity<Map<String, Object>> getTotalUnreadCount(
@@ -607,15 +694,12 @@ public class ChatController {
      * 
      * GET /api/chat/presence/{userId}
      * 
-     * Returns online/offline status and last seen time.
-     * 
-     * @param userId User ID to check
+     * @param userId User ID
      * @return User presence information
      */
     @GetMapping("/presence/{userId}")
     public ResponseEntity<UserPresenceDto> getUserPresence(@PathVariable Long userId) {
         try {
-            log.debug("🔍 Checking presence for user {}", userId);
             UserPresenceDto presence = chatMessageService.getUserPresence(userId);
             return ResponseEntity.ok(presence);
             
@@ -626,89 +710,7 @@ public class ChatController {
     }
     
     /**
-     * REST: Search Messages in Conversation
-     * 
-     * GET /api/chat/conversations/{conversationId}/search?q=hello&page=0&size=20
-     * 
-     * Case-insensitive search through message content.
-     * 
-     * @param conversationId Conversation ID
-     * @param q Search query
-     * @param page Page number
-     * @param size Page size
-     * @param userDetails Authenticated user
-     * @return Page of matching messages
-     */
-    @GetMapping("/conversations/{conversationId}/search")
-    public ResponseEntity<Page<ChatMessageResponse>> searchMessages(
-        @PathVariable Long conversationId,
-        @RequestParam String q,
-        @RequestParam(defaultValue = "0") int page,
-        @RequestParam(defaultValue = "20") int size,
-        @AuthenticationPrincipal CustomUserDetails userDetails
-    ) {
-        try {
-            Long userId = userDetails.getUserId();
-            log.info("🔍 Searching messages in conversation {} with query: '{}'", conversationId, q);
-            
-            Pageable pageable = PageRequest.of(page, size);
-            Page<ChatMessageResponse> messages = chatMessageService.searchMessages(
-                conversationId,
-                q,
-                userId,
-                pageable
-            );
-            
-            return ResponseEntity.ok(messages);
-            
-        } catch (Exception e) {
-            log.error("❌ Error searching messages: {}", e.getMessage(), e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-    
-    /**
-     * REST: Delete Message (Soft Delete)
-     * 
-     * DELETE /api/chat/messages/{messageId}
-     * 
-     * Only the sender can delete their message.
-     * Message is hidden but not removed from database.
-     * 
-     * @param messageId Message ID
-     * @param userDetails Authenticated user
-     * @return Success response
-     */
-    @DeleteMapping("/messages/{messageId}")
-    public ResponseEntity<Map<String, String>> deleteMessage(
-        @PathVariable Long messageId,
-        @AuthenticationPrincipal CustomUserDetails userDetails
-    ) {
-        try {
-            Long userId = userDetails.getUserId();
-            log.info("🗑️ Deleting message {} by user {}", messageId, userId);
-            
-            chatMessageService.deleteMessage(messageId, userId);
-            
-            return ResponseEntity.ok(Map.of(
-                "message", "Message deleted successfully",
-                "messageId", messageId.toString()
-            ));
-            
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body(Map.of("error", e.getMessage()));
-        } catch (Exception e) {
-            log.error("❌ Error deleting message: {}", e.getMessage(), e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(Map.of("error", "Failed to delete message"));
-        }
-    }
-    
-    /**
-     * REST: Health Check for WebSocket Connection
-     * 
-     * ✅ NEW: Check if WebSocket is accessible
+     * REST: Health Check
      * 
      * GET /api/chat/health
      * 

@@ -4,6 +4,7 @@ import com.evstation.ev_charging_backend.dto.BookingRequestDto;
 import com.evstation.ev_charging_backend.dto.BookingResponseDto;
 import com.evstation.ev_charging_backend.entity.Booking;
 import com.evstation.ev_charging_backend.entity.Charger;
+import com.evstation.ev_charging_backend.entity.Conversation;
 import com.evstation.ev_charging_backend.entity.User;
 import com.evstation.ev_charging_backend.enums.BookingStatus;
 import com.evstation.ev_charging_backend.exception.BookingConflictException;
@@ -11,10 +12,13 @@ import com.evstation.ev_charging_backend.exception.BookingNotFoundException;
 import com.evstation.ev_charging_backend.exception.ResourceNotFoundException;
 import com.evstation.ev_charging_backend.repository.BookingRepository;
 import com.evstation.ev_charging_backend.repository.ChargerRepository;
+import com.evstation.ev_charging_backend.repository.ConversationRepository;
 import com.evstation.ev_charging_backend.repository.UserRepository;
 import com.evstation.ev_charging_backend.service.BookingService;
 
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
+
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -22,7 +26,18 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+/**
+ * ENHANCED BookingServiceImpl with Auto-Conversation Creation
+ * 
+ * ✅ NEW FEATURES:
+ * 1. Automatically creates a conversation between user and host when booking is created
+ * 2. Ensures conversation exists for seamless communication
+ * 3. Handles edge cases where conversation already exists
+ * 
+ * This enables users and hosts to communicate directly about their bookings.
+ */
 @Service
+@Slf4j
 public class BookingServiceImpl implements BookingService {
 
     private static final long MIN_DURATION_MINUTES = 30;
@@ -33,30 +48,58 @@ public class BookingServiceImpl implements BookingService {
     private final BookingRepository bookingRepository;
     private final ChargerRepository chargerRepository;
     private final UserRepository userRepository;
+    private final ConversationRepository conversationRepository;  // NEW: Added for conversation management
 
     public BookingServiceImpl(
             BookingRepository bookingRepository,
             ChargerRepository chargerRepository,
-            UserRepository userRepository
+            UserRepository userRepository,
+            ConversationRepository conversationRepository  // NEW: Added dependency
     ) {
         this.bookingRepository = bookingRepository;
         this.chargerRepository = chargerRepository;
         this.userRepository = userRepository;
+        this.conversationRepository = conversationRepository;
     }
 
+    /**
+     * Create Booking with Auto-Conversation Creation
+     * 
+     * ✅ ENHANCED:
+     * - Creates a conversation between user and charger host automatically
+     * - Logs conversation creation for debugging
+     * - Handles cases where conversation already exists (idempotent)
+     * 
+     * @param dto Booking request data
+     * @param userId ID of the user creating the booking
+     * @return BookingResponseDto
+     */
     @Override
     @Transactional
     public BookingResponseDto createBooking(BookingRequestDto dto, Long userId) {
+        log.info("📝 Creating booking for user {} at charger {}", userId, dto.getChargerId());
+        
+        // Load user
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
+        // Load charger with pessimistic lock to prevent double-booking
         Charger charger = chargerRepository.findByIdForUpdate(dto.getChargerId());
         if (charger == null) {
             throw new ResourceNotFoundException("Charger not found");
         }
 
+        // Get the host of the charger
+        User host = charger.getHost();
+        if (host == null) {
+            log.error("❌ Charger {} has no host assigned", charger.getId());
+            throw new ResourceNotFoundException("Charger host not found");
+        }
+
+        // Validate booking time
         validateTime(dto.getStartTime(), dto.getEndTime());
 
+        // Check for conflicts
         List<Booking> conflicts = bookingRepository.findConflictingBookings(
                 charger.getId(),
                 dto.getStartTime(),
@@ -68,6 +111,7 @@ public class BookingServiceImpl implements BookingService {
             throw new BookingConflictException("Charger already booked for selected time");
         }
 
+        // Create the booking
         Booking booking = Booking.builder()
                 .user(user)
                 .charger(charger)
@@ -77,9 +121,21 @@ public class BookingServiceImpl implements BookingService {
                 .pricePerKwh(charger.getPricePerKwh())
                 .build();
 
-        bookingRepository.save(booking);
+        Booking savedBooking = bookingRepository.save(booking);
+        log.info("✅ Booking created successfully: {}", savedBooking.getId());
 
-        return mapToResponse(booking);
+        // ==================== AUTO-CONVERSATION CREATION ====================
+        // NEW: Create conversation between user and host (if not exists)
+        try {
+            createOrGetConversation(userId, host.getUserId());
+        } catch (Exception e) {
+            // Log but don't fail the booking if conversation creation fails
+            log.error("⚠️ Failed to create conversation between user {} and host {}: {}", 
+                     userId, host.getUserId(), e.getMessage(), e);
+        }
+        // ====================================================================
+
+        return mapToResponse(savedBooking);
     }
 
     @Override
@@ -151,6 +207,51 @@ public class BookingServiceImpl implements BookingService {
     }
 
     // ================= PRIVATE METHODS =================
+
+    /**
+     * Create or Get Conversation Between User and Host
+     * 
+     * This method ensures a conversation exists between the booking user and charger host.
+     * It's idempotent - won't create duplicates if conversation already exists.
+     * 
+     * @param userId ID of the booking user
+     * @param hostId ID of the charger host
+     * @return Conversation entity
+     */
+    private Conversation createOrGetConversation(Long userId, Long hostId) {
+        // Don't create conversation if user is booking their own charger
+        if (userId.equals(hostId)) {
+            log.debug("ℹ️ User {} is booking their own charger, skipping conversation creation", userId);
+            return null;
+        }
+
+        // Check if conversation already exists
+        return conversationRepository.findByUsers(userId, hostId)
+            .orElseGet(() -> {
+                // Normalize: smaller ID first (database constraint)
+                Long user1Id = Math.min(userId, hostId);
+                Long user2Id = Math.max(userId, hostId);
+                
+                // Double-check to prevent race conditions
+                return conversationRepository.findByUsers(user1Id, user2Id)
+                    .orElseGet(() -> {
+                        // Create new conversation
+                        Conversation newConversation = Conversation.builder()
+                            .user1Id(user1Id)
+                            .user2Id(user2Id)
+                            .lastMessage(null)
+                            .lastMessageTime(null)
+                            .unreadCountUser1(0)
+                            .unreadCountUser2(0)
+                            .build();
+                        
+                        Conversation saved = conversationRepository.save(newConversation);
+                        log.info("✨ Auto-created conversation {} between user {} and host {}", 
+                                 saved.getId(), userId, hostId);
+                        return saved;
+                    });
+            });
+    }
 
     private void validateTime(LocalDateTime start, LocalDateTime end) {
         LocalDateTime now = LocalDateTime.now();

@@ -1,174 +1,296 @@
 package com.evstation.ev_charging_backend.service;
 
 import com.evstation.ev_charging_backend.dto.*;
+import com.evstation.ev_charging_backend.enums.ConversationType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
-
 /**
- * Service interface for chat messaging functionality.
+ * Enhanced Chat Message Service Interface
  * 
- * Handles:
- * - Sending and receiving messages
+ * Supports:
+ * - Different conversation types (USER_HOST, USER_ADMIN, HOST_ADMIN)
+ * - Real-time messaging via WebSocket
+ * - Message status tracking (sent, delivered, read)
+ * - Typing indicators
+ * - User presence
  * - Conversation management
- * - User presence tracking
- * - Message status updates
+ * - Admin chat functionality
  */
 public interface ChatMessageService {
     
+    // ==================== MESSAGE OPERATIONS ====================
+    
     /**
-     * Send a new chat message.
+     * Send a message in an existing or new conversation
      * 
-     * Process:
-     * 1. Find or create conversation between sender and receiver
-     * 2. Create and save message
-     * 3. Update conversation's last message
-     * 4. Increment unread count for receiver
-     * 5. Return message response for broadcasting
-     * 
-     * @param senderId ID of the user sending the message
-     * @param request Message request containing receiver ID and content
-     * @return ChatMessageResponse with full message details
-     * @throws ResourceNotFoundException if sender or receiver not found
+     * @param senderId ID of the sender
+     * @param request Message request containing receiver and content
+     * @return ChatMessageResponse with delivery status
      */
     ChatMessageResponse sendMessage(Long senderId, ChatMessageRequest request);
     
     /**
-     * Get message history for a conversation with pagination.
-     * Messages are returned in descending order (newest first).
+     * Get messages in a conversation with pagination
      * 
-     * @param conversationId ID of the conversation
-     * @param currentUserId ID of the user requesting history (for authorization)
+     * @param conversationId Conversation ID
+     * @param userId Current user ID (for authorization)
      * @param pageable Pagination parameters
-     * @return Page of ChatMessageResponse objects
-     * @throws ResourceNotFoundException if conversation not found
-     * @throws UnauthorizedAccessException if user is not part of conversation
+     * @return Page of messages
      */
-    Page<ChatMessageResponse> getConversationHistory(
-        Long conversationId, 
-        Long currentUserId, 
+    Page<ChatMessageResponse> getConversationMessages(
+        Long conversationId,
+        Long userId,
         Pageable pageable
     );
     
     /**
-     * Get all conversations for a user.
-     * Returns conversations sorted by last message time (most recent first).
-     * Includes unread count and other participant's presence status.
+     * Mark a specific message as read
      * 
-     * @param userId ID of the user
-     * @param pageable Pagination parameters
-     * @return Page of ConversationResponse objects
-     */
-    Page<ConversationResponse> getUserConversations(Long userId, Pageable pageable);
-    
-    /**
-     * Get or create a conversation between two users.
-     * If conversation doesn't exist, creates a new one.
-     * 
-     * @param user1Id First user ID
-     * @param user2Id Second user ID
-     * @return ConversationResponse with conversation details
-     * @throws ResourceNotFoundException if either user not found
-     */
-    ConversationResponse getOrCreateConversation(Long user1Id, Long user2Id);
-    
-    /**
-     * Mark all messages in a conversation as READ for the current user.
-     * Also resets the unread count for that user in the conversation.
-     * 
-     * @param conversationId ID of the conversation
-     * @param userId ID of the user marking messages as read
-     * @return Number of messages marked as read
-     * @throws ResourceNotFoundException if conversation not found
-     */
-    int markConversationAsRead(Long conversationId, Long userId);
-    
-    /**
-     * Mark a specific message as READ.
-     * 
-     * @param messageId ID of the message
-     * @param userId ID of the user marking as read (must be receiver)
-     * @return Updated ChatMessageResponse
-     * @throws ResourceNotFoundException if message not found
-     * @throws UnauthorizedAccessException if user is not the receiver
+     * @param messageId Message ID
+     * @param userId User marking the message as read
+     * @return Updated message
      */
     ChatMessageResponse markMessageAsRead(Long messageId, Long userId);
     
     /**
-     * Get unread message count for a conversation.
+     * Mark all messages in a conversation as read
      * 
-     * @param conversationId ID of the conversation
-     * @param userId ID of the user
-     * @return Number of unread messages
+     * @param conversationId Conversation ID
+     * @param userId User marking messages as read
+     * @return Number of messages marked as read
      */
-    Long getUnreadCount(Long conversationId, Long userId);
+    Integer markConversationAsRead(Long conversationId, Long userId);
     
     /**
-     * Get total unread message count across all conversations for a user.
+     * Delete a message (soft delete)
      * 
-     * @param userId ID of the user
-     * @return Total unread messages count
+     * @param messageId Message ID
+     * @param userId User requesting deletion (must be sender)
      */
-    Long getTotalUnreadCount(Long userId);
+    void deleteMessage(Long messageId, Long userId);
     
     /**
-     * Update user presence to ONLINE.
-     * Called when user connects via WebSocket.
+     * Search messages within a conversation
      * 
-     * @param userId ID of the user
-     */
-    void setUserOnline(Long userId);
-    
-    /**
-     * Update user presence to OFFLINE.
-     * Called when user disconnects from WebSocket.
-     * 
-     * @param userId ID of the user
-     */
-    void setUserOffline(Long userId);
-    
-    /**
-     * Get user's current presence status.
-     * 
-     * @param userId ID of the user
-     * @return UserPresenceDto with status and last seen
-     */
-    UserPresenceDto getUserPresence(Long userId);
-    
-    /**
-     * Mark all undelivered messages for a user as DELIVERED.
-     * Called when user comes online.
-     * 
-     * @param userId ID of the user
-     * @return Number of messages marked as delivered
-     */
-    int markPendingMessagesAsDelivered(Long userId);
-    
-    /**
-     * Search messages in a conversation.
-     * 
-     * @param conversationId ID of the conversation
-     * @param searchTerm Search term (case-insensitive)
-     * @param userId ID of the user performing search (for authorization)
-     * @param pageable Pagination parameters
+     * @param conversationId Conversation ID
+     * @param searchTerm Search term
+     * @param userId Current user ID
+     * @param pageable Pagination
      * @return Page of matching messages
      */
     Page<ChatMessageResponse> searchMessages(
-        Long conversationId, 
-        String searchTerm, 
-        Long userId, 
+        Long conversationId,
+        String searchTerm,
+        Long userId,
+        Pageable pageable
+    );
+    
+    // ==================== CONVERSATION OPERATIONS ====================
+    
+    /**
+     * Initiate or get a conversation with context
+     * 
+     * @param currentUserId Current user ID
+     * @param request Conversation initiation request
+     * @return Conversation response
+     */
+    ConversationResponse initiateConversation(
+        Long currentUserId,
+        ConversationInitiateRequest request
+    );
+    
+    /**
+     * Get or create conversation between two users with specific type
+     * 
+     * @param user1Id First user ID
+     * @param user2Id Second user ID
+     * @param type Conversation type
+     * @param chargerId Charger ID (for USER_HOST type)
+     * @return Conversation response
+     */
+    ConversationResponse getOrCreateConversation(
+        Long user1Id,
+        Long user2Id,
+        ConversationType type,
+        Long chargerId
+    );
+    
+    /**
+     * Get all conversations for a user
+     * 
+     * @param userId User ID
+     * @param pageable Pagination
+     * @return Page of conversations
+     */
+    Page<ConversationResponse> getUserConversations(Long userId, Pageable pageable);
+    
+    /**
+     * Get conversations filtered by type
+     * 
+     * @param userId User ID
+     * @param type Conversation type
+     * @param pageable Pagination
+     * @return Page of conversations
+     */
+    Page<ConversationResponse> getUserConversationsByType(
+        Long userId,
+        ConversationType type,
         Pageable pageable
     );
     
     /**
-     * Delete a message (soft delete).
-     * Message is hidden but not removed from database.
+     * Get a specific conversation by ID
      * 
-     * @param messageId ID of the message
-     * @param userId ID of the user deleting (must be sender)
-     * @throws ResourceNotFoundException if message not found
-     * @throws UnauthorizedAccessException if user is not the sender
+     * @param conversationId Conversation ID
+     * @param userId Current user ID (for authorization)
+     * @return Conversation details
      */
-    void deleteMessage(Long messageId, Long userId);
+    ConversationResponse getConversationById(Long conversationId, Long userId);
+    
+    /**
+     * Archive/Unarchive a conversation
+     * 
+     * @param conversationId Conversation ID
+     * @param userId User performing the action
+     * @param archive true to archive, false to unarchive
+     */
+    void toggleArchiveConversation(Long conversationId, Long userId, boolean archive);
+    
+    /**
+     * Search conversations
+     * 
+     * @param userId Current user ID
+     * @param searchTerm Search term
+     * @param pageable Pagination
+     * @return Page of matching conversations
+     */
+    Page<ConversationResponse> searchConversations(
+        Long userId,
+        String searchTerm,
+        Pageable pageable
+    );
+    
+    // ==================== ADMIN OPERATIONS ====================
+    
+    /**
+     * Get all support conversations for admin
+     * 
+     * @param adminId Admin user ID
+     * @param pageable Pagination
+     * @return Page of support conversations
+     */
+    Page<ConversationResponse> getAdminSupportConversations(
+        Long adminId,
+        Pageable pageable
+    );
+    
+    /**
+     * Search users/hosts for admin to initiate chat
+     * 
+     * @param adminId Admin user ID
+     * @param request Search request
+     * @return Page of users matching search criteria
+     */
+    Page<UserSearchResponse> searchUsersForAdminChat(
+        Long adminId,
+        AdminChatSearchRequest request
+    );
+    
+    /**
+     * Admin initiates chat with a user or host
+     * 
+     * @param adminId Admin user ID
+     * @param targetUserId Target user/host ID
+     * @param initialMessage Optional initial message
+     * @return Created conversation
+     */
+    ConversationResponse adminInitiateChat(
+        Long adminId,
+        Long targetUserId,
+        String initialMessage
+    );
+    
+    // ==================== CHARGER-SPECIFIC OPERATIONS ====================
+    
+    /**
+     * Get host ID for a specific charger
+     * 
+     * @param chargerId Charger ID
+     * @return Host user ID
+     */
+    Long getChargerHostId(Long chargerId);
+    
+    /**
+     * Get conversations related to a specific charger
+     * 
+     * @param chargerId Charger ID
+     * @param hostId Host user ID (for authorization)
+     * @param pageable Pagination
+     * @return Page of conversations about this charger
+     */
+    Page<ConversationResponse> getChargerConversations(
+        Long chargerId,
+        Long hostId,
+        Pageable pageable
+    );
+    
+    // ==================== PRESENCE & STATUS ====================
+    
+    /**
+     * Get user presence information
+     * 
+     * @param userId User ID
+     * @return User presence DTO
+     */
+    UserPresenceDto getUserPresence(Long userId);
+    
+    /**
+     * Update user presence status
+     * 
+     * @param userId User ID
+     * @param isOnline Online status
+     */
+    void updateUserPresence(Long userId, boolean isOnline);
+    
+    /**
+     * Set user as online (called by WebSocket connection)
+     * 
+     * @param userId User ID
+     */
+    void setUserOnline(Long userId);
+    
+    /**
+     * Set user as offline (called by WebSocket disconnection)
+     * 
+     * @param userId User ID
+     */
+    void setUserOffline(Long userId);
+    
+    /**
+     * Mark pending messages as delivered when user comes online
+     * 
+     * @param userId User ID who just came online
+     * @return Number of messages marked as delivered
+     */
+    int markPendingMessagesAsDelivered(Long userId);
+    
+    // ==================== UNREAD COUNT ====================
+    
+    /**
+     * Get unread count for a specific conversation
+     * 
+     * @param conversationId Conversation ID
+     * @param userId Current user ID
+     * @return Unread message count
+     */
+    Long getUnreadCount(Long conversationId, Long userId);
+    
+    /**
+     * Get total unread count across all conversations
+     * 
+     * @param userId User ID
+     * @return Total unread count
+     */
+    Long getTotalUnreadCount(Long userId);
 }
