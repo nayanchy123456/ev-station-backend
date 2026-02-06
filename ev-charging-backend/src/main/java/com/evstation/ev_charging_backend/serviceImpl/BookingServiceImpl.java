@@ -6,6 +6,7 @@ import com.evstation.ev_charging_backend.entity.Booking;
 import com.evstation.ev_charging_backend.entity.Charger;
 import com.evstation.ev_charging_backend.entity.Conversation;
 import com.evstation.ev_charging_backend.entity.User;
+import com.evstation.ev_charging_backend.entity.Rating; // ⭐ NEW
 import com.evstation.ev_charging_backend.enums.BookingStatus;
 import com.evstation.ev_charging_backend.exception.BookingConflictException;
 import com.evstation.ev_charging_backend.exception.BookingNotFoundException;
@@ -14,6 +15,7 @@ import com.evstation.ev_charging_backend.repository.BookingRepository;
 import com.evstation.ev_charging_backend.repository.ChargerRepository;
 import com.evstation.ev_charging_backend.repository.ConversationRepository;
 import com.evstation.ev_charging_backend.repository.UserRepository;
+import com.evstation.ev_charging_backend.repository.RatingRepository; // ⭐ NEW
 import com.evstation.ev_charging_backend.service.BookingService;
 
 import jakarta.transaction.Transactional;
@@ -23,16 +25,17 @@ import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional; // ⭐ NEW
 
 import org.springframework.stereotype.Service;
 
 /**
- * ✅ FIXED BookingServiceImpl
+ * ✅ UPDATED BookingServiceImpl with Rating Information
  * 
  * CHANGES:
- * 1. createBooking() now follows reservation flow (starts with RESERVED)
- * 2. Added enhanced logging for debugging
- * 3. Maintains all existing functionality
+ * 1. Added RatingRepository dependency
+ * 2. Updated mapToResponse() to include rating information
+ * 3. Ratings are fetched and included in booking responses
  */
 @Service
 @Slf4j
@@ -42,27 +45,30 @@ public class BookingServiceImpl implements BookingService {
     private static final long MAX_DURATION_MINUTES = 8 * 60;
     private static final long MIN_ADVANCE_MINUTES = 15;
     private static final long CANCELLATION_DEADLINE_HOURS = 1;
-    private static final long RESERVATION_TIMEOUT_MINUTES = 3; // ✅ ADDED
+    private static final long RESERVATION_TIMEOUT_MINUTES = 3;
 
     private final BookingRepository bookingRepository;
     private final ChargerRepository chargerRepository;
     private final UserRepository userRepository;
     private final ConversationRepository conversationRepository;
+    private final RatingRepository ratingRepository; // ⭐ NEW
 
     public BookingServiceImpl(
             BookingRepository bookingRepository,
             ChargerRepository chargerRepository,
             UserRepository userRepository,
-            ConversationRepository conversationRepository
+            ConversationRepository conversationRepository,
+            RatingRepository ratingRepository // ⭐ NEW
     ) {
         this.bookingRepository = bookingRepository;
         this.chargerRepository = chargerRepository;
         this.userRepository = userRepository;
         this.conversationRepository = conversationRepository;
+        this.ratingRepository = ratingRepository; // ⭐ NEW
     }
 
     /**
-     * ✅ FIXED: Create Booking - Now follows reservation flow
+     * Create Booking - Follows reservation flow
      * 
      * CHANGES:
      * - Status starts as RESERVED (not CONFIRMED)
@@ -96,7 +102,6 @@ public class BookingServiceImpl implements BookingService {
             throw new ResourceNotFoundException("Charger host not found");
         }
 
-        // ✅ LOG HOST ID
         log.info("🏠 Charger host ID: {}", host.getUserId());
 
         // Validate booking time
@@ -115,7 +120,7 @@ public class BookingServiceImpl implements BookingService {
             throw new BookingConflictException("Charger already booked for selected time");
         }
 
-        // ✅ FIXED: Create booking with RESERVED status (not CONFIRMED)
+        // Create booking with RESERVED status
         LocalDateTime reservedUntil = LocalDateTime.now().plusMinutes(RESERVATION_TIMEOUT_MINUTES);
         
         Booking booking = Booking.builder()
@@ -123,14 +128,13 @@ public class BookingServiceImpl implements BookingService {
                 .charger(charger)
                 .startTime(dto.getStartTime())
                 .endTime(dto.getEndTime())
-                .status(BookingStatus.RESERVED)  // ✅ CHANGED FROM CONFIRMED
-                .reservedUntil(reservedUntil)    // ✅ ADDED
+                .status(BookingStatus.RESERVED)
+                .reservedUntil(reservedUntil)
                 .pricePerKwh(charger.getPricePerKwh())
                 .build();
 
         Booking savedBooking = bookingRepository.save(booking);
         
-        // ✅ ENHANCED LOGGING
         log.info("✅ Booking #{} created with status RESERVED for user {} on charger {} (host: {})", 
                  savedBooking.getId(), userId, charger.getId(), host.getUserId());
         log.info("⏰ Reservation expires at: {}", reservedUntil);
@@ -217,7 +221,6 @@ public class BookingServiceImpl implements BookingService {
     public List<BookingResponseDto> getBookingsByHost(Long hostId) {
         List<Booking> bookings = bookingRepository.findByChargerHostUserIdOrderByStartTimeDesc(hostId);
         
-        // ✅ ENHANCED LOGGING
         long reservedCount = bookings.stream().filter(b -> b.getStatus() == BookingStatus.RESERVED).count();
         long paymentPendingCount = bookings.stream().filter(b -> b.getStatus() == BookingStatus.PAYMENT_PENDING).count();
         long confirmedCount = bookings.stream().filter(b -> b.getStatus() == BookingStatus.CONFIRMED).count();
@@ -317,6 +320,11 @@ public class BookingServiceImpl implements BookingService {
         return booking.getStatus();
     }
 
+    /**
+     * ⭐ UPDATED: Map Booking to Response DTO with Rating Information
+     * 
+     * NEW: Fetches rating information if exists and includes it in response
+     */
     private BookingResponseDto mapToResponse(Booking booking) {
         BigDecimal totalPrice = null;
         if (booking.getTotalEnergyKwh() != null) {
@@ -326,7 +334,10 @@ public class BookingServiceImpl implements BookingService {
             totalPrice = booking.getTotalPrice();
         }
 
-        return BookingResponseDto.builder()
+        // ⭐ NEW - Fetch rating information if exists
+        Optional<Rating> ratingOpt = ratingRepository.findByBookingId(booking.getId());
+        
+        BookingResponseDto.BookingResponseDtoBuilder builder = BookingResponseDto.builder()
                 .bookingId(booking.getId())
                 .userId(booking.getUser().getUserId())
                 .chargerId(booking.getCharger().getId())
@@ -336,7 +347,20 @@ public class BookingServiceImpl implements BookingService {
                 .status(mapStatusRealTime(booking))
                 .reservedUntil(booking.getReservedUntil())
                 .pricePerKwh(booking.getPricePerKwh())
-                .totalPrice(totalPrice)
-                .build();
+                .totalPrice(totalPrice);
+        
+        // ⭐ NEW - Add rating information if rating exists
+        if (ratingOpt.isPresent()) {
+            Rating rating = ratingOpt.get();
+            builder.ratingId(rating.getId())
+                   .ratingScore(rating.getRatingScore())
+                   .ratingComment(rating.getComment())
+                   .ratingCreatedAt(rating.getCreatedAt());
+            
+            log.debug("📊 Included rating {} (score: {}) for booking {}", 
+                     rating.getId(), rating.getRatingScore(), booking.getId());
+        }
+        
+        return builder.build();
     }
 }
