@@ -230,7 +230,7 @@ public class GlobalExceptionHandler {
                         "timestamp", Instant.now(),
                         "status", HttpStatus.INTERNAL_SERVER_ERROR.value(),
                         "error", "Runtime Error",
-                        "message", ex.getMessage()
+                        "message", ex.getMessage() != null ? ex.getMessage() : "An unexpected error occurred"
                 ));
     }
 
