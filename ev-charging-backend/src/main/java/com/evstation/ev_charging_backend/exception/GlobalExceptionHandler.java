@@ -107,6 +107,18 @@ public class GlobalExceptionHandler {
                 ));
     }
 
+    // --- Date Range Validation Exception ---
+    @ExceptionHandler(InvalidDateRangeException.class)
+    public ResponseEntity<Map<String, Object>> handleInvalidDateRange(InvalidDateRangeException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(Map.of(
+                        "timestamp", Instant.now(),
+                        "status", HttpStatus.BAD_REQUEST.value(),
+                        "error", "Invalid Date Range",
+                        "message", ex.getMessage()
+                ));
+    }
+
     // --- Rating-specific exceptions (NEW) ---
     @ExceptionHandler(RatingAlreadyExistsException.class)
     public ResponseEntity<Map<String, Object>> handleRatingAlreadyExists(RatingAlreadyExistsException ex) {
@@ -245,4 +257,7 @@ public class GlobalExceptionHandler {
                         "message", ex.getMessage()
                 ));
     }
+
+
+    
 }

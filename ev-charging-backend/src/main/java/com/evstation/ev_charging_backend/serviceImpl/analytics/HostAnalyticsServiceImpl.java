@@ -323,8 +323,8 @@ public class HostAnalyticsServiceImpl implements HostAnalyticsService {
         
         LocalDateTime startDate = getStartDate(period);
         
-        // Get booking counts by status
-        List<Object[]> statusData = bookingRepository.getBookingStatusDistribution(hostId, startDate);
+        // ✅ FIXED: Use getBookingStatusDistributionByHost instead of getBookingStatusDistribution
+        List<Object[]> statusData = bookingRepository.getBookingStatusDistributionByHost(hostId, startDate);
         
         Long totalBookings = 0L;
         Long completedBookings = 0L;

@@ -44,20 +44,17 @@ public class CorsFilter implements Filter {
         // Check if origin is allowed
         if (origin != null && (ALLOWED_ORIGINS.contains(origin) || origin.startsWith("file://"))) {
             response.setHeader("Access-Control-Allow-Origin", origin);
+            response.setHeader("Access-Control-Allow-Credentials", "true");
         } else if (origin == null) {
-            // For same-origin requests or file:// protocol
-            response.setHeader("Access-Control-Allow-Origin", "*");
+            // For same-origin requests - use localhost as default
+            response.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
+            // Don't set credentials for null origin
         }
 
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH");
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type, Accept, x-requested-with, Cache-Control");
         response.setHeader("Access-Control-Expose-Headers", "Authorization");
-        
-        // Only set credentials to true for allowed origins
-        if (origin != null && ALLOWED_ORIGINS.contains(origin)) {
-            response.setHeader("Access-Control-Allow-Credentials", "true");
-        }
 
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             response.setStatus(HttpServletResponse.SC_OK);

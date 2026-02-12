@@ -35,17 +35,30 @@ public class AnalyticsCacheRefreshService {
         log.info("Starting scheduled analytics cache refresh (2-minute interval)");
         
         try {
-            // Clear all analytics caches
+            // Clear Host Analytics caches
             clearCache("hostOverview");
             clearCache("hostRevenue");
             clearCache("hostChargers");
             clearCache("hostBookings");
             clearCache("hostUsers");
+            
+            // Clear User Analytics caches
             clearCache("userOverview");
             clearCache("userSpending");
             clearCache("userBehavior");
             clearCache("userBookings");
             clearCache("userRatings");
+            
+            // Clear Admin Analytics caches
+            clearCache("adminOverview");
+            clearCache("adminUsers");
+            clearCache("adminHosts");
+            clearCache("adminChargers");
+            clearCache("adminBookings");
+            clearCache("adminRevenue");
+            clearCache("adminRatings");
+            clearCache("adminPlatformPerformance");
+            clearCache("adminTimeAnalytics");
             
             log.info("Analytics cache refresh completed successfully");
         } catch (Exception e) {
@@ -113,5 +126,85 @@ public class AnalyticsCacheRefreshService {
         if (hostChargers != null) hostChargers.clear();
         if (hostBookings != null) hostBookings.clear();
         if (hostUsers != null) hostUsers.clear();
+    }
+
+    /**
+     * Clear all admin analytics caches
+     * Useful when admin needs fresh platform-wide data
+     */
+    public void clearAdminCache() {
+        log.info("Clearing all admin analytics caches");
+        
+        clearCache("adminOverview");
+        clearCache("adminUsers");
+        clearCache("adminHosts");
+        clearCache("adminChargers");
+        clearCache("adminBookings");
+        clearCache("adminRevenue");
+        clearCache("adminRatings");
+        clearCache("adminPlatformPerformance");
+        clearCache("adminTimeAnalytics");
+        
+        log.info("Admin analytics caches cleared successfully");
+    }
+
+    /**
+     * Clear cache for a specific date range
+     * Useful for targeted cache invalidation
+     */
+    public void clearCacheForDateRange(String startDate, String endDate) {
+        log.info("Clearing cache for date range: {} to {}", startDate, endDate);
+        
+        // For admin analytics which use date ranges
+        clearAdminCache();
+        
+        log.info("Cache cleared for date range");
+    }
+
+    /**
+     * Get cache statistics for monitoring
+     */
+    public String getCacheStatistics() {
+        StringBuilder stats = new StringBuilder();
+        stats.append("=== Analytics Cache Statistics ===\n");
+        
+        // Host caches
+        stats.append("\nHost Analytics:\n");
+        appendCacheInfo(stats, "hostOverview");
+        appendCacheInfo(stats, "hostRevenue");
+        appendCacheInfo(stats, "hostChargers");
+        appendCacheInfo(stats, "hostBookings");
+        appendCacheInfo(stats, "hostUsers");
+        
+        // User caches
+        stats.append("\nUser Analytics:\n");
+        appendCacheInfo(stats, "userOverview");
+        appendCacheInfo(stats, "userSpending");
+        appendCacheInfo(stats, "userBehavior");
+        appendCacheInfo(stats, "userBookings");
+        appendCacheInfo(stats, "userRatings");
+        
+        // Admin caches
+        stats.append("\nAdmin Analytics:\n");
+        appendCacheInfo(stats, "adminOverview");
+        appendCacheInfo(stats, "adminUsers");
+        appendCacheInfo(stats, "adminHosts");
+        appendCacheInfo(stats, "adminChargers");
+        appendCacheInfo(stats, "adminBookings");
+        appendCacheInfo(stats, "adminRevenue");
+        appendCacheInfo(stats, "adminRatings");
+        appendCacheInfo(stats, "adminPlatformPerformance");
+        appendCacheInfo(stats, "adminTimeAnalytics");
+        
+        return stats.toString();
+    }
+
+    private void appendCacheInfo(StringBuilder stats, String cacheName) {
+        var cache = cacheManager.getCache(cacheName);
+        if (cache != null) {
+            stats.append("  - ").append(cacheName).append(": Active\n");
+        } else {
+            stats.append("  - ").append(cacheName).append(": Not configured\n");
+        }
     }
 }
