@@ -8,10 +8,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
+
+    // ============================================
+    // BASIC USER QUERIES
+    // ============================================
 
     Optional<User> findByEmail(String email);
 
@@ -56,4 +61,62 @@ public interface UserRepository extends JpaRepository<User, Long> {
         @Param("excludeUserId") Long excludeUserId,
         Pageable pageable
     );
+
+    // ============================================
+    // USER ANALYTICS QUERIES
+    // ============================================
+
+    /**
+     * Get daily user registration trend
+     * Returns: [date, count]
+     */
+    @Query(value = """
+            SELECT DATE(u.created_at) as date,
+                   COUNT(*) as user_count
+            FROM users u
+            WHERE u.created_at BETWEEN :startDate AND :endDate
+            GROUP BY DATE(u.created_at)
+            ORDER BY DATE(u.created_at)
+            """, nativeQuery = true)
+    List<Object[]> getDailyUserRegistrationTrend(
+            @Param("startDate") LocalDateTime startDate,
+            @Param("endDate") LocalDateTime endDate
+    );
+
+    /**
+     * Count users by role
+     */
+    Long countByRole(Role role);
+    
+    /**
+     * Count users created after a specific date
+     */
+    Long countByCreatedAtAfter(LocalDateTime date);
+    
+    /**
+     * Count users created within a date range
+     */
+    Long countByCreatedAtBetween(LocalDateTime start, LocalDateTime end);
+    
+    /**
+     * Count users created before a specific date
+     */
+    Long countByCreatedAtBefore(LocalDateTime date);
+    
+    /**
+     * Count users by role within a date range
+     */
+    Long countByRoleAndCreatedAtBetween(Role role, LocalDateTime start, LocalDateTime end);
+    
+    /**
+     * Count total users who have made at least one booking
+     */
+    @Query("SELECT COUNT(DISTINCT b.user.userId) FROM Booking b")
+    Long countUsersWithBookings();
+    
+    /**
+     * Count users who have made bookings after a specific date
+     */
+    @Query("SELECT COUNT(DISTINCT b.user.userId) FROM Booking b WHERE b.createdAt > :date")
+    Long countUsersWithBookingsAfter(@Param("date") LocalDateTime date);
 }
