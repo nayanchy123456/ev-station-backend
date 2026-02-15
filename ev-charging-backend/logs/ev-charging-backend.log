@@ -11428,3 +11428,730 @@ java.lang.NullPointerException: Cannot invoke "java.util.Map.get(Object)" becaus
 2026-02-12 14:59:10 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
 2026-02-12 14:59:10 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-15 - Shutdown initiated...
 2026-02-12 14:59:10 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-15 - Shutdown completed.
+2026-02-15 21:50:59 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - Starting EvChargingBackendApplication using Java 21.0.2 with PID 10284 (E:\EV_station_project(Both mode)\ev-station-backend\ev-charging-backend\target\classes started by Nayan-Windows in E:\EV_station_project(Both mode)\ev-station-backend\ev-charging-backend)
+2026-02-15 21:50:59 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-02-15 21:50:59 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-02-15 21:50:59 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-02-15 21:51:01 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-15 21:51:01 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 159 ms. Found 10 JPA repository interfaces.
+2026-02-15 21:51:02 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-02-15 21:51:02 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-02-15 21:51:02 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.46]
+2026-02-15 21:51:02 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-02-15 21:51:02 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3500 ms
+2026-02-15 21:51:02 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-15 21:51:02 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.29.Final
+2026-02-15 21:51:03 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-02-15 21:51:03 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-15 21:51:03 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-15 21:51:03 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@354e528b
+2026-02-15 21:51:03 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-02-15 21:51:03 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-15 21:51:03 [restartedMain] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.40
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-02-15 21:51:05 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-15 21:51:05 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-15 21:51:06 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-15 21:51:11 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Inbound WebSocket channel configured
+2026-02-15 21:51:11 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Outbound WebSocket channel configured
+2026-02-15 21:51:11 [restartedMain] INFO  c.e.e.config.WebSocketConfig - WebSocket Message Broker initialized
+2026-02-15 21:51:11 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2026-02-15 21:51:12 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-15 21:51:12 [restartedMain] INFO  c.e.e.config.WebSocketConfig - WebSocket transport tuned
+2026-02-15 21:51:12 [restartedMain] INFO  c.e.e.config.WebSocketConfig - STOMP WebSocket endpoints registered
+2026-02-15 21:51:12 [restartedMain] DEBUG o.s.w.s.s.s.WebSocketHandlerMapping - Patterns [/ws/**, /ws] in 'stompWebSocketHandlerMapping'
+2026-02-15 21:51:12 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.AdminController:
+	
+2026-02-15 21:51:12 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.AdminAnalyticsController:
+	
+2026-02-15 21:51:12 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.HostAnalyticsController:
+	
+2026-02-15 21:51:12 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.UserAnalyticsController:
+	
+2026-02-15 21:51:12 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.AuthController:
+	
+2026-02-15 21:51:12 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.BookingController:
+	
+2026-02-15 21:51:12 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ChargerController:
+	
+2026-02-15 21:51:12 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ChatController:
+	{[MESSAGE],[/chat.sendMessage]}: sendMessage(ChatMessageRequest,SimpMessageHeaderAccessor)
+	{[MESSAGE],[/chat.stopTyping]}: sendStopTypingIndicator(Long,SimpMessageHeaderAccessor)
+	{[MESSAGE],[/chat.typing]}: sendTypingIndicator(Long,SimpMessageHeaderAccessor)
+2026-02-15 21:51:12 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.DashboardController:
+	
+2026-02-15 21:51:12 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.FileController:
+	
+2026-02-15 21:51:12 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.NotificationController:
+	
+2026-02-15 21:51:12 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.PaymentController:
+	
+2026-02-15 21:51:12 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.RatingController:
+	
+2026-02-15 21:51:12 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ReceiptController:
+	
+2026-02-15 21:51:12 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ReservationController:
+	
+2026-02-15 21:51:12 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	
+2026-02-15 21:51:12 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Servlet WebSocket container configured
+2026-02-15 21:51:12 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-02-15 21:51:12 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2026-02-15 21:51:12 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2026-02-15 21:51:12 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Starting...
+2026-02-15 21:51:12 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@57a68526]
+2026-02-15 21:51:12 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@57a68526]
+2026-02-15 21:51:12 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@57a68526]]
+2026-02-15 21:51:12 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Started.
+2026-02-15 21:51:12 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-02-15 21:51:12 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-02-15 21:51:12 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-02-15 21:51:12 [restartedMain] INFO  o.s.s.config.TaskSchedulerRouter - More than one TaskScheduler bean exists within the context, and none is named 'taskScheduler'. Mark one of them as primary or name it 'taskScheduler' (possibly as an alias); or implement the SchedulingConfigurer interface and call ScheduledTaskRegistrar#setScheduler explicitly within the configureTasks() callback: [messageBrokerTaskScheduler, heartbeatTaskScheduler]
+2026-02-15 21:51:12 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - Started EvChargingBackendApplication in 14.907 seconds (process running for 16.002)
+2026-02-15 21:51:13 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-02-15 21:51:13 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-02-15 21:51:16 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-15 21:51:16 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-02-15 21:51:16 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2026-02-15 21:51:21 [http-nio-8080-exec-7] INFO  c.e.e.c.a.HostAnalyticsController - Getting host overview for period: LAST_30_DAYS
+2026-02-15 21:51:21 [http-nio-8080-exec-7] INFO  c.e.e.s.a.HostAnalyticsServiceImpl - Calculating overview for host 29 with period LAST_30_DAYS
+2026-02-15 21:51:25 [http-nio-8080-exec-10] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource 1771168935460_7089460700500.jpg.]
+2026-02-15 21:51:25 [http-nio-8080-exec-8] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource 1771168935471_7089471050900.jpg.]
+2026-02-15 21:51:25 [http-nio-8080-exec-9] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource 1771168935398_7089399120700.jpg.]
+2026-02-15 21:51:25 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource 1771168935448_7089448608200.jpg.]
+2026-02-15 21:51:26 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource 1771168935479_7089479451300.jpg.]
+2026-02-15 21:51:26 [http-nio-8080-exec-7] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource 1771168935485_7089485747000.jpg.]
+2026-02-15 21:51:26 [http-nio-8080-exec-5] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource 1771168935498_7089498487600.jpg.]
+2026-02-15 21:51:26 [http-nio-8080-exec-4] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource 1771168935493_7089492991100.jpg.]
+2026-02-15 21:52:12 [MessageBroker-1] INFO  o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2026-02-15 21:53:13 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-02-15 21:53:13 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-02-15 21:53:18 [http-nio-8080-exec-2] INFO  c.e.e.c.a.HostAnalyticsController - Getting host overview for period: LAST_30_DAYS
+2026-02-15 21:53:18 [http-nio-8080-exec-2] INFO  c.e.e.s.a.HostAnalyticsServiceImpl - Calculating overview for host 29 with period LAST_30_DAYS
+2026-02-15 21:53:20 [http-nio-8080-exec-10] INFO  c.e.e.c.a.HostAnalyticsController - Getting charger analytics for period: LAST_7_DAYS
+2026-02-15 21:53:20 [http-nio-8080-exec-10] INFO  c.e.e.s.a.HostAnalyticsServiceImpl - === START: getChargerAnalytics for hostId=29, period=LAST_7_DAYS ===
+2026-02-15 21:53:20 [http-nio-8080-exec-10] INFO  c.e.e.s.a.HostAnalyticsServiceImpl - Found 4 chargers for host 29
+2026-02-15 21:53:20 [http-nio-8080-exec-10] INFO  c.e.e.s.a.HostAnalyticsServiceImpl - Found 4 last booking date records
+2026-02-15 21:53:20 [http-nio-8080-exec-10] INFO  c.e.e.s.a.HostAnalyticsServiceImpl - Last booking map built with 4 entries
+2026-02-15 21:53:20 [http-nio-8080-exec-10] INFO  c.e.e.s.a.HostAnalyticsServiceImpl - Successfully processed 4 out of 4 chargers
+2026-02-15 21:53:20 [http-nio-8080-exec-10] INFO  c.e.e.s.a.HostAnalyticsServiceImpl - === SUCCESS: getChargerAnalytics completed successfully ===
+2026-02-15 21:53:41 [http-nio-8080-exec-5] INFO  c.e.e.c.a.UserAnalyticsController - Getting user overview for period: LAST_30_DAYS
+2026-02-15 21:53:41 [http-nio-8080-exec-5] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating overview for user 31 with period LAST_30_DAYS
+2026-02-15 21:53:43 [http-nio-8080-exec-10] INFO  c.e.e.c.a.UserAnalyticsController - Getting spending analytics for period: LAST_7_DAYS
+2026-02-15 21:53:43 [http-nio-8080-exec-10] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating spending analytics for user 31 with period LAST_7_DAYS
+2026-02-15 21:53:48 [http-nio-8080-exec-8] INFO  c.e.e.c.a.UserAnalyticsController - Getting spending analytics for period: LAST_30_DAYS
+2026-02-15 21:53:48 [http-nio-8080-exec-8] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating spending analytics for user 31 with period LAST_30_DAYS
+2026-02-15 21:53:50 [http-nio-8080-exec-6] INFO  c.e.e.c.a.UserAnalyticsController - Getting spending analytics for period: LAST_7_DAYS
+2026-02-15 21:53:53 [http-nio-8080-exec-9] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource bmw.jpg.]
+2026-02-15 21:54:30 [http-nio-8080-exec-8] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 27]
+2026-02-15 21:54:30 [http-nio-8080-exec-5] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 25]
+2026-02-15 21:54:30 [http-nio-8080-exec-9] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 20]
+2026-02-15 21:54:30 [http-nio-8080-exec-10] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 26]
+2026-02-15 21:54:30 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 16]
+2026-02-15 21:54:36 [http-nio-8080-exec-10] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource bmw.jpg.]
+2026-02-15 21:55:13 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-02-15 21:55:13 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-02-15 21:55:44 [http-nio-8080-exec-1] INFO  c.e.e.c.a.HostAnalyticsController - Getting host overview for period: LAST_30_DAYS
+2026-02-15 21:55:44 [http-nio-8080-exec-1] INFO  c.e.e.s.a.HostAnalyticsServiceImpl - Calculating overview for host 29 with period LAST_30_DAYS
+2026-02-15 21:55:59 [http-nio-8080-exec-8] INFO  c.e.e.c.a.HostAnalyticsController - Getting host overview for period: LAST_30_DAYS
+2026-02-15 21:55:59 [http-nio-8080-exec-8] INFO  c.e.e.s.a.HostAnalyticsServiceImpl - Calculating overview for host 15 with period LAST_30_DAYS
+2026-02-15 21:56:15 [http-nio-8080-exec-9] INFO  c.e.e.c.a.HostAnalyticsController - Getting host overview for period: LAST_30_DAYS
+2026-02-15 21:57:13 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-02-15 21:57:13 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-02-15 21:57:32 [http-nio-8080-exec-3] INFO  c.e.e.c.a.UserAnalyticsController - Getting user overview for period: LAST_30_DAYS
+2026-02-15 21:57:32 [http-nio-8080-exec-3] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating overview for user 31 with period LAST_30_DAYS
+2026-02-15 21:57:34 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 27]
+2026-02-15 21:57:34 [http-nio-8080-exec-4] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 26]
+2026-02-15 21:57:34 [http-nio-8080-exec-3] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 20]
+2026-02-15 21:57:34 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 25]
+2026-02-15 21:57:34 [http-nio-8080-exec-6] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 16]
+2026-02-15 21:57:35 [http-nio-8080-exec-4] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource bmw.jpg.]
+2026-02-15 21:58:03 [http-nio-8080-exec-3] WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$WarningLoggingModifier - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+2026-02-15 21:58:26 [http-nio-8080-exec-10] INFO  c.e.e.serviceImpl.PaymentServiceImpl - 💳 User 31 initiating payment for reservation 61
+2026-02-15 21:58:26 [http-nio-8080-exec-10] INFO  c.e.e.serviceImpl.PaymentServiceImpl - 📋 Booking #61 current status: RESERVED (host: 15)
+2026-02-15 21:58:26 [http-nio-8080-exec-10] INFO  c.e.e.serviceImpl.PaymentServiceImpl - ✅ Payment #35 initiated for booking #61
+2026-02-15 21:58:26 [http-nio-8080-exec-10] INFO  c.e.e.serviceImpl.PaymentServiceImpl - 📊 Booking #61 status: RESERVED → PAYMENT_PENDING (host: 15)
+2026-02-15 21:58:26 [http-nio-8080-exec-10] INFO  c.e.e.serviceImpl.PaymentServiceImpl - 💰 Payment amount: NPR 35.00
+2026-02-15 21:58:30 [http-nio-8080-exec-2] INFO  c.e.e.serviceImpl.PaymentServiceImpl - 💳 User 31 processing payment 35
+2026-02-15 21:58:33 [http-nio-8080-exec-2] INFO  c.e.e.serviceImpl.PaymentServiceImpl - ✅ Payment 35 successful for booking #61
+2026-02-15 21:58:33 [http-nio-8080-exec-2] INFO  c.e.e.serviceImpl.PaymentServiceImpl - 📊 Booking #61 status: PAYMENT_PENDING → CONFIRMED (host: 15)
+2026-02-15 21:58:33 [http-nio-8080-exec-2] INFO  c.e.e.serviceImpl.PaymentServiceImpl - 🎫 Transaction ID: TXN-8995916B-0B4D-4D05
+2026-02-15 21:58:33 [http-nio-8080-exec-2] INFO  c.e.e.serviceImpl.PaymentServiceImpl - 🔔 Notifications sent to user 31 and host 15
+2026-02-15 21:58:42 [http-nio-8080-exec-2] ERROR c.e.e.serviceImpl.EmailServiceImpl - Failed to send receipt email to nayanchy2004@gmail.com: Authentication failed
+2026-02-15 21:58:45 [http-nio-8080-exec-2] ERROR c.e.e.serviceImpl.EmailServiceImpl - Failed to send booking confirmation email to nayanchy2004@gmail.com: Authentication failed
+2026-02-15 21:58:48 [http-nio-8080-exec-5] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 27]
+2026-02-15 21:58:48 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 26]
+2026-02-15 21:58:48 [http-nio-8080-exec-6] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 25]
+2026-02-15 21:58:48 [http-nio-8080-exec-9] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 20]
+2026-02-15 21:58:48 [http-nio-8080-exec-8] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 16]
+2026-02-15 21:59:13 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-02-15 21:59:13 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-02-15 21:59:54 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 27]
+2026-02-15 21:59:54 [http-nio-8080-exec-8] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 25]
+2026-02-15 21:59:54 [http-nio-8080-exec-4] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 26]
+2026-02-15 21:59:54 [http-nio-8080-exec-8] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 16]
+2026-02-15 21:59:54 [http-nio-8080-exec-3] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 20]
+2026-02-15 22:00:00 [http-nio-8080-exec-6] INFO  c.e.e.c.a.UserAnalyticsController - Getting user overview for period: LAST_30_DAYS
+2026-02-15 22:00:00 [http-nio-8080-exec-6] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating overview for user 31 with period LAST_30_DAYS
+2026-02-15 22:00:04 [http-nio-8080-exec-3] INFO  c.e.e.c.a.UserAnalyticsController - Getting spending analytics for period: LAST_7_DAYS
+2026-02-15 22:00:04 [http-nio-8080-exec-3] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating spending analytics for user 31 with period LAST_7_DAYS
+2026-02-15 22:00:16 [http-nio-8080-exec-1] INFO  c.e.e.c.a.UserAnalyticsController - Getting spending analytics for period: LAST_30_DAYS
+2026-02-15 22:00:16 [http-nio-8080-exec-1] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating spending analytics for user 31 with period LAST_30_DAYS
+2026-02-15 22:00:56 [http-nio-8080-exec-8] INFO  c.e.e.c.a.HostAnalyticsController - Getting host overview for period: LAST_30_DAYS
+2026-02-15 22:00:56 [http-nio-8080-exec-8] INFO  c.e.e.s.a.HostAnalyticsServiceImpl - Calculating overview for host 15 with period LAST_30_DAYS
+2026-02-15 22:01:05 [http-nio-8080-exec-1] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 15 bookings: Total=12, RESERVED=0, PAYMENT_PENDING=1, CONFIRMED=1
+2026-02-15 22:01:06 [http-nio-8080-exec-7] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 15 bookings: Total=12, RESERVED=0, PAYMENT_PENDING=1, CONFIRMED=1
+2026-02-15 22:01:07 [http-nio-8080-exec-2] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 15 bookings: Total=12, RESERVED=0, PAYMENT_PENDING=1, CONFIRMED=1
+2026-02-15 22:01:07 [http-nio-8080-exec-10] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 15 bookings: Total=12, RESERVED=0, PAYMENT_PENDING=1, CONFIRMED=1
+2026-02-15 22:01:13 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-02-15 22:01:13 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-02-15 22:03:13 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-02-15 22:03:13 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-02-15 22:03:16 [http-nio-8080-exec-1] INFO  c.e.e.c.a.UserAnalyticsController - Getting user overview for period: LAST_30_DAYS
+2026-02-15 22:03:16 [http-nio-8080-exec-1] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating overview for user 6 with period LAST_30_DAYS
+2026-02-15 22:03:18 [http-nio-8080-exec-3] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource bmw.jpg.]
+2026-02-15 22:04:24 [http-nio-8080-exec-1] INFO  c.e.e.serviceImpl.PaymentServiceImpl - 💳 User 6 initiating payment for reservation 62
+2026-02-15 22:04:24 [http-nio-8080-exec-1] INFO  c.e.e.serviceImpl.PaymentServiceImpl - 📋 Booking #62 current status: RESERVED (host: 15)
+2026-02-15 22:04:25 [http-nio-8080-exec-1] INFO  c.e.e.serviceImpl.PaymentServiceImpl - ✅ Payment #36 initiated for booking #62
+2026-02-15 22:04:25 [http-nio-8080-exec-1] INFO  c.e.e.serviceImpl.PaymentServiceImpl - 📊 Booking #62 status: RESERVED → PAYMENT_PENDING (host: 15)
+2026-02-15 22:04:25 [http-nio-8080-exec-1] INFO  c.e.e.serviceImpl.PaymentServiceImpl - 💰 Payment amount: NPR 17.50
+2026-02-15 22:04:27 [http-nio-8080-exec-6] INFO  c.e.e.serviceImpl.PaymentServiceImpl - 💳 User 6 processing payment 36
+2026-02-15 22:04:29 [http-nio-8080-exec-6] INFO  c.e.e.serviceImpl.PaymentServiceImpl - ✅ Payment 36 successful for booking #62
+2026-02-15 22:04:29 [http-nio-8080-exec-6] INFO  c.e.e.serviceImpl.PaymentServiceImpl - 📊 Booking #62 status: PAYMENT_PENDING → CONFIRMED (host: 15)
+2026-02-15 22:04:29 [http-nio-8080-exec-6] INFO  c.e.e.serviceImpl.PaymentServiceImpl - 🎫 Transaction ID: TXN-D78E032F-52DF-4618
+2026-02-15 22:04:29 [http-nio-8080-exec-6] INFO  c.e.e.serviceImpl.PaymentServiceImpl - 🔔 Notifications sent to user 6 and host 15
+2026-02-15 22:04:38 [http-nio-8080-exec-6] ERROR c.e.e.serviceImpl.EmailServiceImpl - Failed to send receipt email to ram@gmail.com: Authentication failed
+2026-02-15 22:04:47 [http-nio-8080-exec-6] ERROR c.e.e.serviceImpl.EmailServiceImpl - Failed to send booking confirmation email to ram@gmail.com: Authentication failed
+2026-02-15 22:04:50 [http-nio-8080-exec-9] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource bmw.jpg.]
+2026-02-15 22:04:51 [http-nio-8080-exec-8] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 13]
+2026-02-15 22:04:51 [http-nio-8080-exec-7] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 8]
+2026-02-15 22:04:51 [http-nio-8080-exec-10] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 4]
+2026-02-15 22:04:51 [http-nio-8080-exec-6] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 11]
+2026-02-15 22:04:51 [http-nio-8080-exec-4] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 5]
+2026-02-15 22:04:51 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 7]
+2026-02-15 22:05:13 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-02-15 22:05:13 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-02-15 22:05:47 [http-nio-8080-exec-9] INFO  c.e.e.c.a.HostAnalyticsController - Getting host overview for period: LAST_30_DAYS
+2026-02-15 22:05:47 [http-nio-8080-exec-9] INFO  c.e.e.s.a.HostAnalyticsServiceImpl - Calculating overview for host 15 with period LAST_30_DAYS
+2026-02-15 22:05:50 [http-nio-8080-exec-10] INFO  c.e.e.c.a.HostAnalyticsController - Getting host overview for period: LAST_7_DAYS
+2026-02-15 22:05:50 [http-nio-8080-exec-10] INFO  c.e.e.s.a.HostAnalyticsServiceImpl - Calculating overview for host 15 with period LAST_7_DAYS
+2026-02-15 22:05:55 [http-nio-8080-exec-4] INFO  c.e.e.c.a.HostAnalyticsController - Getting revenue analytics for period: LAST_7_DAYS
+2026-02-15 22:05:55 [http-nio-8080-exec-4] INFO  c.e.e.s.a.HostAnalyticsServiceImpl - Calculating revenue analytics for host 15 with period LAST_7_DAYS
+2026-02-15 22:05:58 [http-nio-8080-exec-7] INFO  c.e.e.c.a.HostAnalyticsController - Getting host overview for period: LAST_7_DAYS
+2026-02-15 22:06:09 [http-nio-8080-exec-9] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 15 bookings: Total=13, RESERVED=0, PAYMENT_PENDING=1, CONFIRMED=2
+2026-02-15 22:06:09 [http-nio-8080-exec-10] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 15 bookings: Total=13, RESERVED=0, PAYMENT_PENDING=1, CONFIRMED=2
+2026-02-15 22:06:10 [http-nio-8080-exec-4] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 15 bookings: Total=13, RESERVED=0, PAYMENT_PENDING=1, CONFIRMED=2
+2026-02-15 22:06:11 [http-nio-8080-exec-7] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 15 bookings: Total=13, RESERVED=0, PAYMENT_PENDING=1, CONFIRMED=2
+2026-02-15 22:06:25 [http-nio-8080-exec-3] DEBUG o.s.w.s.s.s.WebSocketHandlerMapping - Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7e28c30b
+2026-02-15 22:06:25 [http-nio-8080-exec-3] DEBUG o.s.w.s.s.t.h.DefaultSockJsService - Processing transport request: GET http://localhost:8080/ws/info?t=1771172485025
+2026-02-15 22:06:25 [http-nio-8080-exec-7] INFO  c.e.e.controller.ChatController - 📋 Fetching conversations for user 15 (page 0, size 50)
+2026-02-15 22:06:25 [http-nio-8080-exec-7] INFO  c.e.e.s.ChatMessageServiceImpl - 📋 Fetching conversations for user 15
+2026-02-15 22:06:25 [http-nio-8080-exec-1] DEBUG o.s.w.s.s.s.WebSocketHandlerMapping - Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7e28c30b
+2026-02-15 22:06:25 [http-nio-8080-exec-1] DEBUG o.s.w.s.s.t.h.DefaultSockJsService - Processing transport request: GET http://localhost:8080/ws/859/ufrvje2o/websocket
+2026-02-15 22:06:25 [http-nio-8080-exec-7] INFO  c.e.e.s.ChatMessageServiceImpl - Found 3 conversations for user 15
+2026-02-15 22:06:25 [http-nio-8080-exec-2] INFO  c.e.e.controller.ChatController - 📋 Fetching conversations for user 15 (page 0, size 50)
+2026-02-15 22:06:25 [http-nio-8080-exec-2] INFO  c.e.e.s.ChatMessageServiceImpl - 📋 Fetching conversations for user 15
+2026-02-15 22:06:25 [http-nio-8080-exec-2] INFO  c.e.e.s.ChatMessageServiceImpl - Found 3 conversations for user 15
+2026-02-15 22:06:25 [http-nio-8080-exec-1] DEBUG o.s.w.s.h.LoggingWebSocketHandlerDecorator - New WebSocketServerSockJsSession[id=ufrvje2o]
+2026-02-15 22:06:26 [http-nio-8080-exec-1] INFO  c.e.e.c.WebSocketAuthInterceptor - 🔐 Authenticating WebSocket connection - Session: ufrvje2o
+2026-02-15 22:06:26 [http-nio-8080-exec-1] DEBUG c.e.e.c.WebSocketAuthInterceptor - 📝 Extracted JWT token (first 20 chars): eyJhbGciOiJIUzI1NiJ9... - Session: ufrvje2o
+2026-02-15 22:06:26 [http-nio-8080-exec-1] DEBUG c.e.e.c.WebSocketAuthInterceptor - 👤 Extracted username: himesh@gmail.com - Session: ufrvje2o
+2026-02-15 22:06:26 [http-nio-8080-exec-1] DEBUG c.e.e.c.WebSocketAuthInterceptor - ✅ JWT token validated successfully for user: himesh@gmail.com
+2026-02-15 22:06:26 [http-nio-8080-exec-1] DEBUG c.e.e.c.WebSocketAuthInterceptor - ✅ User details loaded for: himesh@gmail.com
+2026-02-15 22:06:26 [http-nio-8080-exec-1] DEBUG c.e.e.c.WebSocketAuthInterceptor - ✅ Authentication setup complete - SecurityContext and session attributes configured
+2026-02-15 22:06:26 [http-nio-8080-exec-1] INFO  c.e.e.c.WebSocketAuthInterceptor - ✅ WebSocket authenticated successfully - User: himesh@gmail.com (ID: 15), Session: ufrvje2o
+2026-02-15 22:06:26 [clientInboundChannel-2] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing CONNECT user=himesh@gmail.com session=ufrvje2o
+2026-02-15 22:06:26 [http-nio-8080-exec-1] INFO  c.e.e.config.WebSocketEventListener - 🔌 WebSocket connection attempt - Session: ufrvje2o
+2026-02-15 22:06:26 [clientOutboundChannel-1] ERROR o.s.w.s.m.StompSubProtocolHandler - Error publishing SessionConnectedEvent[GenericMessage [payload=byte[0], headers={simpMessageType=CONNECT_ACK, simpConnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=CONNECT, stompCommand=CONNECT, nativeHeaders={Authorization=[Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiSE9TVCIsInVzZXJJZCI6MTUsInN1YiI6ImhpbWVzaEBnbWFpbC5jb20iLCJpYXQiOjE3NzExNzI0NDYsImV4cCI6MTc3MTE3NjA0Nn0.OspxLELmrfAHrlWfYzwldmPrEujSd7ZlVO3WyY2q5HI], accept-version=[1.2,1.1,1.0], heart-beat=[25000,25000]}, simpSessionAttributes={authenticated=true, authenticationTime=1771172486096, userId=15, username=himesh@gmail.com}, simpHeartbeat=[J@2dfd3472, simpUser=UsernamePasswordAuthenticationToken [Principal=com.evstation.ev_charging_backend.security.CustomUserDetails@7d1adcd8, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_HOST]], simpSessionId=ufrvje2o}], simpHeartbeat=[J@19b2a4, simpUser=UsernamePasswordAuthenticationToken [Principal=com.evstation.ev_charging_backend.security.CustomUserDetails@7d1adcd8, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_HOST]], simpSessionId=ufrvje2o}]]
+java.lang.NullPointerException: Cannot invoke "java.util.Map.get(Object)" because the return value of "org.springframework.messaging.simp.stomp.StompHeaderAccessor.getSessionAttributes()" is null
+	at com.evstation.ev_charging_backend.config.WebSocketEventListener.handleWebSocketConnectedListener(WebSocketEventListener.java:87)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.doInvoke(ApplicationListenerMethodAdapter.java:383)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.processEvent(ApplicationListenerMethodAdapter.java:255)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.onApplicationEvent(ApplicationListenerMethodAdapter.java:174)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:185)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:178)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:156)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:454)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:387)
+	at org.springframework.web.socket.messaging.StompSubProtocolHandler.publishEvent(StompSubProtocolHandler.java:448)
+	at org.springframework.web.socket.messaging.StompSubProtocolHandler.handleMessageToClient(StompSubProtocolHandler.java:492)
+	at org.springframework.web.socket.messaging.SubProtocolWebSocketHandler.handleMessage(SubProtocolWebSocketHandler.java:387)
+	at org.springframework.messaging.support.ExecutorSubscribableChannel$SendTask.run(ExecutorSubscribableChannel.java:152)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-02-15 22:06:26 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing SUBSCRIBE destination=/queue/messages-userufrvje2o subscriptionId=sub-0 session=ufrvje2o user=himesh@gmail.com attributes[4] payload=byte[0]
+2026-02-15 22:06:26 [clientInboundChannel-2] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing SUBSCRIBE destination=/queue/confirmations-userufrvje2o subscriptionId=sub-1 session=ufrvje2o user=himesh@gmail.com attributes[4] payload=byte[0]
+2026-02-15 22:06:27 [clientInboundChannel-1] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing SUBSCRIBE /topic/messages/19 id=sub-2 session=ufrvje2o
+2026-02-15 22:06:27 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing SUBSCRIBE /topic/typing/19 id=sub-3 session=ufrvje2o
+2026-02-15 22:06:27 [http-nio-8080-exec-4] INFO  c.e.e.controller.ChatController - 👁️ Marking conversation 19 as read by user 15
+2026-02-15 22:06:27 [http-nio-8080-exec-4] INFO  c.e.e.s.ChatMessageServiceImpl - 👁️ Marking all messages in conversation 19 as read by user 15
+2026-02-15 22:06:27 [http-nio-8080-exec-6] INFO  c.e.e.controller.ChatController - 📨 Fetching messages for conversation 19 by user 15
+2026-02-15 22:06:27 [http-nio-8080-exec-6] INFO  c.e.e.s.ChatMessageServiceImpl - 📨 Fetching messages for conversation 19 by user 15
+2026-02-15 22:06:27 [http-nio-8080-exec-6] INFO  c.e.e.s.ChatMessageServiceImpl - Found 1 messages in conversation 19
+2026-02-15 22:06:27 [http-nio-8080-exec-4] INFO  c.e.e.s.ChatMessageServiceImpl - ✅ Marked 0 messages as read in conversation 19
+2026-02-15 22:06:27 [http-nio-8080-exec-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/read-receipts/19 session=null payload={"conversationId":19,"readBy":15,"count":0}
+2026-02-15 22:06:29 [clientInboundChannel-2] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:29 [clientInboundChannel-2] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:29 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:29 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:29 [clientInboundChannel-2] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:29 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:29 [clientInboundChannel-2] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:29 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:29 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:29 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:29 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:29 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:29 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:29 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:29 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:29 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:29 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:29 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:29 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:29 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:29 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:29 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:29 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:29 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:30 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:30 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:30 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:30 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:30 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:30 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:30 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:30 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:30 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:30 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:30 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:30 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:30 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:30 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:30 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:30 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:30 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:30 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:30 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:30 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:30 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:30 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:30 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:30 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:31 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:31 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:31 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:31 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:31 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:31 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:31 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:31 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:31 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:31 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:31 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:31 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:31 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:31 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:31 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:31 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:31 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:31 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:31 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:31 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:32 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:32 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:32 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:32 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:32 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:32 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:32 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:32 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:32 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:32 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:32 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:32 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:32 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:32 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:32 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:32 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:32 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:32 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:32 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:32 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:33 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:33 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:33 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:33 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:33 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:33 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:33 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:33 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:34 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:34 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:34 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:34 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:35 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:35 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:35 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:35 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:35 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:35 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:35 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:35 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:35 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:35 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:35 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:35 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:35 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:35 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:35 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:35 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:36 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:36 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:36 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:36 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:36 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:36 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:36 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:36 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:36 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:36 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:36 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:36 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:36 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:36 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:36 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:36 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:37 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:37 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:37 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:37 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:37 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:37 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:37 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:37 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:37 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:37 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:37 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:37 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:37 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:37 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:37 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:37 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:37 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:37 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:37 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:37 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:37 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:37 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:37 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:37 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:38 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:38 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:38 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:38 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:38 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:38 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:38 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:38 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:39 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:39 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:39 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:39 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:39 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.typing session=ufrvje2o, lookupDestination='/chat.typing'
+2026-02-15 22:06:39 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendTypingIndicator[2 args]
+2026-02-15 22:06:39 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":true,"username":"himesh@gmail.com","...(truncated)
+2026-02-15 22:06:39 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:40 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.sendMessage session=ufrvje2o, lookupDestination='/chat.sendMessage'
+2026-02-15 22:06:40 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.stopTyping session=ufrvje2o, lookupDestination='/chat.stopTyping'
+2026-02-15 22:06:40 [clientInboundChannel-3] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendStopTypingIndicator[2 args]
+2026-02-15 22:06:40 [clientInboundChannel-4] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendMessage[2 args]
+2026-02-15 22:06:40 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":false,"timestamp":1771172500309}
+2026-02-15 22:06:40 [clientInboundChannel-3] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:40 [clientInboundChannel-4] INFO  c.e.e.controller.ChatController - 💬 WebSocket message from himesh@gmail.com (15) to 31
+2026-02-15 22:06:40 [clientInboundChannel-4] INFO  c.e.e.s.ChatMessageServiceImpl - 📤 Sending message from user 15 to user 31
+2026-02-15 22:06:40 [clientInboundChannel-4] INFO  c.e.e.s.ChatMessageServiceImpl - ✅ Message sent successfully: ID=301
+2026-02-15 22:06:40 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/messages/19 session=null payload={"id":301,"conversationId":19,"senderId":15,"senderName":"Himesh Chaudhary","rec...(truncated)
+2026-02-15 22:06:40 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:40 [clientInboundChannel-4] INFO  c.e.e.controller.ChatController - ✅ Message 301 sent successfully
+2026-02-15 22:06:40 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/chat.sendMessage session=ufrvje2o payload={"id":301,"conversationId":19,"senderId":15,"senderName":"Himesh Chaudhary","rec...(truncated)
+2026-02-15 22:06:40 [http-nio-8080-exec-8] INFO  c.e.e.controller.ChatController - 📋 Fetching conversations for user 15 (page 0, size 50)
+2026-02-15 22:06:40 [http-nio-8080-exec-8] INFO  c.e.e.s.ChatMessageServiceImpl - 📋 Fetching conversations for user 15
+2026-02-15 22:06:40 [http-nio-8080-exec-8] INFO  c.e.e.s.ChatMessageServiceImpl - Found 3 conversations for user 15
+2026-02-15 22:06:41 [http-nio-8080-exec-9] INFO  c.e.e.controller.ChatController - 👁️ Marking conversation 19 as read by user 15
+2026-02-15 22:06:41 [http-nio-8080-exec-9] INFO  c.e.e.s.ChatMessageServiceImpl - 👁️ Marking all messages in conversation 19 as read by user 15
+2026-02-15 22:06:41 [http-nio-8080-exec-9] INFO  c.e.e.s.ChatMessageServiceImpl - ✅ Marked 0 messages as read in conversation 19
+2026-02-15 22:06:41 [http-nio-8080-exec-9] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/read-receipts/19 session=null payload={"conversationId":19,"readBy":15,"count":0}
+2026-02-15 22:06:41 [clientInboundChannel-1] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Searching methods to handle SEND /app/chat.stopTyping session=ufrvje2o, lookupDestination='/chat.stopTyping'
+2026-02-15 22:06:41 [clientInboundChannel-1] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - Invoking ChatController#sendStopTypingIndicator[2 args]
+2026-02-15 22:06:41 [clientInboundChannel-1] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/typing/19 session=null payload={"conversationId":19,"userId":15,"isTyping":false,"timestamp":1771172501664}
+2026-02-15 22:06:41 [clientInboundChannel-1] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Broadcasting to 1 sessions.
+2026-02-15 22:06:42 [http-nio-8080-exec-10] DEBUG o.s.w.s.h.LoggingWebSocketHandlerDecorator - WebSocketServerSockJsSession[id=ufrvje2o] closed with CloseStatus[code=1000, reason=null]
+2026-02-15 22:06:42 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.SubProtocolWebSocketHandler - Clearing session ufrvje2o
+2026-02-15 22:06:42 [http-nio-8080-exec-10] INFO  c.e.e.config.WebSocketEventListener - 🔌 WebSocket disconnected - User: himesh@gmail.com (ID: 15), Session: ufrvje2o
+2026-02-15 22:06:42 [http-nio-8080-exec-10] INFO  c.e.e.config.WebSocketEventListener - 👋 User 15 went OFFLINE (last session closed)
+2026-02-15 22:06:42 [http-nio-8080-exec-10] INFO  c.e.e.s.ChatMessageServiceImpl - 👋 Setting user 15 status to OFFLINE
+2026-02-15 22:06:42 [http-nio-8080-exec-10] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/presence/15 session=null payload={"timestamp":1771172502457,"status":"OFFLINE","userId":15}
+2026-02-15 22:06:42 [clientInboundChannel-2] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing DISCONNECT session=ufrvje2o
+2026-02-15 22:06:42 [clientOutboundChannel-4] DEBUG o.s.w.s.m.SubProtocolWebSocketHandler - No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true, authenticated=true, authenticationTime=1771172486096, userId=15, username=himesh@gmail.com}, simpUser=UsernamePasswordAuthenticationToken [Principal=com.evstation.ev_charging_backend.security.CustomUserDetails@7d1adcd8, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_HOST]], simpSessionId=ufrvje2o}], simpUser=UsernamePasswordAuthenticationToken [Principal=com.evstation.ev_charging_backend.security.CustomUserDetails@7d1adcd8, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_HOST]], simpSessionId=ufrvje2o}]
+2026-02-15 22:06:47 [http-nio-8080-exec-2] INFO  c.e.e.c.a.UserAnalyticsController - Getting user overview for period: LAST_30_DAYS
+2026-02-15 22:06:47 [http-nio-8080-exec-2] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating overview for user 31 with period LAST_30_DAYS
+2026-02-15 22:06:50 [MessageBroker-4] DEBUG o.s.w.s.s.t.h.DefaultSockJsService - Closed 1 sessions: [ufrvje2o]
+2026-02-15 22:06:51 [http-nio-8080-exec-8] DEBUG o.s.w.s.s.s.WebSocketHandlerMapping - Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7e28c30b
+2026-02-15 22:06:51 [http-nio-8080-exec-8] DEBUG o.s.w.s.s.t.h.DefaultSockJsService - Processing transport request: GET http://localhost:8080/ws/info?t=1771172511362
+2026-02-15 22:06:51 [http-nio-8080-exec-1] INFO  c.e.e.controller.ChatController - 📋 Fetching conversations for user 31 (page 0, size 50)
+2026-02-15 22:06:51 [http-nio-8080-exec-1] INFO  c.e.e.s.ChatMessageServiceImpl - 📋 Fetching conversations for user 31
+2026-02-15 22:06:51 [http-nio-8080-exec-1] INFO  c.e.e.s.ChatMessageServiceImpl - Found 6 conversations for user 31
+2026-02-15 22:06:51 [http-nio-8080-exec-9] DEBUG o.s.w.s.s.s.WebSocketHandlerMapping - Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7e28c30b
+2026-02-15 22:06:51 [http-nio-8080-exec-9] DEBUG o.s.w.s.s.t.h.DefaultSockJsService - Processing transport request: GET http://localhost:8080/ws/968/p2ufri3o/websocket
+2026-02-15 22:06:51 [http-nio-8080-exec-9] DEBUG o.s.w.s.h.LoggingWebSocketHandlerDecorator - New WebSocketServerSockJsSession[id=p2ufri3o]
+2026-02-15 22:06:51 [http-nio-8080-exec-5] INFO  c.e.e.c.WebSocketAuthInterceptor - 🔐 Authenticating WebSocket connection - Session: p2ufri3o
+2026-02-15 22:06:51 [http-nio-8080-exec-5] DEBUG c.e.e.c.WebSocketAuthInterceptor - 📝 Extracted JWT token (first 20 chars): eyJhbGciOiJIUzI1NiJ9... - Session: p2ufri3o
+2026-02-15 22:06:51 [http-nio-8080-exec-5] DEBUG c.e.e.c.WebSocketAuthInterceptor - 👤 Extracted username: nayanchy2004@gmail.com - Session: p2ufri3o
+2026-02-15 22:06:51 [http-nio-8080-exec-5] DEBUG c.e.e.c.WebSocketAuthInterceptor - ✅ JWT token validated successfully for user: nayanchy2004@gmail.com
+2026-02-15 22:06:51 [http-nio-8080-exec-5] DEBUG c.e.e.c.WebSocketAuthInterceptor - ✅ User details loaded for: nayanchy2004@gmail.com
+2026-02-15 22:06:51 [http-nio-8080-exec-5] DEBUG c.e.e.c.WebSocketAuthInterceptor - ✅ Authentication setup complete - SecurityContext and session attributes configured
+2026-02-15 22:06:51 [http-nio-8080-exec-5] INFO  c.e.e.c.WebSocketAuthInterceptor - ✅ WebSocket authenticated successfully - User: nayanchy2004@gmail.com (ID: 31), Session: p2ufri3o
+2026-02-15 22:06:51 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing CONNECT user=nayanchy2004@gmail.com session=p2ufri3o
+2026-02-15 22:06:51 [http-nio-8080-exec-5] INFO  c.e.e.config.WebSocketEventListener - 🔌 WebSocket connection attempt - Session: p2ufri3o
+2026-02-15 22:06:51 [clientOutboundChannel-1] ERROR o.s.w.s.m.StompSubProtocolHandler - Error publishing SessionConnectedEvent[GenericMessage [payload=byte[0], headers={simpMessageType=CONNECT_ACK, simpConnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=CONNECT, stompCommand=CONNECT, nativeHeaders={Authorization=[Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiVVNFUiIsInVzZXJJZCI6MzEsInN1YiI6Im5heWFuY2h5MjAwNEBnbWFpbC5jb20iLCJpYXQiOjE3NzExNzI1MDcsImV4cCI6MTc3MTE3NjEwN30.m0VXySF-F-N--zlbm46S9e6pCv4kzbj436_mkGuOwm0], accept-version=[1.2,1.1,1.0], heart-beat=[25000,25000]}, simpSessionAttributes={authenticated=true, authenticationTime=1771172511454, userId=31, username=nayanchy2004@gmail.com}, simpHeartbeat=[J@4e782650, simpUser=UsernamePasswordAuthenticationToken [Principal=com.evstation.ev_charging_backend.security.CustomUserDetails@3ee606c2, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_USER]], simpSessionId=p2ufri3o}], simpHeartbeat=[J@19b2a4, simpUser=UsernamePasswordAuthenticationToken [Principal=com.evstation.ev_charging_backend.security.CustomUserDetails@3ee606c2, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_USER]], simpSessionId=p2ufri3o}]]
+java.lang.NullPointerException: Cannot invoke "java.util.Map.get(Object)" because the return value of "org.springframework.messaging.simp.stomp.StompHeaderAccessor.getSessionAttributes()" is null
+	at com.evstation.ev_charging_backend.config.WebSocketEventListener.handleWebSocketConnectedListener(WebSocketEventListener.java:87)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.doInvoke(ApplicationListenerMethodAdapter.java:383)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.processEvent(ApplicationListenerMethodAdapter.java:255)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.onApplicationEvent(ApplicationListenerMethodAdapter.java:174)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:185)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:178)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:156)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:454)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:387)
+	at org.springframework.web.socket.messaging.StompSubProtocolHandler.publishEvent(StompSubProtocolHandler.java:448)
+	at org.springframework.web.socket.messaging.StompSubProtocolHandler.handleMessageToClient(StompSubProtocolHandler.java:492)
+	at org.springframework.web.socket.messaging.SubProtocolWebSocketHandler.handleMessage(SubProtocolWebSocketHandler.java:387)
+	at org.springframework.messaging.support.ExecutorSubscribableChannel$SendTask.run(ExecutorSubscribableChannel.java:152)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-02-15 22:06:51 [clientInboundChannel-2] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing SUBSCRIBE destination=/queue/messages-userp2ufri3o subscriptionId=sub-0 session=p2ufri3o user=nayanchy2004@gmail.com attributes[4] payload=byte[0]
+2026-02-15 22:06:51 [clientInboundChannel-1] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing SUBSCRIBE destination=/queue/confirmations-userp2ufri3o subscriptionId=sub-1 session=p2ufri3o user=nayanchy2004@gmail.com attributes[4] payload=byte[0]
+2026-02-15 22:06:51 [http-nio-8080-exec-10] INFO  c.e.e.controller.ChatController - 📋 Fetching conversations for user 31 (page 0, size 50)
+2026-02-15 22:06:51 [http-nio-8080-exec-10] INFO  c.e.e.s.ChatMessageServiceImpl - 📋 Fetching conversations for user 31
+2026-02-15 22:06:51 [http-nio-8080-exec-10] INFO  c.e.e.s.ChatMessageServiceImpl - Found 6 conversations for user 31
+2026-02-15 22:06:58 [http-nio-8080-exec-4] DEBUG o.s.w.s.h.LoggingWebSocketHandlerDecorator - WebSocketServerSockJsSession[id=p2ufri3o] closed with CloseStatus[code=1000, reason=null]
+2026-02-15 22:06:58 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.SubProtocolWebSocketHandler - Clearing session p2ufri3o
+2026-02-15 22:06:58 [http-nio-8080-exec-4] INFO  c.e.e.config.WebSocketEventListener - 🔌 WebSocket disconnected - User: nayanchy2004@gmail.com (ID: 31), Session: p2ufri3o
+2026-02-15 22:06:58 [http-nio-8080-exec-4] INFO  c.e.e.config.WebSocketEventListener - 👋 User 31 went OFFLINE (last session closed)
+2026-02-15 22:06:58 [http-nio-8080-exec-4] INFO  c.e.e.s.ChatMessageServiceImpl - 👋 Setting user 31 status to OFFLINE
+2026-02-15 22:06:58 [http-nio-8080-exec-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing MESSAGE destination=/topic/presence/31 session=null payload={"timestamp":1771172518356,"status":"OFFLINE","userId":31}
+2026-02-15 22:06:58 [clientInboundChannel-4] DEBUG o.s.m.s.b.SimpleBrokerMessageHandler - Processing DISCONNECT session=p2ufri3o
+2026-02-15 22:06:58 [clientOutboundChannel-3] DEBUG o.s.w.s.m.SubProtocolWebSocketHandler - No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true, authenticated=true, authenticationTime=1771172511454, userId=31, username=nayanchy2004@gmail.com}, simpUser=UsernamePasswordAuthenticationToken [Principal=com.evstation.ev_charging_backend.security.CustomUserDetails@3ee606c2, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_USER]], simpSessionId=p2ufri3o}], simpUser=UsernamePasswordAuthenticationToken [Principal=com.evstation.ev_charging_backend.security.CustomUserDetails@3ee606c2, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_USER]], simpSessionId=p2ufri3o}]
+2026-02-15 22:07:05 [MessageBroker-6] DEBUG o.s.w.s.s.t.h.DefaultSockJsService - Closed 1 sessions: [p2ufri3o]
+2026-02-15 22:07:13 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-02-15 22:07:13 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-02-15 22:09:13 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-02-15 22:09:13 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-02-15 22:11:13 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-02-15 22:11:13 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-02-15 22:13:13 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-02-15 22:13:13 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-02-15 22:15:13 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-02-15 22:15:13 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-02-15 22:17:12 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-02-15 22:17:12 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-02-15 22:19:13 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-02-15 22:19:13 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-02-15 22:21:12 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-02-15 22:21:12 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-02-15 22:22:12 [MessageBroker-1] INFO  o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 2 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(2)-CONNECTED(2)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 168], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 50], sockJsScheduler[pool size = 16, active threads = 1, queued tasks = 1, completed tasks = 191]
+2026-02-15 22:23:12 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-02-15 22:23:12 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-02-15 22:23:54 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2026-02-15 22:23:55 [Thread-5] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-02-15 22:23:55 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-02-15 22:23:55 [Thread-5] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientOutboundChannel removed SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2026-02-15 22:23:55 [Thread-5] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2026-02-15 22:23:55 [Thread-5] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Stopping...
+2026-02-15 22:23:55 [Thread-5] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@57a68526]]
+2026-02-15 22:23:55 [Thread-5] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@57a68526]
+2026-02-15 22:23:55 [Thread-5] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@57a68526]
+2026-02-15 22:23:55 [Thread-5] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Stopped.
+2026-02-15 22:23:55 [Thread-5] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-02-15 22:23:55 [Thread-5] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-02-15 22:23:55 [Thread-5] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-02-15 22:23:55 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-02-15 22:23:55 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-02-15 22:23:55 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - Starting EvChargingBackendApplication using Java 21.0.2 with PID 10284 (E:\EV_station_project(Both mode)\ev-station-backend\ev-charging-backend\target\classes started by Nayan-Windows in E:\EV_station_project(Both mode)\ev-station-backend\ev-charging-backend)
+2026-02-15 22:23:55 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-02-15 22:23:56 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-15 22:23:57 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 127 ms. Found 10 JPA repository interfaces.
+2026-02-15 22:23:57 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-02-15 22:23:57 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-02-15 22:23:57 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.46]
+2026-02-15 22:23:57 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-02-15 22:23:57 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1512 ms
+2026-02-15 22:23:57 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-15 22:23:57 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-02-15 22:23:57 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-15 22:23:57 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2026-02-15 22:23:57 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5a086a93
+2026-02-15 22:23:57 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2026-02-15 22:23:57 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-15 22:23:57 [restartedMain] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-2)']
+	Database driver: undefined/unknown
+	Database version: 8.0.40
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-02-15 22:23:58 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-15 22:23:58 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-15 22:23:59 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Inbound WebSocket channel configured
+2026-02-15 22:23:59 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Outbound WebSocket channel configured
+2026-02-15 22:23:59 [restartedMain] INFO  c.e.e.config.WebSocketConfig - WebSocket Message Broker initialized
+2026-02-15 22:23:59 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2026-02-15 22:23:59 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-15 22:23:59 [restartedMain] INFO  c.e.e.config.WebSocketConfig - WebSocket transport tuned
+2026-02-15 22:23:59 [restartedMain] INFO  c.e.e.config.WebSocketConfig - STOMP WebSocket endpoints registered
+2026-02-15 22:23:59 [restartedMain] DEBUG o.s.w.s.s.s.WebSocketHandlerMapping - Patterns [/ws/**, /ws] in 'stompWebSocketHandlerMapping'
+2026-02-15 22:23:59 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.AdminController:
+	
+2026-02-15 22:23:59 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.AdminAnalyticsController:
+	
+2026-02-15 22:23:59 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.HostAnalyticsController:
+	
+2026-02-15 22:23:59 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.UserAnalyticsController:
+	
+2026-02-15 22:23:59 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.AuthController:
+	
+2026-02-15 22:23:59 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.BookingController:
+	
+2026-02-15 22:23:59 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ChargerController:
+	
+2026-02-15 22:23:59 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ChatController:
+	{[MESSAGE],[/chat.sendMessage]}: sendMessage(ChatMessageRequest,SimpMessageHeaderAccessor)
+	{[MESSAGE],[/chat.stopTyping]}: sendStopTypingIndicator(Long,SimpMessageHeaderAccessor)
+	{[MESSAGE],[/chat.typing]}: sendTypingIndicator(Long,SimpMessageHeaderAccessor)
+2026-02-15 22:23:59 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.DashboardController:
+	
+2026-02-15 22:23:59 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.FileController:
+	
+2026-02-15 22:23:59 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.NotificationController:
+	
+2026-02-15 22:23:59 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.PaymentController:
+	
+2026-02-15 22:23:59 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.RatingController:
+	
+2026-02-15 22:23:59 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ReceiptController:
+	
+2026-02-15 22:23:59 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ReservationController:
+	
+2026-02-15 22:23:59 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	
+2026-02-15 22:23:59 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Servlet WebSocket container configured
+2026-02-15 22:24:00 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-02-15 22:24:00 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2026-02-15 22:24:00 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2026-02-15 22:24:00 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Starting...
+2026-02-15 22:24:00 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@22420d90]
+2026-02-15 22:24:00 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@22420d90]
+2026-02-15 22:24:00 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@22420d90]]
+2026-02-15 22:24:00 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Started.
+2026-02-15 22:24:00 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-02-15 22:24:00 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-02-15 22:24:00 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-02-15 22:24:00 [restartedMain] INFO  o.s.s.config.TaskSchedulerRouter - More than one TaskScheduler bean exists within the context, and none is named 'taskScheduler'. Mark one of them as primary or name it 'taskScheduler' (possibly as an alias); or implement the SchedulingConfigurer interface and call ScheduledTaskRegistrar#setScheduler explicitly within the configureTasks() callback: [messageBrokerTaskScheduler, heartbeatTaskScheduler]
+2026-02-15 22:24:00 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - Started EvChargingBackendApplication in 4.241 seconds (process running for 1983.124)
+2026-02-15 22:24:00 [pool-7-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-02-15 22:24:00 [pool-7-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-02-15 22:24:00 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2026-02-15 22:24:11 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-15 22:24:11 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-02-15 22:24:11 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2026-02-15 22:24:11 [http-nio-8080-exec-3] INFO  c.e.e.c.a.UserAnalyticsController - Getting user overview for period: LAST_30_DAYS
+2026-02-15 22:24:11 [http-nio-8080-exec-3] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating overview for user 31 with period LAST_30_DAYS
+2026-02-15 22:24:16 [http-nio-8080-exec-10] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource bmw.jpg.]
+2026-02-15 22:24:27 [http-nio-8080-exec-4] WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$WarningLoggingModifier - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+2026-02-15 22:25:00 [MessageBroker-1] INFO  o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2026-02-15 22:25:00 [http-nio-8080-exec-1] INFO  c.e.e.serviceImpl.PaymentServiceImpl - 💳 User 31 initiating payment for reservation 63
+2026-02-15 22:25:00 [http-nio-8080-exec-1] INFO  c.e.e.serviceImpl.PaymentServiceImpl - 📋 Booking #63 current status: RESERVED (host: 15)
+2026-02-15 22:25:00 [http-nio-8080-exec-1] INFO  c.e.e.serviceImpl.PaymentServiceImpl - ✅ Payment #37 initiated for booking #63
+2026-02-15 22:25:00 [http-nio-8080-exec-1] INFO  c.e.e.serviceImpl.PaymentServiceImpl - 📊 Booking #63 status: RESERVED → PAYMENT_PENDING (host: 15)
+2026-02-15 22:25:00 [http-nio-8080-exec-1] INFO  c.e.e.serviceImpl.PaymentServiceImpl - 💰 Payment amount: NPR 17.50
+2026-02-15 22:25:02 [http-nio-8080-exec-3] INFO  c.e.e.serviceImpl.PaymentServiceImpl - 💳 User 31 processing payment 37
+2026-02-15 22:25:05 [http-nio-8080-exec-3] INFO  c.e.e.serviceImpl.PaymentServiceImpl - ✅ Payment 37 successful for booking #63
+2026-02-15 22:25:05 [http-nio-8080-exec-3] INFO  c.e.e.serviceImpl.PaymentServiceImpl - 📊 Booking #63 status: PAYMENT_PENDING → CONFIRMED (host: 15)
+2026-02-15 22:25:05 [http-nio-8080-exec-3] INFO  c.e.e.serviceImpl.PaymentServiceImpl - 🎫 Transaction ID: TXN-5EBCFBCC-C6B2-488C
+2026-02-15 22:25:05 [http-nio-8080-exec-3] INFO  c.e.e.serviceImpl.PaymentServiceImpl - 🔔 Notifications sent to user 31 and host 15
+2026-02-15 22:25:17 [http-nio-8080-exec-3] INFO  c.e.e.serviceImpl.EmailServiceImpl - Receipt email sent to nayanchy2004@gmail.com
+2026-02-15 22:25:29 [http-nio-8080-exec-3] INFO  c.e.e.serviceImpl.EmailServiceImpl - Booking confirmation email sent to nayanchy2004@gmail.com
+2026-02-15 22:25:32 [http-nio-8080-exec-8] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 27]
+2026-02-15 22:25:32 [http-nio-8080-exec-9] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 25]
+2026-02-15 22:25:32 [http-nio-8080-exec-5] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 26]
+2026-02-15 22:25:32 [http-nio-8080-exec-7] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 16]
+2026-02-15 22:25:32 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 20]
+2026-02-15 22:26:00 [pool-7-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-02-15 22:26:00 [pool-7-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-02-15 22:26:08 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-02-15 22:26:08 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-02-15 22:26:08 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientOutboundChannel removed SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2026-02-15 22:26:08 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2026-02-15 22:26:08 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Stopping...
+2026-02-15 22:26:08 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@22420d90]]
+2026-02-15 22:26:08 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@22420d90]
+2026-02-15 22:26:08 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@22420d90]
+2026-02-15 22:26:08 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Stopped.
+2026-02-15 22:26:08 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-02-15 22:26:08 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-02-15 22:26:08 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-02-15 22:26:08 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
+2026-02-15 22:26:08 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
