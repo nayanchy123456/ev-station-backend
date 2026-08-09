@@ -4,6 +4,16 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### Secrets / local env - never commit these ###
+.env
+.env.local
+*.env
+!.env.example
+
+### Runtime data that shouldn't be versioned ###
+logs/
+uploads/
+
 ### STS ###
 .apt_generated
 .classpath
