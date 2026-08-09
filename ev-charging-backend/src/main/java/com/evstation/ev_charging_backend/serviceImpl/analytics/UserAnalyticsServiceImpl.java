@@ -399,7 +399,7 @@ public class UserAnalyticsServiceImpl implements UserAnalyticsService {
                 
                 return ChartDataPoint.builder()
                     .date(localDate)
-                    .value((BigDecimal) row[1])
+                    .value(row[1] != null ? (BigDecimal) row[1] : BigDecimal.ZERO)
                     .count((Long) row[2])
                     .build();
             })
@@ -415,7 +415,10 @@ public class UserAnalyticsServiceImpl implements UserAnalyticsService {
             .map(row -> {
                 Long chargerId = (Long) row[0];
                 String chargerName = (String) row[1];
-                BigDecimal spent = (BigDecimal) row[2];
+                // Defensive null-check: SUM() can return NULL at the DB level if every
+                // matching booking has a null totalPrice, even with COALESCE in most
+                // queries. Treat that as zero rather than throwing an NPE.
+                BigDecimal spent = row[2] != null ? (BigDecimal) row[2] : BigDecimal.ZERO;
                 Long sessionCount = (Long) row[3];
                 
                 BigDecimal percentage = totalSpending.compareTo(BigDecimal.ZERO) > 0
