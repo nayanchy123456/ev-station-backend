@@ -1,23 +1,23 @@
-2026-08-10 18:41:25 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - Starting EvChargingBackendApplication using Java 21.0.2 with PID 2076 (E:\Community_EV_Charger_Station\ev-station-backend\ev-charging-backend\target\classes started by Nayan-Windows in E:\Community_EV_Charger_Station\ev-station-backend\ev-charging-backend)
-2026-08-10 18:41:25 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - No active profile set, falling back to 1 default profile: "default"
-2026-08-10 18:41:25 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2026-08-10 18:41:25 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2026-08-10 18:41:26 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-08-10 18:41:27 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 134 ms. Found 10 JPA repository interfaces.
-2026-08-10 18:41:27 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
-2026-08-10 18:41:27 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2026-08-10 18:41:27 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.46]
-2026-08-10 18:41:28 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2026-08-10 18:41:28 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2398 ms
-2026-08-10 18:41:28 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-08-10 18:41:28 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.29.Final
-2026-08-10 18:41:28 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2026-08-10 18:41:28 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-08-10 18:41:29 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-08-10 18:41:29 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@37a50015
-2026-08-10 18:41:29 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-08-10 18:41:29 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-08-10 18:41:29 [restartedMain] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+2026-08-11 00:33:20 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - Starting EvChargingBackendApplication using Java 21.0.2 with PID 29700 (E:\Community_EV_Charger_Station\ev-station-backend\ev-charging-backend\target\classes started by Nayan-Windows in E:\Community_EV_Charger_Station\ev-station-backend\ev-charging-backend)
+2026-08-11 00:33:20 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-08-11 00:33:21 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-08-11 00:33:21 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-08-11 00:33:22 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-08-11 00:33:22 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 154 ms. Found 10 JPA repository interfaces.
+2026-08-11 00:33:24 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-08-11 00:33:24 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-08-11 00:33:24 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.46]
+2026-08-11 00:33:24 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-08-11 00:33:24 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3019 ms
+2026-08-11 00:33:24 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-08-11 00:33:24 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.29.Final
+2026-08-11 00:33:24 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-08-11 00:33:24 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-08-11 00:33:24 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-08-11 00:33:25 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@35f1ff2c
+2026-08-11 00:33:25 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-08-11 00:33:25 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-08-11 00:33:25 [restartedMain] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 8.0.40
@@ -25,254 +25,1327 @@
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-08-10 18:41:31 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-08-10 18:41:32 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-08-10 18:41:32 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-08-10 18:41:38 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Inbound WebSocket channel configured
-2026-08-10 18:41:39 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Outbound WebSocket channel configured
-2026-08-10 18:41:39 [restartedMain] INFO  c.e.e.config.WebSocketConfig - WebSocket Message Broker initialized
-2026-08-10 18:41:40 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
-2026-08-10 18:41:41 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-08-10 18:41:41 [restartedMain] INFO  c.e.e.config.WebSocketConfig - WebSocket transport tuned
-2026-08-10 18:41:41 [restartedMain] INFO  c.e.e.config.WebSocketConfig - STOMP WebSocket endpoints registered
-2026-08-10 18:41:41 [restartedMain] DEBUG o.s.w.s.s.s.WebSocketHandlerMapping - Patterns [/ws/**, /ws] in 'stompWebSocketHandlerMapping'
-2026-08-10 18:41:41 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+2026-08-11 00:33:26 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-08-11 00:33:27 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-08-11 00:33:27 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-08-11 00:33:32 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Inbound WebSocket channel configured
+2026-08-11 00:33:32 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Outbound WebSocket channel configured
+2026-08-11 00:33:32 [restartedMain] INFO  c.e.e.config.WebSocketConfig - WebSocket Message Broker initialized
+2026-08-11 00:33:34 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2026-08-11 00:33:34 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-08-11 00:33:34 [restartedMain] INFO  c.e.e.config.WebSocketConfig - WebSocket transport tuned
+2026-08-11 00:33:34 [restartedMain] INFO  c.e.e.config.WebSocketConfig - STOMP WebSocket endpoints registered
+2026-08-11 00:33:34 [restartedMain] DEBUG o.s.w.s.s.s.WebSocketHandlerMapping - Patterns [/ws/**, /ws] in 'stompWebSocketHandlerMapping'
+2026-08-11 00:33:35 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
 	c.e.e.c.AdminController:
 	
-2026-08-10 18:41:41 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+2026-08-11 00:33:35 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
 	c.e.e.c.a.AdminAnalyticsController:
 	
-2026-08-10 18:41:41 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+2026-08-11 00:33:35 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
 	c.e.e.c.a.HostAnalyticsController:
 	
-2026-08-10 18:41:41 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+2026-08-11 00:33:35 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
 	c.e.e.c.a.UserAnalyticsController:
 	
-2026-08-10 18:41:41 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+2026-08-11 00:33:35 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
 	c.e.e.c.AuthController:
 	
-2026-08-10 18:41:41 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+2026-08-11 00:33:35 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
 	c.e.e.c.BookingController:
 	
-2026-08-10 18:41:41 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+2026-08-11 00:33:35 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
 	c.e.e.c.ChargerController:
 	
-2026-08-10 18:41:41 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+2026-08-11 00:33:35 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ChatController:
+	{[MESSAGE],[/chat.sendMessage]}: sendMessage(ChatMessageRequest,SimpMessageHeaderAccessor)
+	{[MESSAGE],[/chat.typing]}: sendTypingIndicator(Long,SimpMessageHeaderAccessor)
+	{[MESSAGE],[/chat.stopTyping]}: sendStopTypingIndicator(Long,SimpMessageHeaderAccessor)
+2026-08-11 00:33:35 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.DashboardController:
+	
+2026-08-11 00:33:35 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.FileController:
+	
+2026-08-11 00:33:35 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.NotificationController:
+	
+2026-08-11 00:33:35 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.PaymentController:
+	
+2026-08-11 00:33:35 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.RatingController:
+	
+2026-08-11 00:33:35 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ReceiptController:
+	
+2026-08-11 00:33:35 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ReservationController:
+	
+2026-08-11 00:33:35 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	
+2026-08-11 00:33:35 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Servlet WebSocket container configured
+2026-08-11 00:33:35 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-08-11 00:33:35 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2026-08-11 00:33:35 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2026-08-11 00:33:35 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Starting...
+2026-08-11 00:33:35 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@6d7fa890]
+2026-08-11 00:33:35 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@6d7fa890]
+2026-08-11 00:33:35 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@6d7fa890]]
+2026-08-11 00:33:35 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Started.
+2026-08-11 00:33:35 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 00:33:35 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 00:33:35 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-08-11 00:33:35 [restartedMain] INFO  o.s.s.config.TaskSchedulerRouter - More than one TaskScheduler bean exists within the context, and none is named 'taskScheduler'. Mark one of them as primary or name it 'taskScheduler' (possibly as an alias); or implement the SchedulingConfigurer interface and call ScheduledTaskRegistrar#setScheduler explicitly within the configureTasks() callback: [messageBrokerTaskScheduler, heartbeatTaskScheduler]
+2026-08-11 00:33:35 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - Started EvChargingBackendApplication in 15.605 seconds (process running for 16.493)
+2026-08-11 00:33:35 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-08-11 00:33:35 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-08-11 00:34:35 [MessageBroker-1] INFO  o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2026-08-11 00:34:37 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-08-11 00:34:37 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-08-11 00:34:37 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2026-08-11 00:34:38 [http-nio-8080-exec-2] INFO  c.e.e.c.a.UserAnalyticsController - Getting user overview for period: LAST_30_DAYS
+2026-08-11 00:34:38 [http-nio-8080-exec-2] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating overview for user 6 with period LAST_30_DAYS
+2026-08-11 00:34:46 [http-nio-8080-exec-6] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource bmw.jpg.]
+2026-08-11 00:35:35 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-08-11 00:35:35 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-08-11 00:36:09 [http-nio-8080-exec-9] WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$WarningLoggingModifier - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+2026-08-11 00:36:40 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-08-11 00:36:40 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-08-11 00:36:40 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientOutboundChannel removed SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2026-08-11 00:36:40 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2026-08-11 00:36:40 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Stopping...
+2026-08-11 00:36:40 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@6d7fa890]]
+2026-08-11 00:36:40 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@6d7fa890]
+2026-08-11 00:36:40 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@6d7fa890]
+2026-08-11 00:36:40 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Stopped.
+2026-08-11 00:36:40 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 00:36:40 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 00:36:40 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-08-11 00:36:40 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-08-11 00:36:40 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-08-11 00:47:09 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - Starting EvChargingBackendApplication using Java 21.0.2 with PID 11380 (E:\Community_EV_Charger_Station\ev-station-backend\ev-charging-backend\target\classes started by Nayan-Windows in E:\Community_EV_Charger_Station\ev-station-backend\ev-charging-backend)
+2026-08-11 00:47:09 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-08-11 00:47:09 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-08-11 00:47:09 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-08-11 00:47:10 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-08-11 00:47:10 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 123 ms. Found 10 JPA repository interfaces.
+2026-08-11 00:47:11 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-08-11 00:47:11 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-08-11 00:47:11 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.46]
+2026-08-11 00:47:11 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-08-11 00:47:11 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2063 ms
+2026-08-11 00:47:11 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-08-11 00:47:11 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.29.Final
+2026-08-11 00:47:11 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-08-11 00:47:11 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-08-11 00:47:11 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-08-11 00:47:12 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@15f0d087
+2026-08-11 00:47:12 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-08-11 00:47:12 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-08-11 00:47:12 [restartedMain] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.40
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-08-11 00:47:13 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-08-11 00:47:13 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-08-11 00:47:14 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-08-11 00:47:18 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Inbound WebSocket channel configured
+2026-08-11 00:47:18 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Outbound WebSocket channel configured
+2026-08-11 00:47:18 [restartedMain] INFO  c.e.e.config.WebSocketConfig - WebSocket Message Broker initialized
+2026-08-11 00:47:19 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2026-08-11 00:47:19 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-08-11 00:47:19 [restartedMain] INFO  c.e.e.config.WebSocketConfig - WebSocket transport tuned
+2026-08-11 00:47:19 [restartedMain] INFO  c.e.e.config.WebSocketConfig - STOMP WebSocket endpoints registered
+2026-08-11 00:47:19 [restartedMain] DEBUG o.s.w.s.s.s.WebSocketHandlerMapping - Patterns [/ws/**, /ws] in 'stompWebSocketHandlerMapping'
+2026-08-11 00:47:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.AdminController:
+	
+2026-08-11 00:47:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.AdminAnalyticsController:
+	
+2026-08-11 00:47:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.HostAnalyticsController:
+	
+2026-08-11 00:47:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.UserAnalyticsController:
+	
+2026-08-11 00:47:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.AuthController:
+	
+2026-08-11 00:47:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.BookingController:
+	
+2026-08-11 00:47:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ChargerController:
+	
+2026-08-11 00:47:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ChatController:
+	{[MESSAGE],[/chat.sendMessage]}: sendMessage(ChatMessageRequest,SimpMessageHeaderAccessor)
+	{[MESSAGE],[/chat.typing]}: sendTypingIndicator(Long,SimpMessageHeaderAccessor)
+	{[MESSAGE],[/chat.stopTyping]}: sendStopTypingIndicator(Long,SimpMessageHeaderAccessor)
+2026-08-11 00:47:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.DashboardController:
+	
+2026-08-11 00:47:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.FileController:
+	
+2026-08-11 00:47:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.NotificationController:
+	
+2026-08-11 00:47:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.PaymentController:
+	
+2026-08-11 00:47:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.RatingController:
+	
+2026-08-11 00:47:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ReceiptController:
+	
+2026-08-11 00:47:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ReservationController:
+	
+2026-08-11 00:47:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	
+2026-08-11 00:47:20 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Servlet WebSocket container configured
+2026-08-11 00:47:20 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-08-11 00:47:20 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2026-08-11 00:47:20 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2026-08-11 00:47:20 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Starting...
+2026-08-11 00:47:20 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@4902632]
+2026-08-11 00:47:20 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@4902632]
+2026-08-11 00:47:20 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@4902632]]
+2026-08-11 00:47:20 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Started.
+2026-08-11 00:47:20 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 00:47:20 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 00:47:20 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-08-11 00:47:20 [restartedMain] INFO  o.s.s.config.TaskSchedulerRouter - More than one TaskScheduler bean exists within the context, and none is named 'taskScheduler'. Mark one of them as primary or name it 'taskScheduler' (possibly as an alias); or implement the SchedulingConfigurer interface and call ScheduledTaskRegistrar#setScheduler explicitly within the configureTasks() callback: [messageBrokerTaskScheduler, heartbeatTaskScheduler]
+2026-08-11 00:47:20 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - Started EvChargingBackendApplication in 11.854 seconds (process running for 12.503)
+2026-08-11 00:47:20 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-08-11 00:47:20 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-08-11 00:47:30 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-08-11 00:47:30 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-08-11 00:47:30 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2026-08-11 00:47:31 [http-nio-8080-exec-9] INFO  c.e.e.c.a.UserAnalyticsController - Getting user overview for period: LAST_30_DAYS
+2026-08-11 00:47:31 [http-nio-8080-exec-9] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating overview for user 6 with period LAST_30_DAYS
+2026-08-11 00:47:34 [http-nio-8080-exec-6] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource bmw.jpg.]
+2026-08-11 00:47:51 [http-nio-8080-exec-4] WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$WarningLoggingModifier - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+2026-08-11 00:48:03 [http-nio-8080-exec-6] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource bmw.jpg.]
+2026-08-11 00:48:11 [http-nio-8080-exec-5] INFO  c.e.e.c.a.UserAnalyticsController - Getting user overview for period: LAST_30_DAYS
+2026-08-11 00:48:14 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource bmw.jpg.]
+2026-08-11 00:48:20 [MessageBroker-1] INFO  o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2026-08-11 00:48:46 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-08-11 00:48:47 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-08-11 00:48:47 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientOutboundChannel removed SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2026-08-11 00:48:47 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2026-08-11 00:48:47 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Stopping...
+2026-08-11 00:48:47 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@4902632]]
+2026-08-11 00:48:47 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@4902632]
+2026-08-11 00:48:47 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@4902632]
+2026-08-11 00:48:47 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Stopped.
+2026-08-11 00:48:47 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 00:48:47 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 00:48:47 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-08-11 00:48:47 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-08-11 00:48:47 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-08-11 01:09:09 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - Starting EvChargingBackendApplication using Java 21.0.2 with PID 26504 (E:\Community_EV_Charger_Station\ev-station-backend\ev-charging-backend\target\classes started by Nayan-Windows in E:\Community_EV_Charger_Station\ev-station-backend\ev-charging-backend)
+2026-08-11 01:09:09 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-08-11 01:09:09 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-08-11 01:09:09 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-08-11 01:09:11 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-08-11 01:09:11 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 155 ms. Found 10 JPA repository interfaces.
+2026-08-11 01:09:12 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-08-11 01:09:12 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-08-11 01:09:12 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.46]
+2026-08-11 01:09:12 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-08-11 01:09:12 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2220 ms
+2026-08-11 01:09:12 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-08-11 01:09:12 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.29.Final
+2026-08-11 01:09:12 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-08-11 01:09:12 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-08-11 01:09:12 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-08-11 01:09:13 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4353ad5a
+2026-08-11 01:09:13 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-08-11 01:09:13 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-08-11 01:09:13 [restartedMain] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.40
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-08-11 01:09:14 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-08-11 01:09:14 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-08-11 01:09:14 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-08-11 01:09:19 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Inbound WebSocket channel configured
+2026-08-11 01:09:19 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Outbound WebSocket channel configured
+2026-08-11 01:09:19 [restartedMain] INFO  c.e.e.config.WebSocketConfig - WebSocket Message Broker initialized
+2026-08-11 01:09:20 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2026-08-11 01:09:20 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-08-11 01:09:20 [restartedMain] INFO  c.e.e.config.WebSocketConfig - WebSocket transport tuned
+2026-08-11 01:09:20 [restartedMain] INFO  c.e.e.config.WebSocketConfig - STOMP WebSocket endpoints registered
+2026-08-11 01:09:20 [restartedMain] DEBUG o.s.w.s.s.s.WebSocketHandlerMapping - Patterns [/ws/**, /ws] in 'stompWebSocketHandlerMapping'
+2026-08-11 01:09:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.AdminController:
+	
+2026-08-11 01:09:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.AdminAnalyticsController:
+	
+2026-08-11 01:09:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.HostAnalyticsController:
+	
+2026-08-11 01:09:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.UserAnalyticsController:
+	
+2026-08-11 01:09:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.AuthController:
+	
+2026-08-11 01:09:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.BookingController:
+	
+2026-08-11 01:09:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ChargerController:
+	
+2026-08-11 01:09:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ChatController:
+	{[MESSAGE],[/chat.sendMessage]}: sendMessage(ChatMessageRequest,SimpMessageHeaderAccessor)
+	{[MESSAGE],[/chat.typing]}: sendTypingIndicator(Long,SimpMessageHeaderAccessor)
+	{[MESSAGE],[/chat.stopTyping]}: sendStopTypingIndicator(Long,SimpMessageHeaderAccessor)
+2026-08-11 01:09:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.DashboardController:
+	
+2026-08-11 01:09:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.FileController:
+	
+2026-08-11 01:09:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.NotificationController:
+	
+2026-08-11 01:09:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.PaymentController:
+	
+2026-08-11 01:09:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.RatingController:
+	
+2026-08-11 01:09:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ReceiptController:
+	
+2026-08-11 01:09:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ReservationController:
+	
+2026-08-11 01:09:20 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	
+2026-08-11 01:09:21 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Servlet WebSocket container configured
+2026-08-11 01:09:21 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-08-11 01:09:21 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2026-08-11 01:09:21 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2026-08-11 01:09:21 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Starting...
+2026-08-11 01:09:21 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@7f8b6d55]
+2026-08-11 01:09:21 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@7f8b6d55]
+2026-08-11 01:09:21 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@7f8b6d55]]
+2026-08-11 01:09:21 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Started.
+2026-08-11 01:09:21 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:09:21 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:09:21 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-08-11 01:09:21 [restartedMain] INFO  o.s.s.config.TaskSchedulerRouter - More than one TaskScheduler bean exists within the context, and none is named 'taskScheduler'. Mark one of them as primary or name it 'taskScheduler' (possibly as an alias); or implement the SchedulingConfigurer interface and call ScheduledTaskRegistrar#setScheduler explicitly within the configureTasks() callback: [messageBrokerTaskScheduler, heartbeatTaskScheduler]
+2026-08-11 01:09:21 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - Started EvChargingBackendApplication in 12.208 seconds (process running for 12.835)
+2026-08-11 01:09:21 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-08-11 01:09:21 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-08-11 01:10:21 [MessageBroker-1] INFO  o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2026-08-11 01:11:21 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-08-11 01:11:21 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-08-11 01:12:22 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-08-11 01:12:22 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-08-11 01:12:22 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 10 ms
+2026-08-11 01:12:23 [http-nio-8080-exec-4] INFO  c.e.e.c.a.UserAnalyticsController - Getting user overview for period: LAST_30_DAYS
+2026-08-11 01:12:23 [http-nio-8080-exec-4] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating overview for user 6 with period LAST_30_DAYS
+2026-08-11 01:13:21 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-08-11 01:13:21 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-08-11 01:13:24 [http-nio-8080-exec-10] INFO  c.e.e.c.a.UserAnalyticsController - Getting user overview for period: LAST_30_DAYS
+2026-08-11 01:13:24 [http-nio-8080-exec-10] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating overview for user 6 with period LAST_30_DAYS
+2026-08-11 01:14:02 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource bmw.jpg.]
+2026-08-11 01:14:09 [http-nio-8080-exec-8] WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$WarningLoggingModifier - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+2026-08-11 01:15:21 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-08-11 01:15:21 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-08-11 01:17:01 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-08-11 01:17:01 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-08-11 01:17:01 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientOutboundChannel removed SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2026-08-11 01:17:01 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2026-08-11 01:17:01 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Stopping...
+2026-08-11 01:17:01 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@7f8b6d55]]
+2026-08-11 01:17:01 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@7f8b6d55]
+2026-08-11 01:17:01 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@7f8b6d55]
+2026-08-11 01:17:01 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Stopped.
+2026-08-11 01:17:01 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:17:01 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:17:01 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-08-11 01:17:01 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-08-11 01:17:01 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-08-11 01:17:56 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - Starting EvChargingBackendApplication using Java 21.0.2 with PID 18368 (E:\Community_EV_Charger_Station\ev-station-backend\ev-charging-backend\target\classes started by Nayan-Windows in E:\Community_EV_Charger_Station\ev-station-backend\ev-charging-backend)
+2026-08-11 01:17:56 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-08-11 01:17:56 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-08-11 01:17:56 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-08-11 01:17:57 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-08-11 01:17:57 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 114 ms. Found 10 JPA repository interfaces.
+2026-08-11 01:17:58 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-08-11 01:17:58 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-08-11 01:17:58 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.46]
+2026-08-11 01:17:58 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-08-11 01:17:58 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2072 ms
+2026-08-11 01:17:58 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-08-11 01:17:58 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.29.Final
+2026-08-11 01:17:58 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-08-11 01:17:58 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-08-11 01:17:58 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-08-11 01:17:59 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2cce68d0
+2026-08-11 01:17:59 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-08-11 01:17:59 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-08-11 01:17:59 [restartedMain] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.40
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-08-11 01:18:00 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-08-11 01:18:00 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-08-11 01:18:01 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-08-11 01:18:05 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Inbound WebSocket channel configured
+2026-08-11 01:18:05 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Outbound WebSocket channel configured
+2026-08-11 01:18:05 [restartedMain] INFO  c.e.e.config.WebSocketConfig - WebSocket Message Broker initialized
+2026-08-11 01:18:06 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2026-08-11 01:18:06 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-08-11 01:18:06 [restartedMain] INFO  c.e.e.config.WebSocketConfig - WebSocket transport tuned
+2026-08-11 01:18:06 [restartedMain] INFO  c.e.e.config.WebSocketConfig - STOMP WebSocket endpoints registered
+2026-08-11 01:18:06 [restartedMain] DEBUG o.s.w.s.s.s.WebSocketHandlerMapping - Patterns [/ws/**, /ws] in 'stompWebSocketHandlerMapping'
+2026-08-11 01:18:06 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.AdminController:
+	
+2026-08-11 01:18:06 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.AdminAnalyticsController:
+	
+2026-08-11 01:18:06 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.HostAnalyticsController:
+	
+2026-08-11 01:18:06 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.UserAnalyticsController:
+	
+2026-08-11 01:18:06 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.AuthController:
+	
+2026-08-11 01:18:06 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.BookingController:
+	
+2026-08-11 01:18:06 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ChargerController:
+	
+2026-08-11 01:18:06 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ChatController:
+	{[MESSAGE],[/chat.sendMessage]}: sendMessage(ChatMessageRequest,SimpMessageHeaderAccessor)
+	{[MESSAGE],[/chat.typing]}: sendTypingIndicator(Long,SimpMessageHeaderAccessor)
+	{[MESSAGE],[/chat.stopTyping]}: sendStopTypingIndicator(Long,SimpMessageHeaderAccessor)
+2026-08-11 01:18:06 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.DashboardController:
+	
+2026-08-11 01:18:06 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.FileController:
+	
+2026-08-11 01:18:06 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.NotificationController:
+	
+2026-08-11 01:18:06 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.PaymentController:
+	
+2026-08-11 01:18:06 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.RatingController:
+	
+2026-08-11 01:18:06 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ReceiptController:
+	
+2026-08-11 01:18:06 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ReservationController:
+	
+2026-08-11 01:18:06 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	
+2026-08-11 01:18:07 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Servlet WebSocket container configured
+2026-08-11 01:18:07 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-08-11 01:18:07 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2026-08-11 01:18:07 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2026-08-11 01:18:07 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Starting...
+2026-08-11 01:18:07 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@3683a62e]
+2026-08-11 01:18:07 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@3683a62e]
+2026-08-11 01:18:07 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@3683a62e]]
+2026-08-11 01:18:07 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Started.
+2026-08-11 01:18:07 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:18:07 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:18:07 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-08-11 01:18:07 [restartedMain] INFO  o.s.s.config.TaskSchedulerRouter - More than one TaskScheduler bean exists within the context, and none is named 'taskScheduler'. Mark one of them as primary or name it 'taskScheduler' (possibly as an alias); or implement the SchedulingConfigurer interface and call ScheduledTaskRegistrar#setScheduler explicitly within the configureTasks() callback: [messageBrokerTaskScheduler, heartbeatTaskScheduler]
+2026-08-11 01:18:07 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - Started EvChargingBackendApplication in 11.809 seconds (process running for 12.448)
+2026-08-11 01:18:07 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-08-11 01:18:07 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-08-11 01:18:46 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-08-11 01:18:46 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-08-11 01:18:46 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-08-11 01:18:47 [http-nio-8080-exec-4] INFO  c.e.e.c.a.UserAnalyticsController - Getting user overview for period: LAST_30_DAYS
+2026-08-11 01:18:47 [http-nio-8080-exec-4] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating overview for user 6 with period LAST_30_DAYS
+2026-08-11 01:19:07 [MessageBroker-1] INFO  o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2026-08-11 01:19:18 [http-nio-8080-exec-9] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/notifications/unread-count
+2026-08-11 01:19:18 [http-nio-8080-exec-5] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/chat/unread/total
+2026-08-11 01:20:07 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-08-11 01:20:07 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-08-11 01:20:09 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-08-11 01:20:09 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-08-11 01:20:09 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientOutboundChannel removed SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2026-08-11 01:20:09 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2026-08-11 01:20:09 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Stopping...
+2026-08-11 01:20:09 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@3683a62e]]
+2026-08-11 01:20:09 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@3683a62e]
+2026-08-11 01:20:09 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@3683a62e]
+2026-08-11 01:20:09 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Stopped.
+2026-08-11 01:20:09 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:20:09 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:20:09 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-08-11 01:20:09 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-08-11 01:20:09 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-08-11 01:22:50 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - Starting EvChargingBackendApplication using Java 21.0.2 with PID 3828 (E:\Community_EV_Charger_Station\ev-station-backend\ev-charging-backend\target\classes started by Nayan-Windows in E:\Community_EV_Charger_Station\ev-station-backend\ev-charging-backend)
+2026-08-11 01:22:50 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-08-11 01:22:50 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-08-11 01:22:50 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-08-11 01:22:51 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-08-11 01:22:51 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 110 ms. Found 10 JPA repository interfaces.
+2026-08-11 01:22:52 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-08-11 01:22:52 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-08-11 01:22:52 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.46]
+2026-08-11 01:22:52 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-08-11 01:22:52 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1911 ms
+2026-08-11 01:22:52 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-08-11 01:22:52 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.29.Final
+2026-08-11 01:22:52 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-08-11 01:22:53 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-08-11 01:22:53 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-08-11 01:22:53 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7252e3d9
+2026-08-11 01:22:53 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-08-11 01:22:53 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-08-11 01:22:53 [restartedMain] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.40
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-08-11 01:22:54 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-08-11 01:22:54 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-08-11 01:22:55 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-08-11 01:22:59 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Inbound WebSocket channel configured
+2026-08-11 01:22:59 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Outbound WebSocket channel configured
+2026-08-11 01:22:59 [restartedMain] INFO  c.e.e.config.WebSocketConfig - WebSocket Message Broker initialized
+2026-08-11 01:22:59 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2026-08-11 01:23:00 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-08-11 01:23:00 [restartedMain] INFO  c.e.e.config.WebSocketConfig - WebSocket transport tuned
+2026-08-11 01:23:00 [restartedMain] INFO  c.e.e.config.WebSocketConfig - STOMP WebSocket endpoints registered
+2026-08-11 01:23:00 [restartedMain] DEBUG o.s.w.s.s.s.WebSocketHandlerMapping - Patterns [/ws/**, /ws] in 'stompWebSocketHandlerMapping'
+2026-08-11 01:23:00 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.AdminController:
+	
+2026-08-11 01:23:00 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.AdminAnalyticsController:
+	
+2026-08-11 01:23:00 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.HostAnalyticsController:
+	
+2026-08-11 01:23:00 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.UserAnalyticsController:
+	
+2026-08-11 01:23:00 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.AuthController:
+	
+2026-08-11 01:23:00 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.BookingController:
+	
+2026-08-11 01:23:00 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ChargerController:
+	
+2026-08-11 01:23:00 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ChatController:
+	{[MESSAGE],[/chat.sendMessage]}: sendMessage(ChatMessageRequest,SimpMessageHeaderAccessor)
+	{[MESSAGE],[/chat.typing]}: sendTypingIndicator(Long,SimpMessageHeaderAccessor)
+	{[MESSAGE],[/chat.stopTyping]}: sendStopTypingIndicator(Long,SimpMessageHeaderAccessor)
+2026-08-11 01:23:00 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.DashboardController:
+	
+2026-08-11 01:23:00 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.FileController:
+	
+2026-08-11 01:23:00 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.NotificationController:
+	
+2026-08-11 01:23:00 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.PaymentController:
+	
+2026-08-11 01:23:00 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.RatingController:
+	
+2026-08-11 01:23:00 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ReceiptController:
+	
+2026-08-11 01:23:00 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ReservationController:
+	
+2026-08-11 01:23:00 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	
+2026-08-11 01:23:00 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Servlet WebSocket container configured
+2026-08-11 01:23:00 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-08-11 01:23:00 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2026-08-11 01:23:00 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2026-08-11 01:23:00 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Starting...
+2026-08-11 01:23:00 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@5746f5c7]
+2026-08-11 01:23:00 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@5746f5c7]
+2026-08-11 01:23:00 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@5746f5c7]]
+2026-08-11 01:23:00 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Started.
+2026-08-11 01:23:00 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:23:00 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:23:00 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-08-11 01:23:00 [restartedMain] INFO  o.s.s.config.TaskSchedulerRouter - More than one TaskScheduler bean exists within the context, and none is named 'taskScheduler'. Mark one of them as primary or name it 'taskScheduler' (possibly as an alias); or implement the SchedulingConfigurer interface and call ScheduledTaskRegistrar#setScheduler explicitly within the configureTasks() callback: [messageBrokerTaskScheduler, heartbeatTaskScheduler]
+2026-08-11 01:23:00 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - Started EvChargingBackendApplication in 10.845 seconds (process running for 11.49)
+2026-08-11 01:23:01 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-08-11 01:23:01 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-08-11 01:23:05 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-08-11 01:23:05 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-08-11 01:23:05 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2026-08-11 01:23:06 [http-nio-8080-exec-4] INFO  c.e.e.c.a.UserAnalyticsController - Getting user overview for period: LAST_30_DAYS
+2026-08-11 01:23:06 [http-nio-8080-exec-4] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating overview for user 6 with period LAST_30_DAYS
+2026-08-11 01:23:37 [http-nio-8080-exec-5] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/chat/unread/total
+2026-08-11 01:23:37 [http-nio-8080-exec-6] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/notifications/unread-count
+2026-08-11 01:24:00 [MessageBroker-1] INFO  o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2026-08-11 01:24:07 [http-nio-8080-exec-9] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/chat/unread/total
+2026-08-11 01:24:07 [http-nio-8080-exec-10] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/notifications/unread-count
+2026-08-11 01:24:31 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-08-11 01:24:31 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-08-11 01:24:31 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientOutboundChannel removed SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2026-08-11 01:24:31 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2026-08-11 01:24:31 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Stopping...
+2026-08-11 01:24:31 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@5746f5c7]]
+2026-08-11 01:24:31 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@5746f5c7]
+2026-08-11 01:24:31 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@5746f5c7]
+2026-08-11 01:24:31 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Stopped.
+2026-08-11 01:24:31 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:24:31 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:24:31 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-08-11 01:24:31 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-08-11 01:24:31 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-08-11 01:26:30 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - Starting EvChargingBackendApplication using Java 21.0.2 with PID 3052 (E:\Community_EV_Charger_Station\ev-station-backend\ev-charging-backend\target\classes started by Nayan-Windows in E:\Community_EV_Charger_Station\ev-station-backend\ev-charging-backend)
+2026-08-11 01:26:30 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-08-11 01:26:31 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-08-11 01:26:31 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-08-11 01:26:31 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-08-11 01:26:32 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 121 ms. Found 10 JPA repository interfaces.
+2026-08-11 01:26:32 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-08-11 01:26:32 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-08-11 01:26:32 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.46]
+2026-08-11 01:26:33 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-08-11 01:26:33 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2039 ms
+2026-08-11 01:26:33 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-08-11 01:26:33 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.29.Final
+2026-08-11 01:26:33 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-08-11 01:26:33 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-08-11 01:26:33 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-08-11 01:26:34 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6d7136fb
+2026-08-11 01:26:34 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-08-11 01:26:34 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-08-11 01:26:34 [restartedMain] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.40
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-08-11 01:26:36 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-08-11 01:26:36 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-08-11 01:26:37 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-08-11 01:26:41 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Inbound WebSocket channel configured
+2026-08-11 01:26:41 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Outbound WebSocket channel configured
+2026-08-11 01:26:41 [restartedMain] INFO  c.e.e.config.WebSocketConfig - WebSocket Message Broker initialized
+2026-08-11 01:26:43 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2026-08-11 01:26:43 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-08-11 01:26:43 [restartedMain] INFO  c.e.e.config.WebSocketConfig - WebSocket transport tuned
+2026-08-11 01:26:43 [restartedMain] INFO  c.e.e.config.WebSocketConfig - STOMP WebSocket endpoints registered
+2026-08-11 01:26:43 [restartedMain] DEBUG o.s.w.s.s.s.WebSocketHandlerMapping - Patterns [/ws/**, /ws] in 'stompWebSocketHandlerMapping'
+2026-08-11 01:26:43 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.AdminController:
+	
+2026-08-11 01:26:43 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.AdminAnalyticsController:
+	
+2026-08-11 01:26:43 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.HostAnalyticsController:
+	
+2026-08-11 01:26:43 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.UserAnalyticsController:
+	
+2026-08-11 01:26:43 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.AuthController:
+	
+2026-08-11 01:26:43 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.BookingController:
+	
+2026-08-11 01:26:43 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ChargerController:
+	
+2026-08-11 01:26:43 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ChatController:
+	{[MESSAGE],[/chat.sendMessage]}: sendMessage(ChatMessageRequest,SimpMessageHeaderAccessor)
+	{[MESSAGE],[/chat.typing]}: sendTypingIndicator(Long,SimpMessageHeaderAccessor)
+	{[MESSAGE],[/chat.stopTyping]}: sendStopTypingIndicator(Long,SimpMessageHeaderAccessor)
+2026-08-11 01:26:43 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.DashboardController:
+	
+2026-08-11 01:26:43 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.FileController:
+	
+2026-08-11 01:26:43 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.NotificationController:
+	
+2026-08-11 01:26:43 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.PaymentController:
+	
+2026-08-11 01:26:43 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.RatingController:
+	
+2026-08-11 01:26:43 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ReceiptController:
+	
+2026-08-11 01:26:43 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ReservationController:
+	
+2026-08-11 01:26:43 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	
+2026-08-11 01:26:43 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Servlet WebSocket container configured
+2026-08-11 01:26:44 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-08-11 01:26:44 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2026-08-11 01:26:44 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2026-08-11 01:26:44 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Starting...
+2026-08-11 01:26:44 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@356e1181]
+2026-08-11 01:26:44 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@356e1181]
+2026-08-11 01:26:44 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@356e1181]]
+2026-08-11 01:26:44 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Started.
+2026-08-11 01:26:44 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:26:44 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:26:44 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-08-11 01:26:44 [restartedMain] INFO  o.s.s.config.TaskSchedulerRouter - More than one TaskScheduler bean exists within the context, and none is named 'taskScheduler'. Mark one of them as primary or name it 'taskScheduler' (possibly as an alias); or implement the SchedulingConfigurer interface and call ScheduledTaskRegistrar#setScheduler explicitly within the configureTasks() callback: [messageBrokerTaskScheduler, heartbeatTaskScheduler]
+2026-08-11 01:26:44 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - Started EvChargingBackendApplication in 13.704 seconds (process running for 14.322)
+2026-08-11 01:26:44 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-08-11 01:26:44 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-08-11 01:26:48 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-08-11 01:26:48 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-08-11 01:26:48 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 4 ms
+2026-08-11 01:26:49 [http-nio-8080-exec-4] INFO  c.e.e.c.a.UserAnalyticsController - Getting user overview for period: LAST_30_DAYS
+2026-08-11 01:26:49 [http-nio-8080-exec-4] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating overview for user 6 with period LAST_30_DAYS
+2026-08-11 01:27:19 [http-nio-8080-exec-2] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/notifications/unread-count
+2026-08-11 01:27:19 [http-nio-8080-exec-5] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/chat/unread/total
+2026-08-11 01:27:44 [MessageBroker-1] INFO  o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2026-08-11 01:27:49 [http-nio-8080-exec-9] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/chat/unread/total
+2026-08-11 01:27:49 [http-nio-8080-exec-10] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/notifications/unread-count
+2026-08-11 01:28:19 [http-nio-8080-exec-4] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/chat/unread/total
+2026-08-11 01:28:19 [http-nio-8080-exec-2] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/notifications/unread-count
+2026-08-11 01:28:44 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-08-11 01:28:44 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-08-11 01:28:49 [http-nio-8080-exec-8] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/chat/unread/total
+2026-08-11 01:28:49 [http-nio-8080-exec-10] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/notifications/unread-count
+2026-08-11 01:29:19 [http-nio-8080-exec-1] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/chat/unread/total
+2026-08-11 01:29:19 [http-nio-8080-exec-6] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/notifications/unread-count
+2026-08-11 01:29:49 [http-nio-8080-exec-3] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/notifications/unread-count
+2026-08-11 01:29:49 [http-nio-8080-exec-5] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/chat/unread/total
+2026-08-11 01:30:41 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-08-11 01:30:41 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-08-11 01:30:41 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientOutboundChannel removed SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2026-08-11 01:30:41 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2026-08-11 01:30:41 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Stopping...
+2026-08-11 01:30:41 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@356e1181]]
+2026-08-11 01:30:41 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@356e1181]
+2026-08-11 01:30:41 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@356e1181]
+2026-08-11 01:30:41 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Stopped.
+2026-08-11 01:30:41 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:30:41 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:30:41 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-08-11 01:30:41 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-08-11 01:30:41 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-08-11 01:33:55 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - Starting EvChargingBackendApplication using Java 21.0.2 with PID 30600 (E:\Community_EV_Charger_Station\ev-station-backend\ev-charging-backend\target\classes started by Nayan-Windows in E:\Community_EV_Charger_Station\ev-station-backend\ev-charging-backend)
+2026-08-11 01:33:55 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-08-11 01:33:55 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-08-11 01:33:55 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-08-11 01:33:56 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-08-11 01:33:56 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 131 ms. Found 10 JPA repository interfaces.
+2026-08-11 01:33:57 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-08-11 01:33:57 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-08-11 01:33:57 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.46]
+2026-08-11 01:33:57 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-08-11 01:33:57 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2388 ms
+2026-08-11 01:33:57 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-08-11 01:33:57 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.29.Final
+2026-08-11 01:33:58 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-08-11 01:33:58 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-08-11 01:33:58 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-08-11 01:33:58 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@74c1eb6b
+2026-08-11 01:33:58 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-08-11 01:33:58 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-08-11 01:33:58 [restartedMain] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.40
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-08-11 01:34:00 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-08-11 01:34:00 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-08-11 01:34:01 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-08-11 01:34:06 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Inbound WebSocket channel configured
+2026-08-11 01:34:06 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Outbound WebSocket channel configured
+2026-08-11 01:34:06 [restartedMain] INFO  c.e.e.config.WebSocketConfig - WebSocket Message Broker initialized
+2026-08-11 01:34:07 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2026-08-11 01:34:07 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-08-11 01:34:07 [restartedMain] INFO  c.e.e.config.WebSocketConfig - WebSocket transport tuned
+2026-08-11 01:34:07 [restartedMain] INFO  c.e.e.config.WebSocketConfig - STOMP WebSocket endpoints registered
+2026-08-11 01:34:07 [restartedMain] DEBUG o.s.w.s.s.s.WebSocketHandlerMapping - Patterns [/ws/**, /ws] in 'stompWebSocketHandlerMapping'
+2026-08-11 01:34:08 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.AdminController:
+	
+2026-08-11 01:34:08 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.AdminAnalyticsController:
+	
+2026-08-11 01:34:08 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.HostAnalyticsController:
+	
+2026-08-11 01:34:08 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.UserAnalyticsController:
+	
+2026-08-11 01:34:08 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.AuthController:
+	
+2026-08-11 01:34:08 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.BookingController:
+	
+2026-08-11 01:34:08 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ChargerController:
+	
+2026-08-11 01:34:08 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
 	c.e.e.c.ChatController:
 	{[MESSAGE],[/chat.sendMessage]}: sendMessage(ChatMessageRequest,SimpMessageHeaderAccessor)
 	{[MESSAGE],[/chat.stopTyping]}: sendStopTypingIndicator(Long,SimpMessageHeaderAccessor)
 	{[MESSAGE],[/chat.typing]}: sendTypingIndicator(Long,SimpMessageHeaderAccessor)
-2026-08-10 18:41:41 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+2026-08-11 01:34:08 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
 	c.e.e.c.DashboardController:
 	
-2026-08-10 18:41:41 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+2026-08-11 01:34:08 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
 	c.e.e.c.FileController:
 	
-2026-08-10 18:41:41 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+2026-08-11 01:34:08 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
 	c.e.e.c.NotificationController:
 	
-2026-08-10 18:41:41 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+2026-08-11 01:34:08 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
 	c.e.e.c.PaymentController:
 	
-2026-08-10 18:41:41 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+2026-08-11 01:34:08 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
 	c.e.e.c.RatingController:
 	
-2026-08-10 18:41:41 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+2026-08-11 01:34:08 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
 	c.e.e.c.ReceiptController:
 	
-2026-08-10 18:41:41 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+2026-08-11 01:34:08 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
 	c.e.e.c.ReservationController:
 	
-2026-08-10 18:41:41 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+2026-08-11 01:34:08 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	
-2026-08-10 18:41:41 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Servlet WebSocket container configured
-2026-08-10 18:41:42 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
-2026-08-10 18:41:42 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
-2026-08-10 18:41:42 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
-2026-08-10 18:41:42 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Starting...
-2026-08-10 18:41:42 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2803db1c]
-2026-08-10 18:41:42 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2803db1c]
-2026-08-10 18:41:42 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2803db1c]]
-2026-08-10 18:41:42 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Started.
-2026-08-10 18:41:42 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2026-08-10 18:41:42 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2026-08-10 18:41:42 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
-2026-08-10 18:41:42 [restartedMain] INFO  o.s.s.config.TaskSchedulerRouter - More than one TaskScheduler bean exists within the context, and none is named 'taskScheduler'. Mark one of them as primary or name it 'taskScheduler' (possibly as an alias); or implement the SchedulingConfigurer interface and call ScheduledTaskRegistrar#setScheduler explicitly within the configureTasks() callback: [messageBrokerTaskScheduler, heartbeatTaskScheduler]
-2026-08-10 18:41:42 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - Started EvChargingBackendApplication in 17.387 seconds (process running for 18.653)
-2026-08-10 18:41:42 [pool-2-thread-1] INFO  c.e.e.s.BookingStatusScheduler - Activated booking ID: 70
-2026-08-10 18:41:42 [pool-2-thread-1] INFO  c.e.e.s.BookingStatusScheduler - Activated booking ID: 71
-2026-08-10 18:41:42 [pool-2-thread-1] INFO  c.e.e.s.BookingStatusScheduler - Status update summary - Activated: 2, Completed: 0
-2026-08-10 18:41:42 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
-2026-08-10 18:41:42 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
-2026-08-10 18:42:18 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-08-10 18:42:18 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2026-08-10 18:42:18 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
-2026-08-10 18:42:19 [http-nio-8080-exec-3] INFO  c.e.e.c.a.HostAnalyticsController - Getting host overview for period: LAST_30_DAYS
-2026-08-10 18:42:19 [http-nio-8080-exec-3] INFO  c.e.e.s.a.HostAnalyticsServiceImpl - Calculating overview for host 29 with period LAST_30_DAYS
-2026-08-10 18:42:32 [http-nio-8080-exec-9] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:38 [http-nio-8080-exec-7] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:38 [http-nio-8080-exec-5] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:39 [http-nio-8080-exec-4] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:39 [http-nio-8080-exec-1] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:40 [http-nio-8080-exec-2] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:40 [http-nio-8080-exec-8] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:41 [http-nio-8080-exec-10] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:41 [http-nio-8080-exec-10] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:42 [MessageBroker-1] INFO  o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
-2026-08-10 18:42:42 [http-nio-8080-exec-3] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:42 [pool-2-thread-1] INFO  c.e.e.s.BookingStatusScheduler - Completed booking ID: 70
-2026-08-10 18:42:42 [pool-2-thread-1] INFO  c.e.e.s.BookingStatusScheduler - Completed booking ID: 71
-2026-08-10 18:42:42 [pool-2-thread-1] INFO  c.e.e.s.BookingStatusScheduler - Status update summary - Activated: 0, Completed: 2
-2026-08-10 18:42:42 [http-nio-8080-exec-9] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:43 [http-nio-8080-exec-7] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:43 [http-nio-8080-exec-5] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:44 [http-nio-8080-exec-4] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:44 [http-nio-8080-exec-1] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:45 [http-nio-8080-exec-2] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:45 [http-nio-8080-exec-8] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:46 [http-nio-8080-exec-6] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:46 [http-nio-8080-exec-10] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:47 [http-nio-8080-exec-3] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:47 [http-nio-8080-exec-9] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:48 [http-nio-8080-exec-7] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:48 [http-nio-8080-exec-5] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:49 [http-nio-8080-exec-2] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:49 [http-nio-8080-exec-2] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:50 [http-nio-8080-exec-6] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:50 [http-nio-8080-exec-10] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:51 [http-nio-8080-exec-3] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:51 [http-nio-8080-exec-9] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:52 [http-nio-8080-exec-7] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:52 [http-nio-8080-exec-5] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:53 [http-nio-8080-exec-4] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:53 [http-nio-8080-exec-1] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:54 [http-nio-8080-exec-8] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:54 [http-nio-8080-exec-2] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:55 [http-nio-8080-exec-6] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:55 [http-nio-8080-exec-10] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:56 [http-nio-8080-exec-3] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:56 [http-nio-8080-exec-9] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:57 [http-nio-8080-exec-7] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:57 [http-nio-8080-exec-5] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:58 [http-nio-8080-exec-4] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:58 [http-nio-8080-exec-1] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:59 [http-nio-8080-exec-8] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:42:59 [http-nio-8080-exec-2] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:43:00 [http-nio-8080-exec-6] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:43:00 [http-nio-8080-exec-10] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:43:01 [http-nio-8080-exec-3] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:43:01 [http-nio-8080-exec-9] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:43:02 [http-nio-8080-exec-7] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:43:02 [http-nio-8080-exec-5] INFO  c.e.e.serviceImpl.BookingServiceImpl - 📊 Host 29 bookings: Total=29, RESERVED=0, PAYMENT_PENDING=2, CONFIRMED=0
-2026-08-10 18:43:03 [http-nio-8080-exec-4] WARN  c.e.e.s.JwtAuthenticationFilter - No Authorization header found for path: /api/bookings/host
-2026-08-10 18:43:03 [http-nio-8080-exec-1] WARN  c.e.e.s.JwtAuthenticationFilter - No Authorization header found for path: /api/bookings/host
-2026-08-10 18:43:07 [http-nio-8080-exec-3] INFO  c.e.e.c.a.UserAnalyticsController - Getting user overview for period: LAST_30_DAYS
-2026-08-10 18:43:07 [http-nio-8080-exec-3] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating overview for user 6 with period LAST_30_DAYS
-2026-08-10 18:43:13 [http-nio-8080-exec-7] INFO  c.e.e.c.a.UserAnalyticsController - Getting spending analytics for period: LAST_7_DAYS
-2026-08-10 18:43:13 [http-nio-8080-exec-7] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating spending analytics for user 6 with period LAST_7_DAYS
-2026-08-10 18:43:27 [http-nio-8080-exec-4] INFO  c.e.e.c.a.UserAnalyticsController - Getting spending analytics for period: ALL_TIME
-2026-08-10 18:43:27 [http-nio-8080-exec-4] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating spending analytics for user 6 with period ALL_TIME
-2026-08-10 18:43:42 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
-2026-08-10 18:43:42 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
-2026-08-10 18:44:05 [http-nio-8080-exec-4] INFO  c.e.e.c.a.UserAnalyticsController - Getting charging behavior for period: LAST_7_DAYS
-2026-08-10 18:44:05 [http-nio-8080-exec-4] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating charging behavior for user 6 with period LAST_7_DAYS
-2026-08-10 18:44:05 [http-nio-8080-exec-4] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Error: 1055, SQLState: 42000
-2026-08-10 18:44:05 [http-nio-8080-exec-4] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'ev_charger.b.start_time' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
-2026-08-10 18:44:05 [http-nio-8080-exec-4] WARN  c.e.e.s.a.UserAnalyticsServiceImpl - Could not determine peak charging day for user 6: JDBC exception executing SQL [/* dynamic native SQL query */     SELECT
-        CASE DAYOFWEEK(b.start_time)
-            WHEN 1 THEN 'Sunday'
-            WHEN 2 THEN 'Monday'
-            WHEN 3 THEN 'Tuesday'
-            WHEN 4 THEN 'Wednesday'
-            WHEN 5 THEN 'Thursday'
-            WHEN 6 THEN 'Friday'
-            WHEN 7 THEN 'Saturday'
-        END as day_name,
-        COUNT(*) as count
-    FROM bookings b
-    WHERE b.user_id = ?
-    AND b.status = 'COMPLETED'
-    AND b.created_at >= ?
-    GROUP BY DAYOFWEEK(b.start_time)
-    ORDER BY count DESC
-    LIMIT 1
-] [Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'ev_charger.b.start_time' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by] [n/a]; SQL [n/a]
-2026-08-10 18:44:09 [http-nio-8080-exec-6] INFO  c.e.e.c.a.UserAnalyticsController - Getting charging behavior for period: ALL_TIME
-2026-08-10 18:44:09 [http-nio-8080-exec-6] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating charging behavior for user 6 with period ALL_TIME
-2026-08-10 18:44:09 [http-nio-8080-exec-6] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Error: 1055, SQLState: 42000
-2026-08-10 18:44:09 [http-nio-8080-exec-6] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'ev_charger.b.start_time' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
-2026-08-10 18:44:09 [http-nio-8080-exec-6] WARN  c.e.e.s.a.UserAnalyticsServiceImpl - Could not determine peak charging day for user 6: JDBC exception executing SQL [/* dynamic native SQL query */     SELECT
-        CASE DAYOFWEEK(b.start_time)
-            WHEN 1 THEN 'Sunday'
-            WHEN 2 THEN 'Monday'
-            WHEN 3 THEN 'Tuesday'
-            WHEN 4 THEN 'Wednesday'
-            WHEN 5 THEN 'Thursday'
-            WHEN 6 THEN 'Friday'
-            WHEN 7 THEN 'Saturday'
-        END as day_name,
-        COUNT(*) as count
-    FROM bookings b
-    WHERE b.user_id = ?
-    AND b.status = 'COMPLETED'
-    AND b.created_at >= ?
-    GROUP BY DAYOFWEEK(b.start_time)
-    ORDER BY count DESC
-    LIMIT 1
-] [Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'ev_charger.b.start_time' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by] [n/a]; SQL [n/a]
-2026-08-10 18:44:13 [http-nio-8080-exec-9] INFO  c.e.e.c.a.UserAnalyticsController - Getting booking analytics for period: LAST_7_DAYS
-2026-08-10 18:44:13 [http-nio-8080-exec-9] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating booking analytics for user 6 with period LAST_7_DAYS
-2026-08-10 18:44:15 [http-nio-8080-exec-5] INFO  c.e.e.c.a.UserAnalyticsController - Getting booking analytics for period: ALL_TIME
-2026-08-10 18:44:15 [http-nio-8080-exec-5] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating booking analytics for user 6 with period ALL_TIME
-2026-08-10 18:44:32 [http-nio-8080-exec-2] INFO  c.e.e.c.a.UserAnalyticsController - Getting rating analytics (all time)
-2026-08-10 18:44:32 [http-nio-8080-exec-2] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating rating analytics for user 6
-2026-08-10 18:44:41 [http-nio-8080-exec-5] INFO  c.e.e.c.a.UserAnalyticsController - Getting user overview for period: LAST_30_DAYS
-2026-08-10 18:44:41 [http-nio-8080-exec-5] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating overview for user 6 with period LAST_30_DAYS
-2026-08-10 18:44:57 [http-nio-8080-exec-4] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource bmw.jpg.]
-2026-08-10 18:45:24 [http-nio-8080-exec-10] WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$WarningLoggingModifier - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+2026-08-11 01:34:08 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Servlet WebSocket container configured
+2026-08-11 01:34:08 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-08-11 01:34:09 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2026-08-11 01:34:09 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2026-08-11 01:34:09 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Starting...
+2026-08-11 01:34:09 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@768ca247]
+2026-08-11 01:34:09 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@768ca247]
+2026-08-11 01:34:09 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@768ca247]]
+2026-08-11 01:34:09 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Started.
+2026-08-11 01:34:09 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:34:09 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:34:09 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-08-11 01:34:09 [restartedMain] INFO  o.s.s.config.TaskSchedulerRouter - More than one TaskScheduler bean exists within the context, and none is named 'taskScheduler'. Mark one of them as primary or name it 'taskScheduler' (possibly as an alias); or implement the SchedulingConfigurer interface and call ScheduledTaskRegistrar#setScheduler explicitly within the configureTasks() callback: [messageBrokerTaskScheduler, heartbeatTaskScheduler]
+2026-08-11 01:34:09 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - Started EvChargingBackendApplication in 14.398 seconds (process running for 15.109)
+2026-08-11 01:34:09 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-08-11 01:34:09 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-08-11 01:34:18 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-08-11 01:34:18 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-08-11 01:34:18 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2026-08-11 01:34:18 [http-nio-8080-exec-9] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/analytics/user/overview
+2026-08-11 01:34:18 [http-nio-8080-exec-2] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/chat/unread/total
+2026-08-11 01:34:18 [http-nio-8080-exec-3] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/notifications/unread-count
+2026-08-11 01:34:19 [http-nio-8080-exec-6] INFO  c.e.e.c.a.UserAnalyticsController - Getting user overview for period: LAST_30_DAYS
+2026-08-11 01:34:19 [http-nio-8080-exec-6] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating overview for user 6 with period LAST_30_DAYS
+2026-08-11 01:35:09 [MessageBroker-1] INFO  o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2026-08-11 01:35:19 [http-nio-8080-exec-7] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/chat/unread/total
+2026-08-11 01:35:19 [http-nio-8080-exec-1] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/notifications/unread-count
+2026-08-11 01:35:49 [http-nio-8080-exec-10] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/chat/unread/total
+2026-08-11 01:35:49 [http-nio-8080-exec-2] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/notifications/unread-count
+2026-08-11 01:36:09 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-08-11 01:36:09 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-08-11 01:36:19 [http-nio-8080-exec-5] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/chat/unread/total
+2026-08-11 01:36:19 [http-nio-8080-exec-8] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/notifications/unread-count
+2026-08-11 01:36:49 [http-nio-8080-exec-7] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/notifications/unread-count
+2026-08-11 01:36:49 [http-nio-8080-exec-3] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/chat/unread/total
+2026-08-11 01:37:19 [http-nio-8080-exec-9] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/chat/unread/total
+2026-08-11 01:37:19 [http-nio-8080-exec-6] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/notifications/unread-count
+2026-08-11 01:37:49 [http-nio-8080-exec-4] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/chat/unread/total
+2026-08-11 01:37:49 [http-nio-8080-exec-1] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/notifications/unread-count
+2026-08-11 01:38:09 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-08-11 01:38:09 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-08-11 01:38:19 [http-nio-8080-exec-10] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/chat/unread/total
+2026-08-11 01:38:19 [http-nio-8080-exec-2] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/notifications/unread-count
+2026-08-11 01:38:49 [http-nio-8080-exec-8] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/chat/unread/total
+2026-08-11 01:38:49 [http-nio-8080-exec-5] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/notifications/unread-count
+2026-08-11 01:39:34 [http-nio-8080-exec-4] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/notifications/unread-count
+2026-08-11 01:39:34 [http-nio-8080-exec-1] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/chat/unread/total
+2026-08-11 01:39:59 [http-nio-8080-exec-8] INFO  c.e.e.c.a.UserAnalyticsController - Getting user overview for period: LAST_30_DAYS
+2026-08-11 01:39:59 [http-nio-8080-exec-8] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating overview for user 6 with period LAST_30_DAYS
+2026-08-11 01:40:09 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-08-11 01:40:09 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-08-11 01:40:29 [http-nio-8080-exec-9] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/chat/unread/total
+2026-08-11 01:40:29 [http-nio-8080-exec-6] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/notifications/unread-count
+2026-08-11 01:41:00 [http-nio-8080-exec-4] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/chat/unread/total
+2026-08-11 01:41:00 [http-nio-8080-exec-1] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/notifications/unread-count
+2026-08-11 01:41:30 [http-nio-8080-exec-7] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/notifications/unread-count
+2026-08-11 01:41:30 [http-nio-8080-exec-10] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/chat/unread/total
+2026-08-11 01:41:30 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-08-11 01:41:30 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-08-11 01:41:30 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientOutboundChannel removed SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2026-08-11 01:41:30 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2026-08-11 01:41:30 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Stopping...
+2026-08-11 01:41:30 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@768ca247]]
+2026-08-11 01:41:30 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@768ca247]
+2026-08-11 01:41:30 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@768ca247]
+2026-08-11 01:41:30 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Stopped.
+2026-08-11 01:41:30 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:41:30 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:41:30 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-08-11 01:41:30 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-08-11 01:41:30 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-08-11 01:42:07 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - Starting EvChargingBackendApplication using Java 21.0.2 with PID 7560 (E:\Community_EV_Charger_Station\ev-station-backend\ev-charging-backend\target\classes started by Nayan-Windows in E:\Community_EV_Charger_Station\ev-station-backend\ev-charging-backend)
+2026-08-11 01:42:07 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-08-11 01:42:07 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-08-11 01:42:07 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-08-11 01:42:08 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-08-11 01:42:08 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 142 ms. Found 10 JPA repository interfaces.
+2026-08-11 01:42:09 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-08-11 01:42:09 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-08-11 01:42:09 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.46]
+2026-08-11 01:42:09 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-08-11 01:42:09 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2386 ms
+2026-08-11 01:42:09 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-08-11 01:42:09 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.29.Final
+2026-08-11 01:42:09 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-08-11 01:42:10 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-08-11 01:42:10 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-08-11 01:42:10 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@60687ed3
+2026-08-11 01:42:10 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-08-11 01:42:10 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-08-11 01:42:10 [restartedMain] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.40
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-08-11 01:42:12 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-08-11 01:42:12 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-08-11 01:42:12 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-08-11 01:42:17 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Inbound WebSocket channel configured
+2026-08-11 01:42:17 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Outbound WebSocket channel configured
+2026-08-11 01:42:17 [restartedMain] INFO  c.e.e.config.WebSocketConfig - WebSocket Message Broker initialized
+2026-08-11 01:42:18 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2026-08-11 01:42:18 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-08-11 01:42:19 [restartedMain] INFO  c.e.e.config.WebSocketConfig - WebSocket transport tuned
+2026-08-11 01:42:19 [restartedMain] INFO  c.e.e.config.WebSocketConfig - STOMP WebSocket endpoints registered
+2026-08-11 01:42:19 [restartedMain] DEBUG o.s.w.s.s.s.WebSocketHandlerMapping - Patterns [/ws/**, /ws] in 'stompWebSocketHandlerMapping'
+2026-08-11 01:42:19 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.AdminController:
+	
+2026-08-11 01:42:19 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.AdminAnalyticsController:
+	
+2026-08-11 01:42:19 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.HostAnalyticsController:
+	
+2026-08-11 01:42:19 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.UserAnalyticsController:
+	
+2026-08-11 01:42:19 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.AuthController:
+	
+2026-08-11 01:42:19 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.BookingController:
+	
+2026-08-11 01:42:19 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ChargerController:
+	
+2026-08-11 01:42:19 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ChatController:
+	{[MESSAGE],[/chat.sendMessage]}: sendMessage(ChatMessageRequest,SimpMessageHeaderAccessor)
+	{[MESSAGE],[/chat.typing]}: sendTypingIndicator(Long,SimpMessageHeaderAccessor)
+	{[MESSAGE],[/chat.stopTyping]}: sendStopTypingIndicator(Long,SimpMessageHeaderAccessor)
+2026-08-11 01:42:19 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.DashboardController:
+	
+2026-08-11 01:42:19 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.FileController:
+	
+2026-08-11 01:42:19 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.NotificationController:
+	
+2026-08-11 01:42:19 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.PaymentController:
+	
+2026-08-11 01:42:19 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.RatingController:
+	
+2026-08-11 01:42:19 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ReceiptController:
+	
+2026-08-11 01:42:19 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ReservationController:
+	
+2026-08-11 01:42:19 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	
+2026-08-11 01:42:19 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Servlet WebSocket container configured
+2026-08-11 01:42:19 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-08-11 01:42:19 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2026-08-11 01:42:19 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2026-08-11 01:42:19 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Starting...
+2026-08-11 01:42:19 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@26d1b01]
+2026-08-11 01:42:19 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@26d1b01]
+2026-08-11 01:42:19 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@26d1b01]]
+2026-08-11 01:42:19 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Started.
+2026-08-11 01:42:19 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:42:19 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:42:19 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-08-11 01:42:19 [restartedMain] INFO  o.s.s.config.TaskSchedulerRouter - More than one TaskScheduler bean exists within the context, and none is named 'taskScheduler'. Mark one of them as primary or name it 'taskScheduler' (possibly as an alias); or implement the SchedulingConfigurer interface and call ScheduledTaskRegistrar#setScheduler explicitly within the configureTasks() callback: [messageBrokerTaskScheduler, heartbeatTaskScheduler]
+2026-08-11 01:42:19 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - Started EvChargingBackendApplication in 13.162 seconds (process running for 13.798)
+2026-08-11 01:42:20 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-08-11 01:42:20 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-08-11 01:42:27 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-08-11 01:42:27 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-08-11 01:42:27 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientOutboundChannel removed SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2026-08-11 01:42:27 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2026-08-11 01:42:27 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Stopping...
+2026-08-11 01:42:27 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@26d1b01]]
+2026-08-11 01:42:27 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@26d1b01]
+2026-08-11 01:42:27 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@26d1b01]
+2026-08-11 01:42:27 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Stopped.
+2026-08-11 01:42:27 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:42:27 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:42:27 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-08-11 01:42:27 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-08-11 01:42:27 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-08-11 01:44:10 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - Starting EvChargingBackendApplication using Java 21.0.2 with PID 29092 (E:\Community_EV_Charger_Station\ev-station-backend\ev-charging-backend\target\classes started by Nayan-Windows in E:\Community_EV_Charger_Station\ev-station-backend\ev-charging-backend)
+2026-08-11 01:44:10 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-08-11 01:44:10 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-08-11 01:44:10 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-08-11 01:44:11 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-08-11 01:44:11 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 143 ms. Found 10 JPA repository interfaces.
+2026-08-11 01:44:12 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-08-11 01:44:12 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-08-11 01:44:12 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.46]
+2026-08-11 01:44:12 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-08-11 01:44:12 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2603 ms
+2026-08-11 01:44:13 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-08-11 01:44:13 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.29.Final
+2026-08-11 01:44:13 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-08-11 01:44:13 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-08-11 01:44:13 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-08-11 01:44:13 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7d086858
+2026-08-11 01:44:13 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-08-11 01:44:14 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-08-11 01:44:14 [restartedMain] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.40
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-08-11 01:44:15 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-08-11 01:44:15 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-08-11 01:44:16 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-08-11 01:44:20 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Inbound WebSocket channel configured
+2026-08-11 01:44:20 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Outbound WebSocket channel configured
+2026-08-11 01:44:20 [restartedMain] INFO  c.e.e.config.WebSocketConfig - WebSocket Message Broker initialized
+2026-08-11 01:44:21 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2026-08-11 01:44:22 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-08-11 01:44:22 [restartedMain] INFO  c.e.e.config.WebSocketConfig - WebSocket transport tuned
+2026-08-11 01:44:22 [restartedMain] INFO  c.e.e.config.WebSocketConfig - STOMP WebSocket endpoints registered
+2026-08-11 01:44:22 [restartedMain] DEBUG o.s.w.s.s.s.WebSocketHandlerMapping - Patterns [/ws/**, /ws] in 'stompWebSocketHandlerMapping'
+2026-08-11 01:44:22 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.AdminController:
+	
+2026-08-11 01:44:22 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.AdminAnalyticsController:
+	
+2026-08-11 01:44:22 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.HostAnalyticsController:
+	
+2026-08-11 01:44:22 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.UserAnalyticsController:
+	
+2026-08-11 01:44:22 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.AuthController:
+	
+2026-08-11 01:44:22 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.BookingController:
+	
+2026-08-11 01:44:22 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ChargerController:
+	
+2026-08-11 01:44:22 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ChatController:
+	{[MESSAGE],[/chat.sendMessage]}: sendMessage(ChatMessageRequest,SimpMessageHeaderAccessor)
+	{[MESSAGE],[/chat.typing]}: sendTypingIndicator(Long,SimpMessageHeaderAccessor)
+	{[MESSAGE],[/chat.stopTyping]}: sendStopTypingIndicator(Long,SimpMessageHeaderAccessor)
+2026-08-11 01:44:22 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.DashboardController:
+	
+2026-08-11 01:44:22 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.FileController:
+	
+2026-08-11 01:44:22 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.NotificationController:
+	
+2026-08-11 01:44:22 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.PaymentController:
+	
+2026-08-11 01:44:22 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.RatingController:
+	
+2026-08-11 01:44:22 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ReceiptController:
+	
+2026-08-11 01:44:22 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ReservationController:
+	
+2026-08-11 01:44:22 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	
+2026-08-11 01:44:22 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Servlet WebSocket container configured
+2026-08-11 01:44:23 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-08-11 01:44:23 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2026-08-11 01:44:23 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2026-08-11 01:44:23 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Starting...
+2026-08-11 01:44:23 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@4de23353]
+2026-08-11 01:44:23 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@4de23353]
+2026-08-11 01:44:23 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@4de23353]]
+2026-08-11 01:44:23 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Started.
+2026-08-11 01:44:23 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:44:23 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:44:23 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-08-11 01:44:23 [restartedMain] INFO  o.s.s.config.TaskSchedulerRouter - More than one TaskScheduler bean exists within the context, and none is named 'taskScheduler'. Mark one of them as primary or name it 'taskScheduler' (possibly as an alias); or implement the SchedulingConfigurer interface and call ScheduledTaskRegistrar#setScheduler explicitly within the configureTasks() callback: [messageBrokerTaskScheduler, heartbeatTaskScheduler]
+2026-08-11 01:44:23 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - Started EvChargingBackendApplication in 13.649 seconds (process running for 14.278)
+2026-08-11 01:44:23 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-08-11 01:44:23 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-08-11 01:44:44 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-08-11 01:44:44 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-08-11 01:44:44 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 6 ms
+2026-08-11 01:44:45 [http-nio-8080-exec-2] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/notifications/unread-count
+2026-08-11 01:44:45 [http-nio-8080-exec-1] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/chat/unread/total
+2026-08-11 01:44:49 [http-nio-8080-exec-4] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/chat/unread/total
+2026-08-11 01:44:49 [http-nio-8080-exec-3] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/notifications/unread-count
+2026-08-11 01:44:49 [http-nio-8080-exec-5] WARN  c.e.e.s.JwtAuthenticationFilter - JWT token expired for path: /api/analytics/user/overview
+2026-08-11 01:44:50 [http-nio-8080-exec-10] INFO  c.e.e.c.a.UserAnalyticsController - Getting user overview for period: LAST_30_DAYS
+2026-08-11 01:44:50 [http-nio-8080-exec-10] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating overview for user 6 with period LAST_30_DAYS
+2026-08-11 01:45:23 [MessageBroker-1] INFO  o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2026-08-11 01:45:39 [http-nio-8080-exec-10] INFO  c.e.e.c.a.HostAnalyticsController - Getting host overview for period: LAST_30_DAYS
+2026-08-11 01:45:39 [http-nio-8080-exec-10] INFO  c.e.e.s.a.HostAnalyticsServiceImpl - Calculating overview for host 23 with period LAST_30_DAYS
+2026-08-11 01:46:06 [http-nio-8080-exec-3] INFO  c.e.e.c.a.UserAnalyticsController - Getting user overview for period: LAST_30_DAYS
+2026-08-11 01:46:09 [http-nio-8080-exec-10] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource bmw.jpg.]
+2026-08-11 01:46:19 [http-nio-8080-exec-8] WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$WarningLoggingModifier - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
 	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
 	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
 
-2026-08-10 18:45:42 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
-2026-08-10 18:45:42 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
-2026-08-10 18:46:15 [http-nio-8080-exec-7] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource bmw.jpg.]
-2026-08-10 18:46:52 [http-nio-8080-exec-4] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 70]
-2026-08-10 18:46:52 [http-nio-8080-exec-10] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 71]
-2026-08-10 18:46:52 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 7]
-2026-08-10 18:46:52 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 11]
-2026-08-10 18:46:52 [http-nio-8080-exec-6] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 8]
-2026-08-10 18:46:52 [http-nio-8080-exec-8] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 5]
-2026-08-10 18:46:52 [http-nio-8080-exec-3] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 4]
-2026-08-10 18:46:55 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 70]
-2026-08-10 18:46:55 [http-nio-8080-exec-9] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 71]
-2026-08-10 18:46:55 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 8]
-2026-08-10 18:46:55 [http-nio-8080-exec-9] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 11]
-2026-08-10 18:46:55 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 7]
-2026-08-10 18:46:55 [http-nio-8080-exec-10] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 5]
-2026-08-10 18:46:55 [http-nio-8080-exec-4] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 4]
-2026-08-10 18:47:06 [http-nio-8080-exec-5] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 71]
-2026-08-10 18:47:06 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 70]
-2026-08-10 18:47:06 [http-nio-8080-exec-5] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 11]
-2026-08-10 18:47:06 [http-nio-8080-exec-8] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 8]
-2026-08-10 18:47:06 [http-nio-8080-exec-7] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 5]
-2026-08-10 18:47:06 [http-nio-8080-exec-3] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 7]
-2026-08-10 18:47:06 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.evstation.ev_charging_backend.exception.RatingNotFoundException: No rating found for booking ID: 4]
-2026-08-10 18:47:21 [http-nio-8080-exec-2] INFO  c.e.e.c.a.UserAnalyticsController - Getting user overview for period: LAST_30_DAYS
-2026-08-10 18:47:21 [http-nio-8080-exec-2] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating overview for user 6 with period LAST_30_DAYS
-2026-08-10 18:47:42 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
-2026-08-10 18:47:42 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
-2026-08-10 18:48:53 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
-2026-08-10 18:48:53 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
-2026-08-10 18:48:53 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientOutboundChannel removed SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
-2026-08-10 18:48:53 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
-2026-08-10 18:48:53 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Stopping...
-2026-08-10 18:48:53 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2803db1c]]
-2026-08-10 18:48:53 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2803db1c]
-2026-08-10 18:48:53 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2803db1c]
-2026-08-10 18:48:53 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Stopped.
-2026-08-10 18:48:53 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2026-08-10 18:48:53 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2026-08-10 18:48:53 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-08-10 18:48:53 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2026-08-10 18:48:53 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-08-11 01:46:23 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-08-11 01:46:23 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-08-11 01:46:43 [http-nio-8080-exec-10] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource bmw.jpg.]
+2026-08-11 01:48:01 [http-nio-8080-exec-3] INFO  c.e.e.c.a.HostAnalyticsController - Getting host overview for period: LAST_30_DAYS
+2026-08-11 01:48:01 [http-nio-8080-exec-3] INFO  c.e.e.s.a.HostAnalyticsServiceImpl - Calculating overview for host 23 with period LAST_30_DAYS
+2026-08-11 01:48:23 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-08-11 01:48:23 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-08-11 01:48:28 [http-nio-8080-exec-1] INFO  c.e.e.c.a.UserAnalyticsController - Getting user overview for period: LAST_30_DAYS
+2026-08-11 01:48:28 [http-nio-8080-exec-1] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating overview for user 31 with period LAST_30_DAYS
+2026-08-11 01:48:29 [http-nio-8080-exec-5] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource bmw.jpg.]
+2026-08-11 01:49:49 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-08-11 01:49:49 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-08-11 01:49:49 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientOutboundChannel removed SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2026-08-11 01:49:49 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2026-08-11 01:49:49 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Stopping...
+2026-08-11 01:49:49 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@4de23353]]
+2026-08-11 01:49:49 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@4de23353]
+2026-08-11 01:49:49 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@4de23353]
+2026-08-11 01:49:49 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Stopped.
+2026-08-11 01:49:49 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:49:49 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:49:49 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-08-11 01:49:49 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-08-11 01:49:49 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-08-11 01:51:08 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - Starting EvChargingBackendApplication using Java 21.0.2 with PID 15952 (E:\Community_EV_Charger_Station\ev-station-backend\ev-charging-backend\target\classes started by Nayan-Windows in E:\Community_EV_Charger_Station\ev-station-backend\ev-charging-backend)
+2026-08-11 01:51:08 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-08-11 01:51:09 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-08-11 01:51:09 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-08-11 01:51:10 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-08-11 01:51:10 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 139 ms. Found 10 JPA repository interfaces.
+2026-08-11 01:51:11 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-08-11 01:51:11 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-08-11 01:51:11 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.46]
+2026-08-11 01:51:11 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-08-11 01:51:11 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2612 ms
+2026-08-11 01:51:11 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-08-11 01:51:11 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.29.Final
+2026-08-11 01:51:12 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-08-11 01:51:12 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-08-11 01:51:12 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-08-11 01:51:12 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3c0c1808
+2026-08-11 01:51:12 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-08-11 01:51:12 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-08-11 01:51:12 [restartedMain] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.40
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-08-11 01:51:13 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-08-11 01:51:14 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-08-11 01:51:14 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-08-11 01:51:19 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Inbound WebSocket channel configured
+2026-08-11 01:51:19 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Outbound WebSocket channel configured
+2026-08-11 01:51:19 [restartedMain] INFO  c.e.e.config.WebSocketConfig - WebSocket Message Broker initialized
+2026-08-11 01:51:20 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2026-08-11 01:51:20 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-08-11 01:51:20 [restartedMain] INFO  c.e.e.config.WebSocketConfig - WebSocket transport tuned
+2026-08-11 01:51:20 [restartedMain] INFO  c.e.e.config.WebSocketConfig - STOMP WebSocket endpoints registered
+2026-08-11 01:51:20 [restartedMain] DEBUG o.s.w.s.s.s.WebSocketHandlerMapping - Patterns [/ws/**, /ws] in 'stompWebSocketHandlerMapping'
+2026-08-11 01:51:21 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.AdminController:
+	
+2026-08-11 01:51:21 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.AdminAnalyticsController:
+	
+2026-08-11 01:51:21 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.HostAnalyticsController:
+	
+2026-08-11 01:51:21 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.a.UserAnalyticsController:
+	
+2026-08-11 01:51:21 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.AuthController:
+	
+2026-08-11 01:51:21 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.BookingController:
+	
+2026-08-11 01:51:21 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ChargerController:
+	
+2026-08-11 01:51:21 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ChatController:
+	{[MESSAGE],[/chat.sendMessage]}: sendMessage(ChatMessageRequest,SimpMessageHeaderAccessor)
+	{[MESSAGE],[/chat.typing]}: sendTypingIndicator(Long,SimpMessageHeaderAccessor)
+	{[MESSAGE],[/chat.stopTyping]}: sendStopTypingIndicator(Long,SimpMessageHeaderAccessor)
+2026-08-11 01:51:21 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.DashboardController:
+	
+2026-08-11 01:51:21 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.FileController:
+	
+2026-08-11 01:51:21 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.NotificationController:
+	
+2026-08-11 01:51:21 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.PaymentController:
+	
+2026-08-11 01:51:21 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.RatingController:
+	
+2026-08-11 01:51:21 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ReceiptController:
+	
+2026-08-11 01:51:21 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.e.e.c.ReservationController:
+	
+2026-08-11 01:51:21 [restartedMain] DEBUG o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	
+2026-08-11 01:51:21 [restartedMain] INFO  c.e.e.config.WebSocketConfig - Servlet WebSocket container configured
+2026-08-11 01:51:21 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-08-11 01:51:21 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2026-08-11 01:51:21 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2026-08-11 01:51:21 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Starting...
+2026-08-11 01:51:21 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@566810a7]
+2026-08-11 01:51:21 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@566810a7]
+2026-08-11 01:51:21 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@566810a7]]
+2026-08-11 01:51:21 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Started.
+2026-08-11 01:51:21 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:51:21 [restartedMain] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:51:21 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-08-11 01:51:21 [restartedMain] INFO  o.s.s.config.TaskSchedulerRouter - More than one TaskScheduler bean exists within the context, and none is named 'taskScheduler'. Mark one of them as primary or name it 'taskScheduler' (possibly as an alias); or implement the SchedulingConfigurer interface and call ScheduledTaskRegistrar#setScheduler explicitly within the configureTasks() callback: [messageBrokerTaskScheduler, heartbeatTaskScheduler]
+2026-08-11 01:51:21 [restartedMain] INFO  c.e.e.EvChargingBackendApplication - Started EvChargingBackendApplication in 13.507 seconds (process running for 14.194)
+2026-08-11 01:51:21 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Starting scheduled analytics cache refresh (2-minute interval)
+2026-08-11 01:51:21 [pool-2-thread-1] INFO  c.e.e.s.a.AnalyticsCacheRefreshService - Analytics cache refresh completed successfully
+2026-08-11 01:51:27 [http-nio-8080-exec-3] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-08-11 01:51:27 [http-nio-8080-exec-3] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-08-11 01:51:27 [http-nio-8080-exec-3] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2026-08-11 01:51:28 [http-nio-8080-exec-4] INFO  c.e.e.c.a.UserAnalyticsController - Getting user overview for period: LAST_30_DAYS
+2026-08-11 01:51:28 [http-nio-8080-exec-4] INFO  c.e.e.s.a.UserAnalyticsServiceImpl - Calculating overview for user 31 with period LAST_30_DAYS
+2026-08-11 01:51:36 [http-nio-8080-exec-7] INFO  c.e.e.c.a.HostAnalyticsController - Getting host overview for period: LAST_30_DAYS
+2026-08-11 01:51:36 [http-nio-8080-exec-7] INFO  c.e.e.s.a.HostAnalyticsServiceImpl - Calculating overview for host 23 with period LAST_30_DAYS
+2026-08-11 01:52:18 [http-nio-8080-exec-1] INFO  c.e.e.c.a.UserAnalyticsController - Getting user overview for period: LAST_30_DAYS
+2026-08-11 01:52:20 [http-nio-8080-exec-5] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource bmw.jpg.]
+2026-08-11 01:52:21 [MessageBroker-1] INFO  o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2026-08-11 01:52:36 [http-nio-8080-exec-10] WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$WarningLoggingModifier - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+2026-08-11 01:52:44 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource bmw.jpg.]
+2026-08-11 01:52:56 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-08-11 01:52:56 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-08-11 01:52:56 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientOutboundChannel removed SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2026-08-11 01:52:56 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2026-08-11 01:52:56 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Stopping...
+2026-08-11 01:52:56 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@566810a7]]
+2026-08-11 01:52:56 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@566810a7]
+2026-08-11 01:52:56 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@566810a7]
+2026-08-11 01:52:56 [SpringApplicationShutdownHook] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Stopped.
+2026-08-11 01:52:56 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - clientInboundChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:52:56 [SpringApplicationShutdownHook] DEBUG o.s.m.s.ExecutorSubscribableChannel - brokerChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2026-08-11 01:52:56 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-08-11 01:52:56 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-08-11 01:52:56 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

@@ -80,11 +80,27 @@ public class JwtUtil {
     }
 
     // Extract all claims from token
+    // Extract all claims from token
     private Claims extractAllClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(key)
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
+    }
+
+    // Same as extractAllClaims, but tolerates an EXPIRED token — used only by
+    // the /auth/refresh flow, where the whole point is the token is expired
+    // but we still trust its signature and want to mint a fresh one.
+    public Claims extractClaimsAllowExpired(String token) {
+        try {
+            return Jwts.parserBuilder()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (ExpiredJwtException e) {
+            return e.getClaims();
+        }
     }
 }
