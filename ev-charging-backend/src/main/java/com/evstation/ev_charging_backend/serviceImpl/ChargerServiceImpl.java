@@ -78,41 +78,19 @@ public class ChargerServiceImpl implements ChargerService {
             throw new AccessDeniedException("You are not the owner of this charger");
         }
 
-       // Re-geocode if the location text changed, OR if this charger is
-        // currently sitting on invalid/corrupted (0,0) coordinates from a
-        // past failed geocode — this self-heals old bad data automatically.
-        System.out.println("=== UPDATE CHARGER DEBUG ===");
-        System.out.println("Incoming dto.location = [" + dto.getLocation() + "]");
-        System.out.println("Existing charger.location = [" + charger.getLocation() + "]");
-        System.out.println("Existing charger.lat/lng = " + charger.getLatitude() + ", " + charger.getLongitude());
-
-        boolean locationChanged = !dto.getLocation().equals(charger.getLocation());
+       boolean locationChanged = !dto.getLocation().equals(charger.getLocation());
         boolean hasInvalidCoordinates = charger.getLatitude() == null || charger.getLongitude() == null
                 || (charger.getLatitude() == 0.0 && charger.getLongitude() == 0.0);
 
-        System.out.println("locationChanged = " + locationChanged);
-        System.out.println("hasInvalidCoordinates = " + hasInvalidCoordinates);
-
         if (locationChanged || hasInvalidCoordinates) {
-            System.out.println(">>> Re-geocoding triggered for: [" + dto.getLocation() + "]");
             double[] latLng = geoCodingUtil.getLatLngFromAddress(dto.getLocation());
-            System.out.println(">>> Geocode result: " + latLng[0] + ", " + latLng[1]);
             if (latLng[0] != 0.0 || latLng[1] != 0.0) {
                 charger.setLatitude(latLng[0]);
                 charger.setLongitude(latLng[1]);
-                System.out.println(">>> Coordinates UPDATED");
-            } else {
-                System.out.println(">>> Geocode failed (0,0) - keeping existing coordinates");
             }
-        } else {
-            System.out.println(">>> Skipping geocode entirely - coordinates untouched");
         }
-        System.out.println("Final charger.lat/lng before save = " + charger.getLatitude() + ", " + charger.getLongitude());
-        System.out.println("=============================");
 
-        // Handle image updates
-
-        // Handle image updates
+    
 
         // Handle image updates
         if (images != null && !images.isEmpty()) {
