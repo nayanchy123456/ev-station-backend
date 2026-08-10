@@ -412,7 +412,7 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
      */
     @Query("""
                 SELECT DATE(b.createdAt) as date,
-                       SUM(b.totalPrice) as spending,
+                       COALESCE(SUM(b.totalPrice), 0) as spending,
                        COUNT(b) as bookingCount
                 FROM Booking b
                 WHERE b.user.userId = :userId
@@ -430,7 +430,7 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
      */
     @Query("""
                 SELECT c.id, c.name,
-                       SUM(b.totalPrice),
+                       COALESCE(SUM(b.totalPrice), 0),
                        COUNT(b)
                 FROM Booking b
                 JOIN b.charger c

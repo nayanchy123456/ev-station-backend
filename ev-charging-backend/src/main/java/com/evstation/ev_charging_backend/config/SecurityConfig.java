@@ -3,6 +3,7 @@ package com.evstation.ev_charging_backend.config;
 import com.evstation.ev_charging_backend.security.JwtAuthenticationFilter;
 import com.evstation.ev_charging_backend.security.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,22 +13,13 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-/**
- * Security configuration for the EV Charging Station Backend.
- * 
- * ⭐ UPDATED FOR PHASE 1 CHAT SYSTEM:
- * - Added WebSocket endpoint (/ws/**) - permitAll (JWT validated in interceptor)
- * - Added Chat API endpoints (/api/chat/**) - authenticated
- * - Added health endpoint (/api/chat/health) - permitAll for monitoring
- * - CORS handled by CorsFilter class (not Spring Security's cors())
- * 
- * ALL EXISTING FUNCTIONALITY PRESERVED - NO CHANGES TO:
- * - Authentication endpoints
- * - Admin endpoints
- * - File uploads
- * - All other API endpoints
- */
+import java.util.Arrays;
+import java.util.List;
+
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfig {
@@ -35,9 +27,36 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final CustomUserDetailsService userDetailsService;
 
+    // Comma-separated list of allowed frontend origins, e.g.:
+    //   http://localhost:5173,https://ev-station-frontend.vercel.app
+    // Set CORS_ALLOWED_ORIGINS in Render's environment variables for prod.
+    @Value("${CORS_ALLOWED_ORIGINS:http://localhost:5173,http://localhost:3000}")
+    private String allowedOrigins;
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+
+        List<String> origins = Arrays.stream(allowedOrigins.split(","))
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .toList();
+
+        configuration.setAllowedOriginPatterns(origins);
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setExposedHeaders(List.of("Authorization"));
+        configuration.setAllowCredentials(true);
+        configuration.setMaxAge(3600L);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
     @Bean
@@ -49,46 +68,20 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .csrf(csrf -> csrf.disable())
-            // ❌ REMOVED: .cors(cors -> {})  
-            // CORS is now handled by CorsFilter class which runs before Spring Security
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .authorizeHttpRequests(auth -> auth
-
-                // ========== EXISTING - UNCHANGED ==========
-                
-                // ✅ Allow uploads folder (images) - EXISTING
                 .requestMatchers("/uploads/**").permitAll()
-
-                // ✅ Auth endpoints open - EXISTING
                 .requestMatchers("/api/auth/**").permitAll()
-
-                // ========== PHASE 1 CHAT SYSTEM - NEW ==========
-                
-                // ⭐ WebSocket endpoint - permitAll because JWT validation happens
-                //    in WebSocketAuthInterceptor during STOMP CONNECT frame
-                //    This is the standard Spring Security pattern for WebSocket + JWT
                 .requestMatchers("/ws/**").permitAll()
-
-                // ⭐ Health check endpoint - permitAll for monitoring/debugging
-                //    This allows testing if backend is running without authentication
                 .requestMatchers("/api/chat/health").permitAll()
-
-                // ⭐ Chat REST API - requires authentication via JWT filter
-                //    All other chat endpoints need valid JWT token in Authorization header
                 .requestMatchers("/api/chat/**").authenticated()
-
-                // ========== EXISTING - UNCHANGED ==========
-
-                // ✅ Admin endpoints - EXISTING
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
-
-                // ✅ Everything else needs login - EXISTING
                 .anyRequest().authenticated()
             )
             .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             );
 
-        // Add JWT filter - UNCHANGED
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

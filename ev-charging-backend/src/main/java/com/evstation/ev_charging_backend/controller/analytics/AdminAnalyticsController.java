@@ -19,7 +19,6 @@ import java.time.LocalDate;
 @RequestMapping("/api/analytics/admin")
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:3000", "http://localhost:8080"}, allowCredentials = "true")
 public class AdminAnalyticsController {
 
     private final AdminAnalyticsService adminAnalyticsService;

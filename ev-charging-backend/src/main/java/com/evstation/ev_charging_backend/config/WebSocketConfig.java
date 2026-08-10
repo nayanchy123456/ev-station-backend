@@ -62,14 +62,14 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void registerStompEndpoints(StompEndpointRegistry registry) {
 
         registry.addEndpoint("/ws")
-                .setAllowedOriginPatterns("*")
+                .setAllowedOriginPatterns(allowedOrigins)
                 .withSockJS()
                 .setSessionCookieNeeded(false)
                 .setHeartbeatTime(serverHeartbeat)
                 .setDisconnectDelay(5000);
 
         registry.addEndpoint("/ws")
-                .setAllowedOriginPatterns("*");
+                .setAllowedOriginPatterns(allowedOrigins);
 
         log.info("STOMP WebSocket endpoints registered");
     }
