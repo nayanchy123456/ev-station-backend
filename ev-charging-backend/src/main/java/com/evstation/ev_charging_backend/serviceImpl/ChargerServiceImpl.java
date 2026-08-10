@@ -1,5 +1,4 @@
 package com.evstation.ev_charging_backend.serviceImpl;
-
 import com.evstation.ev_charging_backend.dto.ChargerRequestDto;
 import com.evstation.ev_charging_backend.dto.ChargerResponseDto;
 import com.evstation.ev_charging_backend.entity.Charger;
@@ -8,17 +7,13 @@ import com.evstation.ev_charging_backend.exception.ResourceNotFoundException;
 import com.evstation.ev_charging_backend.repository.ChargerRepository;
 import com.evstation.ev_charging_backend.repository.UserRepository;
 import com.evstation.ev_charging_backend.service.ChargerService;
+import com.evstation.ev_charging_backend.service.CloudinaryService;
 import com.evstation.ev_charging_backend.util.GeoCodingUtil;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,16 +24,16 @@ public class ChargerServiceImpl implements ChargerService {
     private final ChargerRepository chargerRepository;
     private final UserRepository userRepository;
     private final GeoCodingUtil geoCodingUtil;
-
-    @Value("${file.upload-dir:uploads}")
-    private String uploadDir;
+    private final CloudinaryService cloudinaryService;
 
     public ChargerServiceImpl(ChargerRepository chargerRepository, 
                             UserRepository userRepository, 
-                            GeoCodingUtil geoCodingUtil) {
+                            GeoCodingUtil geoCodingUtil,
+                            CloudinaryService cloudinaryService) {
         this.chargerRepository = chargerRepository;
         this.userRepository = userRepository;
         this.geoCodingUtil = geoCodingUtil;
+        this.cloudinaryService = cloudinaryService;
     }
 
     @Override
@@ -83,7 +78,41 @@ public class ChargerServiceImpl implements ChargerService {
             throw new AccessDeniedException("You are not the owner of this charger");
         }
 
-        double[] latLng = geoCodingUtil.getLatLngFromAddress(dto.getLocation());
+       // Re-geocode if the location text changed, OR if this charger is
+        // currently sitting on invalid/corrupted (0,0) coordinates from a
+        // past failed geocode — this self-heals old bad data automatically.
+        System.out.println("=== UPDATE CHARGER DEBUG ===");
+        System.out.println("Incoming dto.location = [" + dto.getLocation() + "]");
+        System.out.println("Existing charger.location = [" + charger.getLocation() + "]");
+        System.out.println("Existing charger.lat/lng = " + charger.getLatitude() + ", " + charger.getLongitude());
+
+        boolean locationChanged = !dto.getLocation().equals(charger.getLocation());
+        boolean hasInvalidCoordinates = charger.getLatitude() == null || charger.getLongitude() == null
+                || (charger.getLatitude() == 0.0 && charger.getLongitude() == 0.0);
+
+        System.out.println("locationChanged = " + locationChanged);
+        System.out.println("hasInvalidCoordinates = " + hasInvalidCoordinates);
+
+        if (locationChanged || hasInvalidCoordinates) {
+            System.out.println(">>> Re-geocoding triggered for: [" + dto.getLocation() + "]");
+            double[] latLng = geoCodingUtil.getLatLngFromAddress(dto.getLocation());
+            System.out.println(">>> Geocode result: " + latLng[0] + ", " + latLng[1]);
+            if (latLng[0] != 0.0 || latLng[1] != 0.0) {
+                charger.setLatitude(latLng[0]);
+                charger.setLongitude(latLng[1]);
+                System.out.println(">>> Coordinates UPDATED");
+            } else {
+                System.out.println(">>> Geocode failed (0,0) - keeping existing coordinates");
+            }
+        } else {
+            System.out.println(">>> Skipping geocode entirely - coordinates untouched");
+        }
+        System.out.println("Final charger.lat/lng before save = " + charger.getLatitude() + ", " + charger.getLongitude());
+        System.out.println("=============================");
+
+        // Handle image updates
+
+        // Handle image updates
 
         // Handle image updates
         if (images != null && !images.isEmpty()) {
@@ -105,8 +134,6 @@ public class ChargerServiceImpl implements ChargerService {
         charger.setName(dto.getName());
         charger.setBrand(dto.getBrand());
         charger.setLocation(dto.getLocation());
-        charger.setLatitude(latLng[0]);
-        charger.setLongitude(latLng[1]);
         charger.setPricePerKwh(dto.getPricePerKwh());
 
         chargerRepository.save(charger);
@@ -210,43 +237,28 @@ public class ChargerServiceImpl implements ChargerService {
     /**
      * Save uploaded images and return their URLs
      */
+   /**
+     * Upload images to Cloudinary and return their permanent URLs
+     */
     private List<String> saveUploadedImages(List<MultipartFile> images) throws IOException {
         if (images == null || images.isEmpty()) {
             return new ArrayList<>();
         }
 
-        // Create upload directory if it doesn't exist
-        Path uploadPath = Paths.get(uploadDir);
-        if (!Files.exists(uploadPath)) {
-            Files.createDirectories(uploadPath);
-        }
-
         List<String> imageUrls = new ArrayList<>();
-        
+
         for (MultipartFile file : images) {
             if (!file.isEmpty()) {
-                // Generate unique filename
-                String originalFilename = file.getOriginalFilename();
-                String extension = originalFilename != null && originalFilename.contains(".") 
-                    ? originalFilename.substring(originalFilename.lastIndexOf(".")) 
-                    : "";
-                String fileName = System.currentTimeMillis() + "_" + System.nanoTime() + extension;
-                
-                Path filePath = uploadPath.resolve(fileName);
-                
-                // Save file
-                Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-                
-                // Return URL accessible by frontend
-                imageUrls.add("/uploads/" + fileName);
+                String url = cloudinaryService.uploadFile(file, "ev-charging/chargers");
+                imageUrls.add(url);
             }
         }
-        
+
         return imageUrls;
     }
 
     /**
-     * Delete old image files from disk
+     * Delete old charger images from Cloudinary
      */
     private void deleteOldImages(List<String> imageUrls) {
         if (imageUrls == null || imageUrls.isEmpty()) {
@@ -254,16 +266,7 @@ public class ChargerServiceImpl implements ChargerService {
         }
 
         for (String url : imageUrls) {
-            try {
-                // Extract filename from URL (e.g., "/uploads/123456.jpg" -> "123456.jpg")
-                String fileName = url.substring(url.lastIndexOf("/") + 1);
-                Path filePath = Paths.get(uploadDir, fileName);
-                
-                Files.deleteIfExists(filePath);
-            } catch (IOException e) {
-                // Log error but don't throw exception
-                System.err.println("Failed to delete image: " + url + " - " + e.getMessage());
-            }
+            cloudinaryService.deleteFile(url);
         }
     }
 

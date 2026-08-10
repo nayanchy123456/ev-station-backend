@@ -2,16 +2,24 @@ package com.evstation.ev_charging_backend.util;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 @Component
 public class GeoCodingUtil {
 
+    @Value("${LOCATIONIQ_API_KEY}")
+    private String apiKey;
+
     public double[] getLatLngFromAddress(String address) {
         try {
-            String url = "https://nominatim.openstreetmap.org/search?q="
-                    + address.replace(" ", "+") + "&format=json";
+            String encoded = URLEncoder.encode(address, StandardCharsets.UTF_8);
+            String url = "https://us1.locationiq.com/v1/search?key=" + apiKey
+                    + "&q=" + encoded + "&format=json";
 
             RestTemplate restTemplate = new RestTemplate();
             String response = restTemplate.getForObject(url, String.class);
