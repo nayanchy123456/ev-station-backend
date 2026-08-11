@@ -2,6 +2,7 @@ package com.evstation.ev_charging_backend.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import jakarta.persistence.OrderColumn;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -33,9 +34,10 @@ public class Charger {
     @Column(nullable = false)
     private BigDecimal pricePerKwh;
 
-    @ElementCollection
+  @ElementCollection
     @CollectionTable(name = "charger_images", joinColumns = @JoinColumn(name = "charger_id"))
     @Column(name = "image_url")
+    @OrderColumn(name = "image_order")
     @Builder.Default
     private List<String> images = List.of(); // default empty list
 
